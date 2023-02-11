@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Task 0</title>
+</head>
+<body>
+    <header></header>
+    <main class="page">
+        <div class="page__container task0">
+            <h2>Задача 0.</h2>
+            <script>
+                //Задача 0. Обчислити значення виразів.
+                    // 1. Введенння необхідних і загальних даних для 4-х виразів.
+                        let a = parseFloat(
+                            prompt('Введіть значення числа a', '0')
+                        ) 
+                        let b = parseFloat(
+                            prompt('Введіть значення числа b', '0')
+                        )
+                        let c = parseFloat(
+                            prompt('Введіть значення числа c', '0')
+                        )
+                    // =====================================================================
+                    // 2. Обчислення результату 4-х виразів.
+                    // Вираз №1.
+                        let resultOne = a + 12 + b;
+                    // Вираз №2.
+                        let resultTwo = Math.sqrt((a + b) / (2 * a));
+                    // Вираз №3.
+                        //  Обчислення виразу під коренем.
+                            let resultSum = a + b / c;
+                        //  Піднесення до кубічного корення змінної з результатом.
+                            let resultThree = Math.cbrt(resultSum);
+                    // Вираз №4.
+                        let resultFour = Math.sin((a) / (-b));
+                    // =====================================================================
+                    document.write(`<div class="tablet">
+                                        <div class="tablet__item">
+                                            <div class="tablet__title">Значення числа a</div>
+                                            <div class="tablet__value">${a}</div>
+                                        </div>
+                                        <div class="tablet__item">
+                                            <div class="tablet__title">Значення числа b</div>
+                                            <div class="tablet__value">${b}</div>
+                                        </div>
+                                        <div class="tablet__item">
+                                            <div class="tablet__title">Значення числа c</div>
+                                            <div class="tablet__value">${c}</div>
+                                        </div>
+                                    </div> 
+                                <br>`)
+                    // 3. Виведення результатів 4-х виразів.
+                    document.write(`<div class="tack0__image">
+                                        <img src="img/01.jpg" alt="Image">
+                                    </div>
+                                <br>`)
+                    // Вираз №1.
+                        document.write(`Результат обчислення виразу S1 = ${resultOne} <br> <br>`)
+                    // Вираз №2.
+                        document.write(`Результат обчислення виразу S2 = ${resultTwo} <br> <br>`)
+                    // Вираз №3.
+                        document.write(`Результат обчислення виразу S3 = ${resultThree} <br> <br>`)
+                    // Вираз №4.
+                        document.write(`Результат обчислення виразу S4 = ${resultFour} <br>`)                 
+            </script>
+        </div>
+    </main>
+    <footer></footer>
+    <script src="./js/script.js"></script>
+</body>
+<style>
+    @charset "UTF-8";
+	@import url("https://fonts.googleapis.com/css?family=Montserrat:regular,700&display=swap");
+    h2{
+        font-size: 30px;
+        color:#020202;
+        text-align: center;
+        margin-bottom: 25px;
+    }
+    .task0{
+        color:rgb(255, 255, 255);
+    }
+    .task0:not(:last-child){
+        margin-bottom: 25px;
+    }
+    .tablet{
+        display: grid;
+        grid-template-columns: repeat(3, auto);
+        justify-content: center;
+    }
+    .tablet__item{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border:1px solid #020202;
+        gap:25px;
+        /* padding: 15px; */
+        padding-top: 0;
+        padding-bottom: 0;
+        position: relative;
+    }
+    .tablet__item::before{
+        content:'';
+        position: absolute;
+        width: 100%;
+        height: 1px;
+        background-color: #020202;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    .tablet__title{
+        padding: 10px;
+        /* padding-top: 5px; */
+        text-align: center;
+    }
+    .tablet__value{
+        display: flex;
+        padding: 10px;
+        padding-top: 0;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+</style>
+</html>

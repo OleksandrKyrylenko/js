@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Task 7</title>
+</head>
+<body>
+    <header></header>
+    <main class="page">
+        <div class="page__container task1">
+            <h2>Задача 7.</h2>
+            <script>
+                //Задача 7. Знайти суму випадкового номера місяця (від 1 до 12) та випадкового номера дня (від 0 до 6).                       
+                    // =====================================================================
+                    // 1. Введенння необхідних даних.
+                        let minMonth = 1, maxMonth = 12;
+                        let minDay = 1, maxDay = 6;
+                        let randomMonth = minMonth + Math.floor(Math.random() * (maxMonth - minMonth+1));
+                        let randomDay = minDay + Math.floor(Math.random() * (maxDay - minDay+1));
+                    // =====================================================================
+                    // 2. Обчислення результатів.
+                        let randomSum = randomMonth + randomDay;
+                    // =====================================================================
+                    // 3. Виведення результатів.
+                    document.write(`<div class="tablet tablet--1">
+                                        <div class="tablet__item">
+                                            <div class="tablet__title">Випадковий номер місяця</div>
+                                            <div class="tablet__value">${randomMonth}</div>
+                                        </div>
+                                        <div class="tablet__item">
+                                            <div class="tablet__title">Випадковий номер дня</div>
+                                            <div class="tablet__value">${randomDay}</div>
+                                        </div>
+                                        <div class="tablet__item">
+                                            <div class="tablet__title">Загальна сума випадкових чисел</div>
+                                            <div class="tablet__value">${randomSum}</div>
+                                        </div>
+                                    </div> 
+                                <br>`)         
+            </script>
+        </div>
+    </main>
+    <footer></footer>
+    <script src="./js/script.js"></script>
+</body>
+<style>
+    @charset "UTF-8";
+	@import url("https://fonts.googleapis.com/css?family=Montserrat:regular,700&display=swap");
+    h2{
+        font-size: 30px;
+        color:#020202;
+        text-align: center;
+        margin-bottom: 25px;
+    }
+    .task1{
+        color:rgb(255, 255, 255);
+    }
+    .task0:not(:last-child){
+        margin-bottom: 25px;
+    }
+    .tablet{
+        display: grid;
+        grid-template-columns: repeat(3, auto);
+        justify-content: center;
+    }
+    @media(max-width:720px){
+        .tablet--1 {
+            grid-template-columns: repeat(1, 1fr);
+        }
+        .tablet__item{
+            flex-direction: row;
+        }
+    }
+    .tablet__item{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border:1px solid #020202;
+        gap:25px;
+        padding-top: 0;
+        padding-bottom: 0;
+        position: relative;
+    }
+    .tablet__item::before{
+        content:'';
+        position: absolute;
+        width: 100%;
+        height: 1px;
+        background-color: #020202;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    .tablet__title{
+        padding: 10px;
+        text-align: center;
+    }
+    .tablet__value{
+        display: flex;
+        padding: 10px;
+        padding-top: 0;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+</style>
+</html>

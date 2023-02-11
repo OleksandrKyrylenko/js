@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Task 6</title>
+</head>
+<body>
+    <header></header>
+    <main class="page">
+        <div class="page__container task1">
+            <h2>Задача 6.</h2> 
+            <script>
+                //Задача 6. З клавіатури вводяться вартість товару та кількість одиниць 3 товарів. Обчислити вартість кожного товару окремо та  загальну вартість. Вивести чек (як у супермаркеті) використовуючи елементи розмітки.                       
+                    // 1. Введенння необхідних даних.
+                        let firstProduct = parseFloat(
+                            prompt('Введіть кількість одиниць першого товару', '0')
+                        )
+                        let firstProductPrice = parseFloat(
+                            prompt('Введіть вартість першого товару', '0')
+                        ) 
+                        let secondProduct = parseFloat(
+                            prompt('Введіть кількість одиниць другого товару', '0')
+                        )
+                        let secondProductPrice = parseFloat(
+                            prompt('Введіть вартість другого товару', '0')
+                        )
+                        let thirdProduct = parseFloat(
+                            prompt('Введіть кількість одиниць третього товару', '0')
+                        )
+                        let thirdProductPrice = parseFloat(
+                            prompt('Введіть вартість третього товару', '0')
+                        )
+                    // =====================================================================
+                    // 2. Обчислення результатів.
+                        // Вартість першого товару
+                        let firstProductTotal = firstProduct * firstProductPrice;
+                        // Вартість другого товару
+                        let secondProductTotal = secondProduct * secondProductPrice;
+                        // Вартість третього товару
+                        let thirdProductTotal = thirdProduct * thirdProductPrice;
+                        // Загальна вартість трьох товарів
+                        let totalPriceProduct = firstProductTotal + secondProductTotal + thirdProductTotal;
+                         // 20% ПДВ від загальної вартості трьох товарів
+                        let totalPdv = (totalPriceProduct / 100) * 20;
+                    // =====================================================================
+                    // 3. Виведення результатів.
+                    document.write(`  <div class="receipt">
+                                        <div class="receipt__title">
+                                            <p>КАСОВИЙ ЧЕК</p>
+                                            <p>№164</p>
+                                        </div>
+                                        <div class="receipt__price price-receipt">
+                                            <div class="price-receipt__inner">
+                                                <div class="price-receipt__name">1. Перший товар</div>
+                                                <div class="price-receipt__value">${firstProduct}од. x ${firstProductPrice} грн = ${firstProductTotal} грн</div>
+                                            </div>
+                                            <div class="price-receipt__inner">
+                                                <div class="price-receipt__name">2. Другий товар</div>
+                                                <div class="price-receipt__value">${secondProduct}од. x ${secondProductPrice} грн = ${secondProductTotal} грн</div>
+                                            </div>
+                                            <div class="price-receipt__inner">
+                                                <div class="price-receipt__name">3. Третій товар</div>
+                                                <div class="price-receipt__value">${thirdProduct}од. x ${thirdProductPrice} грн = ${thirdProductTotal} грн</div>
+                                            </div>
+                                        </div>
+                                        <div class="receipt__total total-receipt">
+                                            <div class="total-receipt__label">Загальна вартість</div>
+                                            <div class="total-receipt__value">= ${totalPriceProduct} грн</div>
+                                        </div>
+                                        <div class="receipt__pdv pdv-receipt">
+                                            <div class="pdv-receipt__label">
+                                                <p>ПДВ А</p>
+                                                <p>20%</p>
+                                            </div>
+                                            <div class="pdv-receipt__value">${totalPdv} грн</div>
+                                        </div>
+                                    </div>
+                                <br>`)           
+            </script>
+        </div>
+    </main>
+    <footer></footer>
+    <script src="./js/script.js"></script>
+</body>
+<style>
+    @charset "UTF-8";
+	@import url("https://fonts.googleapis.com/css?family=Montserrat:regular,700&display=swap");
+    h2{
+        font-size: 30px;
+        color:#020202;
+        text-align: center;
+        margin-bottom: 25px;
+    }
+    .task1{
+        color:rgb(255, 255, 255);
+    }
+    .task0:not(:last-child){
+        margin-bottom: 25px;
+    }
+    .receipt {
+        max-width: 500px;
+        margin: 0 auto;
+        background-color: #fff;
+        color:#020202;
+        padding: 25px;
+    }
+    .receipt__title {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        letter-spacing: 0.05em;
+        padding-bottom: 5px;
+        border-bottom: 1px solid #000;
+        margin-bottom: 25px;
+    }
+    .receipt__title p:first-child{
+        color:rgb(249, 47, 47);
+    }
+    .receipt__price {
+        display: grid;
+        gap:15px;
+        margin-bottom: 25px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid #000;
+    }
+    .price-receipt__inner {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap:10px;
+    }
+    .total-receipt {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap:10px;
+        margin-bottom: 10px;
+    }
+    .receipt__pdv {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap:10px;
+    }
+    .pdv-receipt__label {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap:5px;
+    }
+</style>
+</html>

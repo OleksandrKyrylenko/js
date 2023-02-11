@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Task 5</title>
+</head>
+<body>
+    <header></header>
+    <main class="page">
+        <div class="page__container task1">
+            <h2>Задача 5.</h2>
+            <script>
+                //Задача 5. Дано кількість секунд, що пройшла від початку доби. Визначити скільки це годин і хвилин.                       
+                    // 1. Введенння необхідних даних.
+                        let valueSeconds = parseFloat(
+                            prompt('Введіть кількість секунд', '0')
+                        ) 
+                    // =====================================================================
+                    // 2. Обчислення результатів.
+                        let valueMinutes = Math.floor(valueSeconds / 60);
+                        let valueHours = Math.floor(valueSeconds / 3600);
+                    // =====================================================================
+                    // 3. Виведення результатів.
+                    document.write(`<div class="tablet tablet--1">
+                                        <div class="tablet__item">
+                                            <div class="tablet__title">Кількість секунд</div>
+                                            <div class="tablet__value">${valueSeconds} с</div>
+                                        </div>
+                                        <div class="tablet__item">
+                                            <div class="tablet__title">Кількість хвилин</div>
+                                            <div class="tablet__value">${valueMinutes} хв</div>
+                                        </div>
+                                        <div class="tablet__item">
+                                            <div class="tablet__title">Кількість годин</div>
+                                            <div class="tablet__value">${valueHours} год</div>
+                                        </div>
+                                    </div> 
+                                <br>`)           
+            </script>
+        </div>
+    </main>
+    <footer></footer>
+    <script src="./js/script.js"></script>
+</body>
+<style>
+    @charset "UTF-8";
+	@import url("https://fonts.googleapis.com/css?family=Montserrat:regular,700&display=swap");
+    h2{
+        font-size: 30px;
+        color:#020202;
+        text-align: center;
+        margin-bottom: 25px;
+    }
+    .task1{
+        color:rgb(255, 255, 255);
+    }
+    .task0:not(:last-child){
+        margin-bottom: 25px;
+    }
+    .tablet{
+        display: grid;
+        grid-template-columns: repeat(3, auto);
+        justify-content: center;
+    }
+    @media(max-width:720px){
+        .tablet--1 {
+            grid-template-columns: repeat(1, 1fr);
+        }
+        .tablet__item{
+            flex-direction: row;
+        }
+    }
+    .tablet__item{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border:1px solid #020202;
+        gap:25px;
+        padding-top: 0;
+        padding-bottom: 0;
+        position: relative;
+    }
+    .tablet__item::before{
+        content:'';
+        position: absolute;
+        width: 100%;
+        height: 1px;
+        background-color: #020202;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    .tablet__title{
+        padding: 10px;
+        text-align: center;
+    }
+    .tablet__value{
+        display: flex;
+        padding: 10px;
+        padding-top: 0;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+</style>
+</html>
