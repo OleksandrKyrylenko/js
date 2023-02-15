@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Task 1</title>
+</head>
+<body>
+    <header></header>
+    <main class="page">
+        <div class="page__container task">
+            <h2>Задача 1. З клавіатури вводяться імена двох дітей та кількість у них цукерок. Вивести не екран ім’я тієї дитини, у якої кількість цукерок є більшою, або вивести, що кількість однакова.</h2>
+            <script>
+                    // 1. Введенння необхідних і загальних даних.
+                        // Ім'я першої дитини
+                        const nameFirstChild = prompt(`Ім'я першої дитини`, 'Емілія')
+                        // Кількість цукерок в nameFirstChild
+                        const quantityСandyFirstChild = parseInt(prompt('Кількість цукерок першої дитини', '0'))
+                        // Ім'я другої дитини
+                        const nameSecondChild = prompt(`Ім'я другої дитини`, 'Марк')
+                        // Кількість цукерок в nameSecondChild
+                        const quantityСandySecondChild = parseInt(prompt('Кількість цукерок другої дитини', '0'))
+                    // =====================================================================
+                    // 2. Відображення вказаний даних
+                            document.write(`<div class="tablet tablet--1">
+                                        <div class="tablet__item">
+                                            <div class="tablet__title"> Ім'я: ${nameFirstChild}</div>
+                                            <div class="tablet__value">Кількість цукерок: ${quantityСandyFirstChild}</div>
+                                        </div>
+                                        <div class="tablet__item">
+                                            <div class="tablet__title">Ім'я: ${nameSecondChild}</div>
+                                            <div class="tablet__value">Кількість цукерок: ${quantityСandySecondChild}</div>
+                                        </div>
+                                    </div> 
+                                <br>`)  
+                        // Перевірка правильності введених данних
+                        if ((isFinite(nameFirstChild) || isFinite(nameSecondChild)) 
+                                && (isNaN(quantityСandyFirstChild) || isNaN(quantityСandySecondChild)))
+                            document.write(`Ви ввели некоректну кількість цукерок та некоректне ім'я<br>`)
+                        else if(isNaN(quantityСandyFirstChild) || isNaN(quantityСandySecondChild))
+                            document.write(`Ви ввели некоректну кількість цукерок<br>`)
+                        else if (isFinite(nameFirstChild) || isFinite(nameSecondChild))
+                            document.write(`Ви ввели некоректне ім'я <br>`) 
+                        else{
+                            // Якщо nameFirstChild має більше цукерок
+                            if (quantityСandyFirstChild > quantityСandySecondChild)
+                            document.write(` ${nameFirstChild} має більше цукерок <br>`)
+                            // Якщо nameSecondChild має більше цукерок
+                            else if(quantityСandyFirstChild < quantityСandySecondChild)    
+                                document.write(` ${nameSecondChild} має більше цукерок <br>`)
+                            // Якщо у дітей немає цукерок
+                            else if(quantityСandyFirstChild === 0 && quantityСandyFirstChild === 0)    
+                                document.write(` ${nameSecondChild} та ${nameFirstChild} цукерок не мають <br>`)
+                            // Якщо кількість цукерок рівна
+                            else
+                                document.write(`${nameFirstChild} має таку ж саму кількість цукерок як і ${nameSecondChild} <br>`)  
+                        }   
+            </script>
+        </div>
+    </main>
+    <footer></footer>
+    <script src="./js/script.js"></script>
+</body>
+<style>
+    @charset "UTF-8";
+	@import url("https://fonts.googleapis.com/css?family=Montserrat:regular,700&display=swap");
+    h2{
+        font-size: 25px;
+        color:#020202;
+        text-align: left;
+        margin-bottom: 25px;
+    }
+    .task{
+        color:rgb(255, 255, 255);
+    }
+    .task:not(:last-child){
+        margin-bottom: 25px;
+    }
+    .tablet{
+        display: grid;
+        grid-template-columns: repeat(3, auto);
+        justify-content: center;
+    }
+    .tablet__item{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border:1px solid #020202;
+        gap:25px;
+        /* padding: 15px; */
+        padding-top: 0;
+        padding-bottom: 0;
+        position: relative;
+    }
+    .tablet__item::before{
+        content:'';
+        position: absolute;
+        width: 100%;
+        height: 1px;
+        background-color: #020202;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    .tablet__title{
+        padding: 10px;
+        /* padding-top: 5px; */
+        text-align: center;
+    }
+    .tablet__value{
+        display: flex;
+        padding: 10px;
+        padding-top: 0;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+</style>
+</html>
