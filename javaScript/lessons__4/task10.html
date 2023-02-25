@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Task 10</title>
+</head>
+<body>
+    <header></header>
+    <main class="page">
+        <div class="page__container task">
+            <h2> Задача 10. Знайти суму всіх непарних чисел, що знаходяться між заданими користувачем числами. </h2>
+            <script>
+                let userNumOne = parseInt(prompt('Введіть перше число'))
+                let userNumTwo = parseInt(prompt('Введіть друге число'))
+                let minNum = userNumOne,
+                    maxNum = userNumTwo
+                if(userNumOne > userNumTwo){
+                    userNumOne = maxNum
+                    userNumTwo = minNum
+                }
+                let counter = userNumOne
+                let sumNum = 0
+                /*
+                while(counter <= userNumTwo){
+                    if(counter % 2 !== 0)
+                        sumNum += counter
+                    counter++
+                }
+                */
+                while(counter < userNumTwo){
+                    if(counter % 2 !== 0 && counter !== userNumOne)
+                        sumNum += counter
+                    counter++
+                }
+                document.write(`Сума непарних чисел в проміжку від ${userNumOne} до ${userNumTwo} = ${sumNum}`)
+            </script>
+        </div>
+    </main>
+    <footer></footer>
+    <script src="./js/script.js"></script>
+</body>
+<style>
+    @charset "UTF-8";
+	@import url("https://fonts.googleapis.com/css?family=Montserrat:regular,700&display=swap");
+    h2{
+        font-size: 25px;
+        color:#020202;
+        text-align: left;
+        margin-bottom: 25px;
+    }
+    .task{
+        color:rgb(255, 255, 255);
+    }
+</style>
+</html>

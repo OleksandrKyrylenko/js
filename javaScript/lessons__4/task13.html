@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Task 12</title>
+</head>
+<body>
+    <header></header>
+    <main class="page">
+        <div class="page__container task">
+            <h2> Задача 13. Морський бій. Комп’ютер випадково розташовує одиночний корабель на полі розміром N*M. Маючи К снарядів користувач намагається потопити корабель. 
+            </h2>
+            <script>
+                alert('На полі 3х3 спробуй потопити одиночний корабель. Кількість спроб необмежена')
+                // Рандомно знаходимо координати
+                let  randomCoordinatesX = 1 + Math.floor(Math.random() * (3))
+                let  randomCoordinatesY = 1 + Math.floor(Math.random() * (3))
+                let seaBattle = false
+                while(!seaBattle){
+                    // Користувач вводе координати
+                    let userCoordinatesX = parseInt(prompt('Введіть координати від 1 до 3 по горизонталі X'))
+                    let userCoordinatesY = parseInt(prompt('Введіть координати від 1 до 3 по вертикалі Y'))
+                    // перевіряємо чи вірно користувач ввів числа
+                    if((userCoordinatesX < 1 || userCoordinatesX > 3) || (userCoordinatesY < 1 || userCoordinatesY > 3))
+                        continue
+                    // console.log(randomCoordinatesX)
+                    // console.log(randomCoordinatesY)
+                    if (!isFinite(userCoordinatesX) || !isFinite(userCoordinatesY)){
+                        alert(`На жаль Вам не вдалось потопити корабль. Координати корабля X=${randomCoordinatesX} Y=${randomCoordinatesY}`)
+                        break
+                    }
+                    else if(userCoordinatesX !== randomCoordinatesX || userCoordinatesY !== randomCoordinatesY){
+                        alert(`На жаль Вам не вдалось потопити корабль.`)
+                        continue
+                    }
+                    else if(userCoordinatesX === randomCoordinatesX && userCoordinatesY === randomCoordinatesY){
+                        alert(`Вітаємо ви потопили корабель. Ваші координати X=${userCoordinatesX} Y=${userCoordinatesY}. Координати корабля X=${randomCoordinatesX} Y=${randomCoordinatesY}`)
+                        seaBattle = true
+                    }
+                }
+            </script>
+        </div>
+    </main>
+    <footer></footer>
+    <script src="./js/script.js"></script>
+</body>
+<style>
+    @charset "UTF-8";
+	@import url("https://fonts.googleapis.com/css?family=Montserrat:regular,700&display=swap");
+    h2{
+        font-size: 25px;
+        color:#020202;
+        text-align: left;
+        margin-bottom: 25px;
+    }
+    .task{
+        color:rgb(255, 255, 255);
+    }
+    .list__items{
+        margin-bottom: 30px;
+    }
+    .list__items li:not(:last-child){
+        margin-bottom: 10px;
+    }
+    .inner{
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        row-gap: 20px;
+    }
+    .product{
+        justify-content: center;
+        display: grid;
+        font-size: 24px;
+        letter-spacing: 0.2em;
+        outline: 1px solid #020202;
+        padding: 5px;
+    }
+    .table{
+        border:2px solid #020202;
+    }
+    .row{
+        border:1px solid #020202;
+        padding: 5px;
+    }
+
+</style>
+</html>

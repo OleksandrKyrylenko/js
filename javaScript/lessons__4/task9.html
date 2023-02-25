@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Task 9</title>
+</head>
+<body>
+    <header></header>
+    <main class="page">
+        <div class="page__container task">
+            <h2> Задача 9. Користувач загадує число. Комп’ютер задає питання поки не вгадає число користувача.</h2>
+            <script>
+                alert("Вам потрібно загадати число. Комп'ютер має його відгадати")
+                // Просимо користувача ввести число
+                let userNumber = parseInt(prompt('Вкажіть ваше число'))
+                let userNumberTrue = true
+                do{
+                    // Перевіряємо правильність введення
+                    if (isNaN(userNumber)) {
+                        alert('Некоректні дані')
+                        userNumber = parseInt(prompt('Вкажіть ваше число:'))
+                        continue
+                    }
+                    // Визначаємо рандомне число
+                    let randomNumber
+                    if(userNumber<0)
+                        randomNumber = Math.ceil(Math.random() * (userNumber - 1))
+                    else
+                        randomNumber = Math.floor(Math.random() * (userNumber + 1))
+                    // Запитуємо користувача чи вірне число
+                    const computerQuestion = confirm(`Ваше число ${randomNumber}?`)
+                    // Якщо так, виводимо відповідне повідомлення
+                    if(computerQuestion && randomNumber === userNumber){
+                        alert('Відгадано')
+                        userNumberTrue = true
+                    }
+                }while(!userNumberTrue)
+            </script>
+        </div>
+    </main>
+    <footer></footer>
+    <script src="./js/script.js"></script>
+</body>
+<style>
+    @charset "UTF-8";
+	@import url("https://fonts.googleapis.com/css?family=Montserrat:regular,700&display=swap");
+    h2{
+        font-size: 25px;
+        color:#020202;
+        text-align: left;
+        margin-bottom: 25px;
+    }
+    .task{
+        color:rgb(255, 255, 255);
+    }
+</style>
+</html>

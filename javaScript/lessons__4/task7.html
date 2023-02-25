@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Task 7</title>
+</head>
+<body>
+    <header></header>
+    <main class="page">
+        <div class="page__container task">
+            <h2> Задача 7. Вивести на екран N абзаців (N вводиться користувачем)</h2>
+            <script>
+                // Вводимо основні значення
+                let titleСounter = 1
+                // Запитуємо користувача про потрібну кількість абзаців
+                const userСountRubric = parseInt(prompt('Вкажіть кількість абзаців'))
+                // Знаходимо рішення
+                    for(let i = 1; i<=userСountRubric; i++){
+                        document.write(`<h1>Заголовок ${titleСounter}</h1>`)
+                        titleСounter++
+                        for(let j = 1; j<=i; j++){
+                            let rubric = `<p>Розділ ${titleСounter - 1} , параграф ${j}</p>`
+                            document.write(`${rubric}`)
+                        }
+                    }
+            </script>
+        </div>
+    </main>
+    <footer></footer>
+    <script src="./js/script.js"></script>
+</body>
+<style>
+    @charset "UTF-8";
+	@import url("https://fonts.googleapis.com/css?family=Montserrat:regular,700&display=swap");
+    h2{
+        font-size: 25px;
+        color:#020202;
+        text-align: left;
+        margin-bottom: 25px;
+    }
+    .task{
+        color:rgb(255, 255, 255);
+    }
+</style>
+</html>

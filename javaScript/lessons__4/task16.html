@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Task 16</title>
+</head>
+<body>
+    <header></header>
+    <main class="page">
+        <div class="page__container task">
+            <h2>Задача 16. Користувач поступово вводить прибуток магазину за кожен день протягом N тижнів. Знайти загальну величину прибутку та вивести величину прибутку протягом кожного окремого тижня.</h2>
+            <script>
+                let counterAllTime = 0
+                const maxDay = 7
+                let currentDay
+                const N = parseInt(prompt(`Введіть кількість робочих тижднів`))
+                for(let i = 1; i <= N; i++){
+                    let counterSumWeek = 0
+                    for(let minDay = 1; minDay<=maxDay; minDay++){
+                        currentDay = parseFloat(prompt(`Введіть прибуток за ${minDay} день, ${i}го тиждня`))
+                        // if(i > 1 && minDay === 1){
+                        //     counterAllTime = 0
+                        // console.log(counterSumWeek)
+                        // }
+                        if(!isFinite(currentDay)){
+                            alert(`Некоректні дані. Прибуток становить ${counterAllTime}`)
+                            break
+                        }
+                        counterAllTime+=currentDay
+                        counterSumWeek+=currentDay
+                    }
+                    document.write(`Прибуток за ${i} тиждень = ${counterSumWeek} <br>`)
+                }  
+                    document.write(`Прибуток за весь час = ${counterAllTime}`)                  
+            </script>
+        </div>
+    </main>
+    <footer></footer>
+    <script src="./js/script.js"></script>
+</body>
+<style>
+    @charset "UTF-8";
+	@import url("https://fonts.googleapis.com/css?family=Montserrat:regular,700&display=swap");
+    h2{
+        font-size: 25px;
+        color:#020202;
+        text-align: left;
+        margin-bottom: 25px;
+    }
+    .task{
+        color:rgb(255, 255, 255);
+    }
+    .list__items{
+        margin-bottom: 30px;
+    }
+    .list__items li:not(:last-child){
+        margin-bottom: 10px;
+    }
+    .inner{
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        row-gap: 20px;
+    }
+    .product{
+        justify-content: center;
+        display: grid;
+        font-size: 24px;
+        letter-spacing: 0.2em;
+        outline: 1px solid #020202;
+        padding: 5px;
+    }
+    .table{
+        border:2px solid #020202;
+    }
+    .row{
+        border:1px solid #020202;
+        padding: 5px;
+    }
+
+</style>
+</html>

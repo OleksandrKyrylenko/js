@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Task 12</title>
+</head>
+<body>
+    <header></header>
+    <main class="page">
+        <div class="page__container task">
+            <h2> Задача 12. Ігровий автомат. Випадково вибираємо зображення у 3 позиціях. Вибір у кожній позиції вибирається як одне з чотирьох зображень. Вивести ці зображення і повідомити виграш користувача (три перших зображення 100 грн, три других – 200, три третіх – 500, три четвертих зображення – 1000грн).</h2>
+            <ul class="list__items">
+                <li class="list__item">1. Три яблука 100 грн</li>
+                <li class="list__item">2. Три ананаси 200 грн</li>
+                <li class="list__item">3. Три груші 500 грн</li>
+                <li class="list__item">4. Три вишні 1000 грн</li>
+            </ul>
+            <script>
+                // Початкові значення
+                document.write(`<div class="inner"`)
+                const apple = `<div class="product">Яблуко</div>`,
+                    pineapple = `<div class="product">Ананас</div>`,
+                    pear = `<div class="product">Груша</div>`,
+                    cherry = `<div class="product">Вишня</div>`
+                document.write(`</div>`)    
+                // Кількість позицій
+                const quantityPositions = 3;
+                // Кількість фруктів
+                const amountFruit = 4;
+                // Лічильники кількості
+                let counterApple = 0
+                let counterPineapple = 0
+                let counterPear = 0
+                let countercherry = 0
+                // Призові
+                const applePrice = 100,
+                    pineapplePrice = 200,
+                    pearPrice = 500,
+                    cherryPrice = 1000
+                // Змінна для виведення результату
+                    let resultGame = 0
+                // Цикл
+                for(let i = 0; i<quantityPositions; i++){
+                    let randomFruit = 1 + Math.floor(Math.random() * (amountFruit - 1 + 1))
+                    let slot
+                    switch (randomFruit){
+                        case 1: 
+                        slot = apple
+                        counterApple ++
+                        break;
+                        case 2: 
+                        slot = pineapple
+                        counterPineapple
+                        break;
+                        case 3: 
+                        slot = pear
+                        counterPear++
+                        break;
+                        default: 
+                        slot = cherry
+                        countercherry++
+                        break;
+                    }
+                    document.write(`${slot}`)
+                }
+                if(counterApple === 3) resultGame = applePrice
+                if(counterPineapple === 3) resultGame = pineapplePrice
+                if(counterPear === 3) resultGame = pearPrice
+                if(countercherry === 3) resultGame = cherryPrice
+                document.write(`Ваш виграш склав ${resultGame} грн`)
+            </script>
+        </div>
+    </main>
+    <footer></footer>
+    <script src="./js/script.js"></script>
+</body>
+<style>
+    @charset "UTF-8";
+	@import url("https://fonts.googleapis.com/css?family=Montserrat:regular,700&display=swap");
+    h2{
+        font-size: 25px;
+        color:#020202;
+        text-align: left;
+        margin-bottom: 25px;
+    }
+    .task{
+        color:rgb(255, 255, 255);
+    }
+    .list__items{
+        margin-bottom: 30px;
+    }
+    .list__items li:not(:last-child){
+        margin-bottom: 10px;
+    }
+    .inner{
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        row-gap: 20px;
+    }
+    .product{
+        justify-content: center;
+        display: grid;
+        font-size: 24px;
+        letter-spacing: 0.2em;
+        outline: 1px solid #020202;
+        padding: 5px;
+    }
+
+</style>
+</html>

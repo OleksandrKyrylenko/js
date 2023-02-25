@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Task 12</title>
+</head>
+<body>
+    <header></header>
+    <main class="page">
+        <div class="page__container task">
+            <h2> Задача 14. Каса. Користувачу повідомляють суму, яку йому треба сплатити. Користувач поступово вводить суму грошей до тих пір, поки суми не буде достатньо для оплати товарів (кожного разу користувачу повідомляють, яку ще суму потрібно ввести).</h2>
+            <script>
+                let priceGoods = 500
+                do{
+                    let userSumGoods = parseFloat(prompt(`Сума до оплати товару складає ${priceGoods} грн. Внесіть, будь ласка, кошти`))
+                    priceGoods -= userSumGoods
+                    // console.log(priceGoods)
+                    if(priceGoods === 0)
+                        alert('Дякую, за покупку')
+                        
+                    else if(priceGoods<0){
+                        alert(`Дякую за покупку. Візьміть Вашу решту ${Math.abs(priceGoods)} грн`) 
+                    }
+                }while(priceGoods > 0)
+                
+                
+            </script>
+        </div>
+    </main>
+    <footer></footer>
+    <script src="./js/script.js"></script>
+</body>
+<style>
+    @charset "UTF-8";
+	@import url("https://fonts.googleapis.com/css?family=Montserrat:regular,700&display=swap");
+    h2{
+        font-size: 25px;
+        color:#020202;
+        text-align: left;
+        margin-bottom: 25px;
+    }
+    .task{
+        color:rgb(255, 255, 255);
+    }
+    .list__items{
+        margin-bottom: 30px;
+    }
+    .list__items li:not(:last-child){
+        margin-bottom: 10px;
+    }
+    .inner{
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        row-gap: 20px;
+    }
+    .product{
+        justify-content: center;
+        display: grid;
+        font-size: 24px;
+        letter-spacing: 0.2em;
+        outline: 1px solid #020202;
+        padding: 5px;
+    }
+    .table{
+        border:2px solid #020202;
+    }
+    .row{
+        border:1px solid #020202;
+        padding: 5px;
+    }
+
+</style>
+</html>
