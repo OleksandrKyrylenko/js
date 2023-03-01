@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Task 0</title>
+</head>
+<body>
+    <header></header>
+    <main class="page">
+        <div class="page__container task">
+            <h2>Задача 0. Створити функцію, яка за номером місяця повертає пору року, до якої відноситься цей місяць.</h2>
+            <script>
+                function getSeason(numMount) {
+                    let season
+                    switch (numMount){
+                        case 1:
+                        case 2: 
+                        case 12:
+                        season = 'Зима'
+                        break;
+                        case 3:
+                        case 4: 
+                        case 5:
+                        season = 'Весна'
+                        break;
+                        case 6:
+                        case 7: 
+                        case 8:
+                        season = 'Літо'
+                        break;
+                        case 9:
+                        case 10: 
+                        case 11:
+                        season = 'Осінь'
+                        break;
+                        default :
+                            season = 'Error'
+                            break;
+                    }
+                    return season
+                }
+                const numMount = parseInt(prompt('Введіть номер місяця'))
+                const msg = getSeason(numMount)
+                alert(msg)
+            </script>
+        </div>
+    </main>
+    <footer></footer>
+    <script src="./js/script.js"></script>
+</body>
+<style>
+    @charset "UTF-8";
+	@import url("https://fonts.googleapis.com/css?family=Montserrat:regular,700&display=swap");
+    h2{
+        font-size: 25px;
+        color:#020202;
+        text-align: left;
+        margin-bottom: 25px;
+    }
+    .task{
+        color:rgb(255, 255, 255);
+    }
+    .task:not(:last-child){
+        margin-bottom: 25px;
+    }
+    .tablet{
+        display: grid;
+        grid-template-columns: repeat(3, auto);
+        justify-content: center;
+    }
+    .tablet__item{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border:1px solid #020202;
+        gap:25px;
+        /* padding: 15px; */
+        padding-top: 0;
+        padding-bottom: 0;
+        position: relative;
+    }
+    .tablet__item::before{
+        content:'';
+        position: absolute;
+        width: 100%;
+        height: 1px;
+        background-color: #020202;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    .tablet__title{
+        padding: 10px;
+        /* padding-top: 5px; */
+        text-align: center;
+    }
+    .tablet__value{
+        display: flex;
+        padding: 10px;
+        padding-top: 0;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+</style>
+</html>

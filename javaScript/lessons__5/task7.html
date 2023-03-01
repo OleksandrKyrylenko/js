@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Task 8</title>
+</head>
+<body>
+    <header></header>
+    <main class="page">
+        <div class="page__container task">
+            <h2> Задача 7. Створити функцію, яка випадковим чином виводить на екран одне із 4 зображень (шляхи до зображень передаються у функцію<h2>
+            <script>
+                function getGeneratingImage(...images) {
+                    let randomImage = Math.floor(Math.random()*4)
+                    return images[randomImage]
+                }
+                const randomImageOne = `<img src="img/01.jpg" alt="Image">`
+                const randomImageTwo = `<img src="img/02.jpg" alt="Image">`
+                const randomImageThree = `<img src="img/03.jpg" alt="Image">`
+                const randomImageFour = `<img src="img/04.jpg" alt="Image">`
+                const resultRandomImg = getGeneratingImage(randomImageOne, randomImageTwo, randomImageThree, randomImageFour)
+                document.write(resultRandomImg)
+            </script>
+        </div>
+    </main>
+    <footer></footer>
+    <script src="./js/script.js"></script>
+</body>
+<style>
+    @charset "UTF-8";
+	@import url("https://fonts.googleapis.com/css?family=Montserrat:regular,700&display=swap");
+    h2{
+        font-size: 25px;
+        color:#020202;
+        text-align: left;
+        margin-bottom: 25px;
+    }
+    .task{
+        color:rgb(255, 255, 255);
+    }
+    img{
+        max-width: 400px;
+    }
+</style>
+</html>

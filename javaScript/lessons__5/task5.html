@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Task 5</title>
+</head>
+<body>
+<header></header>
+<main class="page">
+    <div class="page__container task">
+        <h2> Задача 5. Створити окремі функції, які переводять:<br>
+            1. Сантиметри у дюйми;<br>
+            2. Кілограми у фунти;<br>
+            3. Кілометри у милі.<br></h2>
+        <script>
+            function getСentimetersToInch(e) {
+                const valueInch = 2.54
+                return (e / valueInch).toFixed(2)
+            }
+            function getKiloToPound(e) {
+                const valuePound = 2.205
+                return (e * valuePound).toFixed(2)
+            }
+            function getKilometreToMile(e) {
+                const valueMile = 1.609
+                return (e / valueMile).toFixed(2)
+            }
+
+            const userValueСentimeters = parseFloat(prompt('Введіть кількість сантиметрів'))
+            const userValueKilo = parseFloat(prompt('Введіть кількість кілограм'))
+            const userValueMile = parseFloat(prompt('Введіть кількість кілометрів'))
+            const resultValueToInch = getСentimetersToInch(userValueСentimeters)
+            const resultValueToPound = getKiloToPound(userValueKilo)
+            const resultValueToMile = getKilometreToMile(userValueMile)
+
+            document.write(`
+            ${userValueСentimeters}см = ${resultValueToInch}дюйма<br><br>
+            ${userValueKilo}кг = ${resultValueToPound}фунта<br><br>
+            ${userValueMile}км = ${resultValueToMile}милі`)
+        </script>
+    </div>
+</main>
+<footer></footer>
+<script src="./js/script.js"></script>
+</body>
+<style>
+    @charset "UTF-8";
+	@import url("https://fonts.googleapis.com/css?family=Montserrat:regular,700&display=swap");
+    h2{
+        font-size: 25px;
+        color:#020202;
+        text-align: left;
+        margin-bottom: 25px;
+    }
+    .task{
+        color:rgb(255, 255, 255);
+    }
+    .table{
+        border:2px solid #020202;
+    }
+    .row{
+        border:1px solid #020202;
+        padding: 5px;
+    }
+    .items{
+        display: flex;
+        gap:15px;
+        justify-content: center;
+    }
+</style>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Task 8</title>
+</head>
+<body>
+    <header></header>
+    <main class="page">
+        <div class="page__container task">
+            <h2> Задача 8. Створити функцію, яка виводить банер (у функцію передаються: зображення, заголовок та посилання, куди переходимо при кліку на зображення</h2>      
+            <script>
+                function getBanner(images, title, link) {
+                    const baner = `
+                        <h1>${bannerTitle}</h1><br>
+                        <a target="_blank" href="${bannerLink}">${bannerImage}</a> 
+                    `
+                    return baner
+                }
+                const bannerImage = `<img src="img/01.jpg" alt="Image">`
+                const bannerTitle = `Заголовок`
+                const bannerLink = `https://www.google.com`
+                const resultBanner = getBanner(bannerImage, bannerTitle,bannerLink)
+                document.write(resultBanner)
+            </script>
+            </script>
+        </div>
+    </main>
+    <footer></footer>
+    <script src="./js/script.js"></script>
+</body>
+<style>
+    @charset "UTF-8";
+	@import url("https://fonts.googleapis.com/css?family=Montserrat:regular,700&display=swap");
+    h2{
+        font-size: 25px;
+        color:#020202;
+        text-align: left;
+        margin-bottom: 25px;
+    }
+    .task{
+        color:rgb(255, 255, 255);
+    }
+</style>
+</html>

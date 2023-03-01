@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Task 4</title>
+</head>
+<body>
+    <header></header>
+    <main class="page">
+        <div class="page__container task">
+            <h2> Задача 4. Створити функцію, яка для 3 заданих чисел знаходить одночасно декілька результатів: кількість парних, кількість додатних, кількість більших за 100.</h2>
+            <script>
+                let quantityEvenNum = 0
+                let positiveNum = 0
+                let quantityMoreHundred  = 0
+
+                function getSearchResults(...numbers) {
+                    for(i=0; i<numbers.length; i++){
+                        if(numbers[i]%2===0)
+                        quantityEvenNum++
+                        if(numbers[i]>0)
+                        positiveNum++
+                        if(numbers[i]>100)
+                        quantityMoreHundred++
+                    }
+                    return {
+                        quantityEvenNum,
+                        positiveNum,
+                        quantityMoreHundred
+                    }
+                }
+                const userNumOne = parseFloat(prompt('Введіть перше число a ='))
+                const userNumTwo = parseFloat(prompt('Введіть друге число b ='))
+                const userNumThree = parseFloat(prompt('Введіть третє число c ='))
+
+                const result = getSearchResults(userNumOne,userNumTwo, userNumThree)
+
+                document.write(`
+                a = ${userNumOne.toFixed(2)}<br>
+                b = ${userNumTwo.toFixed(2)}<br>
+                c = ${userNumThree.toFixed(2)}<br>
+                Кількість парних = ${quantityEvenNum}<br>
+                Кількість додатних = ${positiveNum}<br>
+                Кількість більших за 100 = ${quantityMoreHundred}`)
+            </script>
+        </div>
+    </main>
+    <footer></footer>
+    <script src="./js/script.js"></script>
+</body>
+<style>
+    @charset "UTF-8";
+	@import url("https://fonts.googleapis.com/css?family=Montserrat:regular,700&display=swap");
+    h2{
+        font-size: 25px;
+        color:#020202;
+        text-align: left;
+        margin-bottom: 25px;
+    }
+    .task{
+        color:rgb(255, 255, 255);
+    }
+    .table{
+        border:2px solid #020202;
+    }
+    .row{
+        border:1px solid #020202;
+        padding: 5px;
+    }
+    .items{
+        display: flex;
+        gap:15px;
+        justify-content: center;
+    }
+</style>
+</html>
