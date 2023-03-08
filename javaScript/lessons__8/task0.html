@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Task 1</title>
+</head>
+<body>
+    <header></header>
+    <main class="page">
+        <div class="page__container task">
+            <h2>Задача 1. Дано масив, який містить оцінки з K предметів. Знайти середній бал і з’ясувати до якої категорії він відноситься (відмінник, двійочник (має хоча би одну двійку), хорошист (оцінки добре і відмінно), трійочник(є хоча би одна трійка)).</h2>
+            <script>
+                // Створюємо масив з userQuantitySubjects предметів та запитуємо користувача оцінки з цих предметів
+                function getQuantityGrades(quantityItems) {
+                    let arr = []
+                    for(let i=1; i<=quantityItems; i++){
+                        const userGradesSubjects = parseInt(prompt(`Введіть оцінку за ${i}й предмет`))
+                        arr.push(userGradesSubjects)
+                    }
+                    return arr
+                }
+                // Функція для знаходження середнього балу
+                function getAverageScore(resultUserSubjects) {
+                    let sum = 0 
+                    for(let i = 0; i<resultUserSubjects.length; i++){
+                        sum+=resultUserSubjects[i]
+                    }
+                    const averageScore = sum / resultUserSubjects.length
+                    return averageScore
+                }
+                // Функція для знаходження категорії
+                function getCategory(category) {
+                    let minEstimation = category[0]
+                    for(let i = 1; i<=category.length; i++){
+                        if(category[i] < minEstimation) 
+                        minEstimation = category[i]
+                    }
+                    if(minEstimation === 1  || minEstimation === 2) minEstimation = 'двійочник'
+                    else if(minEstimation === 3)  minEstimation = 'трійочник'
+                    else  minEstimation = 'відмінник'
+                    return minEstimation
+                }
+                // Запитуємо користувача про кількість предметів, та передаємо 
+                // константу userQuantitySubjects в функцію getQuantityGrades
+                const userQuantitySubjects = parseInt(prompt('Введіть кількість предметів'))              
+                const resultUserSubjects = getQuantityGrades(userQuantitySubjects)
+
+                // В константу averageScore передаємо середній бал         
+                const averageScoreValue = getAverageScore(resultUserSubjects)
+                // В константу userCategory передаємо категорію учня
+                const userCategory = getCategory(resultUserSubjects)
+                // Показуємо результат
+                document.write(`У вас ${userQuantitySubjects} предметів. Ваші оцінки ${resultUserSubjects}. 
+                Середній бал = ${averageScoreValue}. Ви ${userCategory}`)
+            </script>
+        </div>
+    </main>
+    <footer></footer>
+    <script src="./js/script.js"></script>
+</body>
+<style>
+    @charset "UTF-8";
+	@import url("https://fonts.googleapis.com/css?family=Montserrat:regular,700&display=swap");
+    h2{
+        font-size: 25px;
+        color:#020202;
+        text-align: left;
+        margin-bottom: 25px;
+    }
+    .task{
+        color:rgb(255, 255, 255);
+    }
+    .task:not(:last-child){
+        margin-bottom: 25px;
+    }
+    .tablet{
+        display: grid;
+        grid-template-columns: repeat(3, auto);
+        justify-content: center;
+    }
+    .tablet__item{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border:1px solid #020202;
+        gap:25px;
+        /* padding: 15px; */
+        padding-top: 0;
+        padding-bottom: 0;
+        position: relative;
+    }
+    .tablet__item::before{
+        content:'';
+        position: absolute;
+        width: 100%;
+        height: 1px;
+        background-color: #020202;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    .tablet__title{
+        padding: 10px;
+        /* padding-top: 5px; */
+        text-align: center;
+    }
+    .tablet__value{
+        display: flex;
+        padding: 10px;
+        padding-top: 0;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+</style>
+</html>

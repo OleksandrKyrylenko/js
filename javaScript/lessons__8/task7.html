@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Task 8</title>
+</head>
+<body>
+    <header></header>
+    <main class="page">
+        <div class="page__container task">
+            <h2> Задача 8. Морський бій. Користувач вводить кількість клітинок одновимірного масиву та кількість одиночних кораблів. Комп’ютер довільно розміщує ці одиночні кораблі у масиві по один у клітинці (якщо у клітинці 0, то клітинка пуста, якщо 1 – то це означає, що там є корабель. Користувач вводить номер клітинки, куди стріляє. Гра продовжується до тих пір, поки не будуть потоплені усі кораблі.
+            <h2>
+            <script>
+                const minValueSum = -500
+                const maxValueSum = 500
+                // Створюємо функцію для генерування масиву випадкових чисел
+                function getRandomSum(maxValueElements, minValueSum, maxValueSum) {
+                    let arr = []
+                    for(let i = 0; i<maxValueElements; i++){
+                        const generationElements = Math.floor(Math.random()*(maxValueSum - minValueSum) + minValueSum)
+                        arr.push(generationElements)
+                    }
+                    return arr
+                }
+                // Створюємо функцію для підрахунку сумарного виграшу
+                function getSearchTotalGain(resultGenerationElements) {
+                    let sumTotalGain = 0
+                    let userNumElement
+                    do{
+                        userNumElement = parseInt(prompt('Введіть номер елемента. 1-10'))
+                        if(isFinite(userNumElement)) sumTotalGain += resultGenerationElements[userNumElement - 1]
+                    } 
+                    while(isFinite(userNumElement))
+                    return sumTotalGain
+                }
+                // Максимальне число елементів
+                const maxValueElements = 10
+                const resultGenerationElements = getRandomSum(maxValueElements, minValueSum, maxValueSum)
+                const resultSearchSumGain = getSearchTotalGain(resultGenerationElements)
+                // console.log(resultGenerationElements)
+                // console.log(resultSearchSumGain)
+                let messageTotalGain
+                if(resultSearchSumGain>0) messageTotalGain = `Ваш виграш складає : ${resultSearchSumGain} грн`
+                else messageTotalGain =  `Ви програли : ${resultSearchSumGain} грн`
+                // Виведення результату
+                document.write(messageTotalGain)
+            </script>
+        </div>
+    </main>
+    <footer></footer>
+    <script src="./js/script.js"></script>
+</body>
+<style>
+    @charset "UTF-8";
+	@import url("https://fonts.googleapis.com/css?family=Montserrat:regular,700&display=swap");
+    h2{
+        font-size: 25px;
+        color:#020202;
+        text-align: left;
+        margin-bottom: 25px;
+    }
+    .task{
+        color:rgb(255, 255, 255);
+    }
+    img{
+        max-width: 400px;
+    }
+</style>
+</html>
