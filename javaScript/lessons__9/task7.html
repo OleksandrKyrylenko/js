@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Task 8</title>
+</head>
+<body>
+    <header></header>
+    <main class="page">
+        <div class="page__container task">
+            <h2> Задача 8. Дано масив номерів авто. Сформувати новий масив тих, які починаються на «А»<h2>
+            <script>
+                let listNumerAuto = ['AA9065EM', 'AM8451OB', 'AM8951OT', 'BX1124PO', 'BC8494AB', 'BA7461KA', 'AC7485BA']
+                let newArrNumerAutoFirstLetter_A = listNumerAuto.filter(numerAuto => numerAuto[0] === 'A')
+                document.write(newArrNumerAutoFirstLetter_A)
+            </script>
+        </div>
+    </main>
+    <footer></footer>
+    <script src="./js/script.js"></script>
+</body>
+<style>
+    @charset "UTF-8";
+	@import url("https://fonts.googleapis.com/css?family=Montserrat:regular,700&display=swap");
+    h2{
+        font-size: 25px;
+        color:#020202;
+        text-align: left;
+        margin-bottom: 25px;
+    }
+    .task{
+        color:rgb(255, 255, 255);
+    }
+    img{
+        max-width: 400px;
+    }
+</style>
+</html>

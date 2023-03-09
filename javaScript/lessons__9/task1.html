@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Task 2</title>
+</head>
+<body>
+    <header></header>
+    <main class="page">
+        <div class="page__container task">
+            <h2>
+                Задача 2.  Користувач вводить кількість елементів. Створити масив, у якому перша половина заповнена 1-цями, а друга заповнена 7-ками.
+            </h2>
+            <script>
+                const userEnterQuantityElements = parseInt(prompt('Введіть кількість елементів'))
+                function getInputArrayElements(num) {
+                    let arr = new Array (num)
+                    const averageValue = arr.length / 2
+                    arr.fill(7)
+                    return arr.fill(1,0,averageValue)
+                }
+                const resultInputElements = getInputArrayElements(userEnterQuantityElements)
+                document.write(`[${resultInputElements}]`)
+            </script>
+        </div>
+    </main>
+    <footer></footer>
+    <script src="./js/script.js"></script>
+</body>
+<style>
+    @charset "UTF-8";
+	@import url("https://fonts.googleapis.com/css?family=Montserrat:regular,700&display=swap");
+    h2{
+        font-size: 25px;
+        color:#020202;
+        text-align: left;
+        margin-bottom: 25px;
+    }
+    .task{
+        color:rgb(255, 255, 255);
+    }
+
+    .input{
+        padding: 2px 8px 10px;
+        border:1px solid #020202;
+        margin-bottom: 10px;
+
+    }
+    label{
+        margin-left: 10px;
+    }
+</style>
+</html>

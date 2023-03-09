@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Task 5</title>
+</head>
+<body>
+    <header></header>
+    <main class="page">
+        <div class="page__container task">
+            <h2> Задача 5. Дано масив елементів. Знайти добуток додатних елементів</h2>
+            <script>
+                let arrElements = [-5,4,2,-45,-4,3,8,-4,-6,7,-9]
+                let product = 1;
+                for (const num of arrElements) if (num > 0) product *= num;
+                console.log(arrElements)
+                document.write(product)
+            </script>
+        </div>
+    </main>
+    <footer></footer>
+    <script src="./js/script.js"></script>
+</body>
+<style>
+    @charset "UTF-8";
+	@import url("https://fonts.googleapis.com/css?family=Montserrat:regular,700&display=swap");
+    h2{
+        font-size: 25px;
+        color:#020202;
+        text-align: left;
+        margin-bottom: 25px;
+    }
+    .task{
+        color:rgb(255, 255, 255);
+    }
+    .table{
+        border:2px solid #020202;
+    }
+    .row{
+        border:1px solid #020202;
+        padding: 5px;
+    }
+    .items{
+        display: flex;
+        gap:15px;
+        justify-content: center;
+    }
+</style>
+</html>

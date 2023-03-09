@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Task 7</title>
+</head>
+<body>
+    <header></header>
+    <main class="page">
+        <div class="page__container task">
+            <h2>Дано масив цін. Змінити цей масив так, що на ціни товарів, які більші за 1000 грн. дати 30% знижки.</h2>
+            <script>
+                let arrPrice = [1005, 250, 800, 2405, 750, 699, 1504, 876]
+                const discount = 30
+                const conditionalPrice = 1000
+                arrPrice.filter((price, index, arrRef) => {
+                    if(price>conditionalPrice) arrRef[index] *= (1 - discount / 100)
+                })
+                console.log(arrPrice)
+                document.write(`[${arrPrice}]`)
+
+                // arrPrice.forEach((element,index, arrRef) => {
+                //     if(element>conditionalPrice) {
+                //         arrRef[index] *= (1 - discount / 100)
+                //         arrRef[index] = parseFloat(arrRef[index].toFixed(2))
+                //     }
+                // })
+                // document.write(`[${arrPrice}]`)
+            </script>
+        </div>
+    </main>
+    <footer></footer>
+    <script src="./js/script.js"></script>
+</body>
+<style>
+    @charset "UTF-8";
+	@import url("https://fonts.googleapis.com/css?family=Montserrat:regular,700&display=swap");
+    h2{
+        font-size: 25px;
+        color:#020202;
+        text-align: left;
+        margin-bottom: 25px;
+    }
+    .task{
+        color:rgb(255, 255, 255);
+    }
+    .table{
+        border:2px solid #020202;
+    }
+    .row{
+        border:1px solid #020202;
+        padding: 5px;
+    }
+</style>
+</html>
