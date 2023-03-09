@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Task 7</title>
+</head>
+<body>
+    <header></header>
+    <main class="page">
+        <div class="page__container task">
+            <h2>Задача 7. Дано послідовність платіжок протягом року. Знайти сумарну кількість грошей за:
+                1. за весь рік;
+                2. у першій половині року;
+                3. у другій половині року;
+                4. за літо;
+                5. за ІІ квартал;
+                6. за парні місяці (з парними номерами);
+                7. за місяці, які є початковими у сезоні (весна, літо, осінь, зима).
+                </h2>
+            <script>
+                // Функція для створення масиву з платіжками
+                function inputArray(numberMount,minSum,maxSum) {
+                    let arr = []
+                    for(let i=0; i<numberMount;i++){
+                        const generationPaymentAmounts = Math.floor(Math.random()*(maxSum - minSum) + minSum)
+                        arr.push(generationPaymentAmounts)
+                    }
+                    return arr
+                }
+                // Функція для знаходження суми за вказаний період
+                function getTotalSum(listPayment, startMonthNumber, endMonthNumber, step) {
+                    let sum = 0
+                    for (let month = startMonthNumber; month <= endMonthNumber; month+=step) {
+                        sum += listPayment[month - 1]
+                    }
+                    return sum
+                }
+                // Кількість місяців
+                const quantityMount = 12
+                // Мінімальна сума
+                const minSumPayment = 100
+                // Максимальна сума
+                const maxSumPayment = 1000
+                const listPayment = inputArray(quantityMount,minSumPayment,maxSumPayment)
+                // Кількість грошей за весь рік
+                const sumYear = getTotalSum(listPayment,1,12,1)
+                // console.log(sumYear)
+                // Кількість грошей у першій половині року;
+                const sum1_6 = getTotalSum(listPayment,1,6,1)
+                // console.log(sum1_6)
+                // Кількість грошей у другій половині року;
+                const sum7_12 = getTotalSum(listPayment,7,12,1)
+                // console.log(sum7_12)
+                // Кількість грошей за літо;
+                const sum6_8 = getTotalSum(listPayment,6,8,1)
+                // console.log(sum6_8)
+                // Кількість грошей за ІІ квартал;
+                const sum4_6 = getTotalSum(listPayment,4,6,1)
+                // console.log(sum4_6)
+                // Кількість грошей за парні місяці (з парними номерами);
+                const sumEvenMount  = getTotalSum(listPayment, 2,12,2)
+                // console.log(sumEvenMount)
+                 // Кількість грошей за місяці, які є початковими у сезоні (весна, літо, осінь, зима);
+                const sumStartMountSeason  = getTotalSum(listPayment, 3,12,3)
+                // console.log(sumStartMountSeason)
+                // console.log(listPayment)
+                // Виведення результатів
+                document.write(`
+                Список платежів за рік : ${listPayment} <br><br>
+                Кількість грошей за весь рік = ${sumYear} <br><br>
+                Кількість грошей у першій половині року = ${sum1_6} <br><br>
+                Кількість грошей у другій половині року = ${sum7_12} <br><br>
+                Кількість грошей за літо = ${sum6_8} <br><br>
+                Кількість грошей за ІІ квартал = ${sum4_6} <br><br>
+                Кількість грошей за парні місяці (з парними номерами) = ${sumEvenMount} <br><br>
+                Кількість грошей за місяці, які є початковими у сезоні (весна, літо, осінь, зима) = ${sumStartMountSeason}`)
+            </script>
+        </div>
+    </main>
+    <footer></footer>
+    <script src="./js/script.js"></script>
+</body>
+<style>
+    @charset "UTF-8";
+	@import url("https://fonts.googleapis.com/css?family=Montserrat:regular,700&display=swap");
+    h2{
+        font-size: 25px;
+        color:#020202;
+        text-align: left;
+        margin-bottom: 25px;
+    }
+    .task{
+        color:rgb(255, 255, 255);
+    }
+    .table{
+        border:2px solid #020202;
+    }
+    .row{
+        border:1px solid #020202;
+        padding: 5px;
+    }
+</style>
+</html>

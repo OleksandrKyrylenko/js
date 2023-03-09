@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Task 2</title>
+</head>
+<body>
+    <header></header>
+    <main class="page">
+        <div class="page__container task">
+            <h2>Задача 2. Дано масив, який зберігає кількість відвідувачів магазину протягом тижня. Вивести на екран:
+                1. Номери днів, протягом яких кількість відвідувачів була меншою за 20;
+                2. Номери днів, коли кількість відвідувачів була мінімальною;
+                3. Номери днів, коли кількість відвідувачів була максимальною;
+                4. Загальну кількість клієнтів у робочі дні та окремо загальну кількість днів на вихідних.
+                </h2>
+            <script>
+                // Запитуємо користувача про кількість відвідувачів кожного дня
+                // Створюємо масив з кількість відвідувачів кожного дня протягом тижня
+                function getQuantityGuest(quantityGuest) {
+                    let arr = []
+                    for(let i = 1; i <= quantityGuest; i++){
+                        const quantityDay = parseFloat(prompt(`Введіть кількість відвідувачів за ${i}й день тижня`))
+                        arr.push(quantityDay)
+                    }
+                    return arr
+                }
+                // Створюємо масив з номерами днів, де кількість відвідувачів була менша за 20
+                function getNumDay_20(numDay, minNumDay){
+                    let arr = []
+                    for(let i = 0; i<numDay.length; i++){
+                        if(numDay[i]<minNumDay)
+                        arr.push([i+1])
+                    }
+                    return arr
+                }
+                // Функція для знаходження найменшего числа
+                function getMinGuest(minGuest) {
+                    let minNumGuest = minGuest[0]
+                    let minIndex = 0
+                    for(let i = 1; i<minGuest.length; i++){
+                        if(minGuest[i] < minNumGuest) {
+                            minNumGuest = minGuest[i]
+                            minIndex=i+1
+                        }
+                    }
+                    return minIndex
+                }                
+                // Функція для знаходження найбільшого числа
+                function getMaxGuest(maxGuest) {
+                    let maxNumGuest = maxGuest[0]
+                    let maxIndex = 0
+                    for(let k = 1; k<maxGuest.length; k++){
+                        if(maxGuest[k] > maxNumGuest) {
+                            maxNumGuest = maxGuest[k]
+                            maxIndex=k+1
+                        } 
+                    }
+                    return maxIndex
+                }  
+                // Функція для знаходження загальної кількості відвідувачів за 1-5 день і 6-7 день
+                function getTotalGuestSum(week, startDayNum, endDayNum) {
+                    let sumTotalGuest = 0
+                    for(let dayWeek = startDayNum; dayWeek <= endDayNum; dayWeek++){
+                        sumTotalGuest+=week[dayWeek-1]
+                    }
+                    return sumTotalGuest
+                }            
+                // Передаємо у функцію кількість днів
+                const week = getQuantityGuest(7)
+                // Передаємо у функцію numDay_20 масив week з кількістю відвідувачів за тиждень
+                // та мінімальну кількість в 20 відвідувачів
+                const numDay_20 = getNumDay_20(week, 20)
+                // Передаємо у функцію getMinGuest масив week для знаходження мінімального числа відвідувачів
+                const valueMinGuest = getMinGuest(week)
+                // Передаємо у функцію getMaxGuest масив week для знаходження максимального числа відвідувачів
+                const valueMaxGuest = getMaxGuest(week)
+                // Передаємо у функцію getTotalGuestSum масив week та мінімальний 1 і максимальний 5 робочий день тижня
+                const sumGuest_1_5 = getTotalGuestSum(week, 1,5)
+                // Передаємо у функцію getTotalGuestSum масив week та мінімальний 6 і максимальний 7 вихідний день тижня
+                const sumGuest_6_7 = getTotalGuestSum(week, 6,7)
+                // Перевірка чи пустий масив numDay_20, якщо так, то виводимо повідомлення, якщо ні, то виводимо день/дні
+                let guestMore_20=''
+                if(numDay_20.length===0){
+                    guestMore_20=`Протягом тижня кількість відвідувачів не була менше 20`
+                } else guestMore_20 = numDay_20
+
+                let numberVisitorsWeek = 'Протягом тижня кількість ваших відвідувачів по кожному дню складала'
+                let numberVisitorsLess_20 = 'Номери днів, протягом яких кількість відвідувачів була меншою за 20'
+                let numberVisitorsMin = 'Номери днів, коли кількість відвідувачів була мінімальною'
+                let numberVisitorsMax = 'Номери днів, коли кількість відвідувачів була максимальною'
+                let totalValueGuest_1_5 = 'Загальна кількість клієнтів у робочі дні'
+                let totalValueGuest_6_7 = 'Загальну кількість клієнтів на вихідних.'
+                document.write(`${numberVisitorsWeek}: ${week}<br><br> 
+                ${numberVisitorsLess_20}: ${guestMore_20}<br><br> 
+                ${numberVisitorsMin}: ${valueMinGuest}<br><br> 
+                ${numberVisitorsMax}: ${valueMaxGuest}<br><br>
+                ${totalValueGuest_1_5}: ${sumGuest_1_5}<br><br>
+                ${totalValueGuest_6_7}: ${sumGuest_6_7}<br><br>`)
+
+            </script>
+        </div>
+    </main>
+    <footer></footer>
+    <script src="./js/script.js"></script>
+</body>
+<style>
+    @charset "UTF-8";
+	@import url("https://fonts.googleapis.com/css?family=Montserrat:regular,700&display=swap");
+    h2{
+        font-size: 25px;
+        color:#020202;
+        text-align: left;
+        margin-bottom: 25px;
+    }
+    .task{
+        color:rgb(255, 255, 255);
+    }
+
+    .input{
+        padding: 2px 8px 10px;
+        border:1px solid #020202;
+        margin-bottom: 10px;
+
+    }
+    label{
+        margin-left: 10px;
+    }
+</style>
+</html>

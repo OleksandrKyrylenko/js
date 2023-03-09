@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Task 5</title>
+</head>
+<body>
+    <header></header>
+    <main class="page">
+        <div class="page__container task">
+            <h2> Задача 5. Дано послідовність оцінок учня. Підрахувати кількість:
+                1.двійок
+                2.кількість хороших оцінок (добре, відмінно);
+                3.кількість оцінок, які нижче середнього.
+                </h2>
+            <script>
+                // Функція для створення масиву з оцінками учня
+                function getGenerationEstimates(quantityItems,minEstimation,maxEstimation) {
+                    let arr = []
+                    for(let i=0; i<quantityItems;i++){
+                        const generationEstimationItems = minEstimation + Math.floor(Math.random()*maxEstimation)
+                        arr.push(generationEstimationItems)
+                    }
+                    return arr
+                }
+                // Створюємо функцію для пошуку двійок
+                function getSearch_2(estimation) {
+                    let sumCount_2 = 0
+                    for(let i = 0; i<estimation.length; i++){
+                        if(estimation[i] === 2) sumCount_2++
+                    }
+                    return sumCount_2
+                }
+                // Створюємо функцію для пошуку кількості хороших (добре, відмінно) оцінок
+                function getSearcHighMarks_4_5(highMarks) {
+                    let sumCount_4_5 = 0
+                    for(let i = 0; i<highMarks.length; i++){
+                        if(highMarks[i] >= 4) sumCount_4_5++
+                    }
+                    return sumCount_4_5
+                }
+                // Створюємо функцію для знаходження середнього балу
+                function getSearcGPA(estimation) {
+                    let countTotalEstimation = 0
+                    for(let i = 0; i<estimation.length; i++){
+                        countTotalEstimation+=estimation[i]
+                        // console.log(countTotalEstimation)
+                    }
+                    const GPA = countTotalEstimation / estimation.length
+                    // console.log(GPA)
+                    return GPA
+                }
+                 // Створюємо функцію для знаходження кількості оцінок, які нижче середнього балу.
+                function getSearchEstimationLowerGpa(estimation,GPA) {
+                    let countEstimationLowerGpa = 0
+                    for(let i = 0; i<estimation.length; i++){
+                        if(estimation[i]<GPA) countEstimationLowerGpa++
+                    }
+                    return countEstimationLowerGpa
+                }
+                // Запитуємо кількість предметів, для генерування необхідної кількості.
+                const maxQuantityItems = parseInt(prompt('Введіть кількість предметів'))
+                // Мінімальна оцінка
+                const minEstimation = 1
+                // Максимальна оцінка
+                const maxEstimation = 5
+                // Передаємо у функцію getGenerationEstimates кількість предметів maxQuantityItems, 
+                // та мінімальну і максимальну оцінку minEstimation, maxEstimation
+                const totalEstimationItems = getGenerationEstimates(maxQuantityItems,minEstimation,maxEstimation)
+                // Передаємо у функцію getSearch_2 масив totalEstimationItems з оцінками учня, для пошуку двійок
+                const resultSearch_2 = getSearch_2(totalEstimationItems)
+                // Передаємо у функцію getSearcHighMarks_4_5 масив totalEstimationItems з оцінками учня, для пошуку хороших оцінок
+                const resultSearchHighMarks_4_5 = getSearcHighMarks_4_5(totalEstimationItems)
+                // Передаємо у функцію getSearcGPA масив totalEstimationItems з оцінками учня, для пошуку середнього балу
+                const valueGPA = getSearcGPA(totalEstimationItems)
+                // Передаємо у функцію getSearchEstimationLowerGpa масив totalEstimationItems з оцінками учня
+                // та середній бал valueGPA, для пошуку кількості оцінок менших за середній бал
+                const resultSearchEstimationLowerGpa = getSearchEstimationLowerGpa(totalEstimationItems, valueGPA)
+                // Виводимо результати
+                document.write(`
+                Список оцінок учня : ${totalEstimationItems}<br><br>
+                Кількість двійок : ${resultSearch_2}<br><br>
+                Кількість хороших оцінок (добре, відмінно) : ${resultSearchHighMarks_4_5}<br><br>
+                Кількість оцінок, які нижче середнього : ${resultSearchEstimationLowerGpa}`)
+                // console.log(totalEstimationItems)
+                // console.log(resultSearch_2)
+                // console.log(resultSearchHighMarks_4_5)
+                // console.log(valueGPA)
+                // console.log(resultSearchEstimationLowerGpa)
+            </script>
+        </div>
+    </main>
+    <footer></footer>
+    <script src="./js/script.js"></script>
+</body>
+<style>
+    @charset "UTF-8";
+	@import url("https://fonts.googleapis.com/css?family=Montserrat:regular,700&display=swap");
+    h2{
+        font-size: 25px;
+        color:#020202;
+        text-align: left;
+        margin-bottom: 25px;
+    }
+    .task{
+        color:rgb(255, 255, 255);
+    }
+    .table{
+        border:2px solid #020202;
+    }
+    .row{
+        border:1px solid #020202;
+        padding: 5px;
+    }
+    .items{
+        display: flex;
+        gap:15px;
+        justify-content: center;
+    }
+</style>
+</html>
