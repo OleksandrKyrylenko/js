@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Task 1</title>
+</head>
+<body>
+    <header></header>
+    <main class="page">
+        <div class="page__container task">
+            <h2>Задача. Дано історію цін на цінні папери за деякий період (згенерувати від 1 до 10000)</h2>
+            <script>
+                const quantityOfPricesOnPeriod = parseInt(prompt('Введіть необхідну кількість цін за період'))
+                function getRandomSum(minPrice, maxPrice) {
+                    return minPrice + Math.floor(Math.random() * (maxPrice - minPrice + 1))
+                }
+                function getRandomArrayPrice(quantityPrice, minPrice,maxPrice) {
+                    const arrHistoryPrice = new Array(quantityPrice).fill(0).map(() => getRandomSum(minPrice,maxPrice))
+                    return arrHistoryPrice
+                }
+                const arrHistoryPrice = getRandomArrayPrice(quantityOfPricesOnPeriod, 1, 10000)
+                console.log(arrHistoryPrice)
+
+                // 1. Сформувати новий масив, у якому є тільки ті, що більші за 1000 грн.
+                const becameThePrice = 1000
+                const newArrPriceMoreThen_1000 = arrHistoryPrice.filter(price => price>becameThePrice)
+                console.log(newArrPriceMoreThen_1000)
+                // 2. Сформувати новий масив, у якому є номери тільки тих, що більші за 1000 грн.
+                const newArrNumElementsMoreThen_1000 = arrHistoryPrice.map((numElement, index,arrRef) => {
+                    // console.log(numElement)
+                    if(numElement > becameThePrice) return index 
+                })
+                .filter(numElement => numElement !== undefined)
+                console.log(newArrNumElementsMoreThen_1000)
+
+                // 3. Сформувати список з тих цін, які більші за попереднє значення
+                const newArrPriceMoreThenPrevious = arrHistoryPrice.filter((previousPrice,index,arrRef)=> {
+                    if(previousPrice>arrRef[index - 1]) console.log(previousPrice)
+                })
+
+                // 4. Сформувати новий масив, що міститиме значення цін у відсотках стосовно максимального
+                // Функція для знаходження максимальної ціни
+                function getMaxPriceInArr(number) {
+                    return Math.max(...number)
+                }
+                const valueMaxPrice = getMaxPriceInArr(arrHistoryPrice)
+                console.log(valueMaxPrice)
+                const arrValuePricePercentageOfMaximum = arrHistoryPrice.map(valuePrice => parseFloat((valuePrice / valueMaxPrice * 100).toFixed(1)))
+                console.log(arrValuePricePercentageOfMaximum)
+                // 5. Підрахувати кількість змін цін
+            
+                let sumChangesPrice = 0
+                arrHistoryPrice.filter((prevPrice,index,arrRef) => {
+                    if(prevPrice>arrRef[index - 1] || prevPrice<arrRef[index - 1]) sumChangesPrice++
+                })
+                console.log(sumChangesPrice)
+                // =========================================
+                let sumNumberOfPriceChanges2 = arrHistoryPrice.reduce((prevPrice,element,index,arrRef) =>{
+                    if(index === 0) return prevPrice
+                    if(element !== arrRef[index-1]) return prevPrice+1
+                    else prevPrice
+                },0)
+                console.log(sumNumberOfPriceChanges2)
+
+                // 6. Визначити, чи є ціна, що менше 1000
+                const isPriceLessThan_1000 = arrHistoryPrice.some(price => price < becameThePrice)
+                console.log(isPriceLessThan_1000) 
+
+                // 7. Визначати, чи усі ціни більше за 1000
+                const isPriceMoreThan_1000 = arrHistoryPrice.every(price => price > becameThePrice)
+                console.log(isPriceMoreThan_1000)
+                
+                // 8. Підрахувати кількість цін, що більше за 1000
+                let countPriceMoreThan_1000 = 0
+                arrHistoryPrice.filter((price,index,arrRef) =>{
+                    if(price > becameThePrice) countPriceMoreThan_1000 ++
+                })
+                console.log(countPriceMoreThan_1000)
+                
+                // 9. Підрахувати суму цін, що більше за 1000
+                let sumPriceMoreThan_1000 = arrHistoryPrice.reduce((prevPrice,element,index,arrRef) => {
+                    if(element > becameThePrice) return element + prevPrice
+                    else return prevPrice
+                },0)
+                console.log(sumPriceMoreThan_1000)
+
+                // 10. Знайти першу ціну, що більше за 1000
+                const searchFirstElementMoreThan_1000 = arrHistoryPrice.find(price => price >  becameThePrice)
+                console.log(searchFirstElementMoreThan_1000)
+
+                // 11. Знайти індекс першої ціни, що більше за 1000
+                const searchIndexFirstElementMoreThan_1000 = arrHistoryPrice.findIndex(priceIndex => priceIndex >  becameThePrice)      
+                console.log(searchIndexFirstElementMoreThan_1000)         
+                
+                // 12. Знайти останню ціну, що більше за 1000
+                const searchLastElementMoreThan_1000 = arrHistoryPrice.findLast(price => price >  becameThePrice)
+                console.log(searchLastElementMoreThan_1000)
+
+                // 13. Знайти індекс останньої ціни, що більше за 1000
+                const searchIndexLastElementMoreThan_1000 = arrHistoryPrice.findLastIndex(price => price >  becameThePrice)
+                console.log(searchIndexLastElementMoreThan_1000)
+                </script>
+        </div>
+    </main>
+    <footer></footer>
+    <script src="./js/script.js"></script>
+</body>
+<style>
+    @charset "UTF-8";
+	@import url("https://fonts.googleapis.com/css?family=Montserrat:regular,700&display=swap");
+    h2{
+        font-size: 25px;
+        color:#020202;
+        text-align: left;
+        margin-bottom: 25px;
+    }
+    .task{
+        color:rgb(255, 255, 255);
+    }
+    .task:not(:last-child){
+        margin-bottom: 25px;
+    }
+    .tablet{
+        display: grid;
+        grid-template-columns: repeat(3, auto);
+        justify-content: center;
+    }
+    .tablet__item{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border:1px solid #020202;
+        gap:25px;
+        /* padding: 15px; */
+        padding-top: 0;
+        padding-bottom: 0;
+        position: relative;
+    }
+    .tablet__item::before{
+        content:'';
+        position: absolute;
+        width: 100%;
+        height: 1px;
+        background-color: #020202;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    .tablet__title{
+        padding: 10px;
+        /* padding-top: 5px; */
+        text-align: center;
+    }
+    .tablet__value{
+        display: flex;
+        padding: 10px;
+        padding-top: 0;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+</style>
+</html>
