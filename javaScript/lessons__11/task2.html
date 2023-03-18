@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Task 3</title>
+</head>
+<body>
+    <header></header>
+    <main class="page">
+        <div class="page__container task">
+            <h2>Задача 3. Морський бій. Випадковим чином на двовимірному полі розміром 6*6 розташовується 5 кораблів. Користувач стріляє вказуючи координати. Гра продовжується поки не потоплено усі кораблі або у користувача не закінчаться снаряди.</h2>
+            <script>
+                const SHIPS_NUMBER = 5
+                const AMMUNITION_NUMBER = 25
+                // Сформувати поле гри (двовимірний масив із розміщеними кораблями)
+                function getGenerationIndex(min, max) {
+                  return Math.floor(Math.random() * (max - min + 1)) + min
+                }
+                // функція генерування одного рядка
+                function generateRandomArray(lengthArr) {
+                    return arr = new Array(lengthArr).fill(0)
+                }
+
+                // функція генерування таблиці(двовимірного масиву)
+                function generateRandomTable(rowsNumberField,columnsNumberField) {
+                    const table = []
+                    for(let i = 0; i<rowsNumberField; i++){
+                        const randomRow = generateRandomArray(columnsNumberField)
+                        table.push(randomRow)
+                    }
+                    return table
+                }
+                // Функція розміщення кораблів на полі
+                function placeShips(field, shipsNumber) {
+                const lastIndex = field.length - 1
+                for (let i = 0; i < shipsNumber; i++) {
+                    let row, col
+                    do {
+                        row = getGenerationIndex(0, lastIndex)
+                        col = getGenerationIndex(0, lastIndex)
+                    } while (field[row][col] === 1) // Перевірка, щоб корабль за цими координатами знаходився один корабель
+                    field[row][col] = 1
+                }
+                return field
+                }
+                // Генеруємо поле гри та розміщуємо на ньому кораблі
+                const field = placeShips(generateRandomTable(6, 6), SHIPS_NUMBER)
+                console.log(field)
+
+                // Гра користувача
+                function game(field, shipsNumber, ammunition) {
+                    do{
+                        const userStrikePositionRow = parseInt(prompt(`Куди стріляємо по горизонталі (1-${field.length})?`)) - 1
+                        const userStrikePositionCol = parseInt(prompt(`Куди стріляємо по вертикалі (1-${field.length})?`)) - 1
+
+                        if(field[userStrikePositionRow][userStrikePositionCol] === 1){
+                            shipsNumber--
+                            ammunition--
+                            alert(`Вітаю, ви попали. Залишилось ${shipsNumber} корабля`)
+                            field[userStrikePositionRow][userStrikePositionCol] = 0
+                        }
+                        else{
+                            ammunition--
+                            alert(`Не попали. Залишок снарядів = ${ammunition}. Залишок кораблів = ${shipsNumber}`)
+                        }
+                    }while(shipsNumber > 0 || ammunition > 0)
+                }
+                const userGame = game(field,SHIPS_NUMBER, AMMUNITION_NUMBER)
+            </script>
+        </div>
+    </main>
+    <footer></footer>
+    <script src="./js/script.js"></script>
+</body>
+<style>
+    @charset "UTF-8";
+	@import url("https://fonts.googleapis.com/css?family=Montserrat:regular,700&display=swap");
+    h2{
+        font-size: 25px;
+        color:#020202;
+        text-align: left;
+        margin-bottom: 25px;
+    }
+    .task{
+        color:rgb(255, 255, 255);
+    }
+    .task:not(:last-child){
+        margin-bottom: 25px;
+    }
+    .tablet{
+        display: grid;
+        grid-template-columns: repeat(3, auto);
+        justify-content: center;
+    }
+    .tablet__item{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border:1px solid #020202;
+        gap:25px;
+        /* padding: 15px; */
+        padding-top: 0;
+        padding-bottom: 0;
+        position: relative;
+    }
+    .tablet__item::before{
+        content:'';
+        position: absolute;
+        width: 100%;
+        height: 1px;
+        background-color: #020202;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    .tablet__title{
+        padding: 10px;
+        /* padding-top: 5px; */
+        text-align: center;
+    }
+    .tablet__value{
+        display: flex;
+        padding: 10px;
+        padding-top: 0;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+</style>
+</html>

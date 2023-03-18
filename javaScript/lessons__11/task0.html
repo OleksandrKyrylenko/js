@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Task 1</title>
+</head>
+<body>
+    <header></header>
+    <main class="page">
+        <div class="page__container task">
+            <h2>Задача 1. Знайти суми елементів у вказаній області</h2>
+            <script>
+                // Тестовий масив
+                let testArrOne = [
+                    [200, 210, 50, 40],
+                    [180, 23, 51, 47],
+                    [120, 74, 96, 100],
+                    [87, 623, 321, 125]
+                ] 
+                function getSumElement(testArrOne, startRow,endRow, startColumn,endColumn) {
+                    let sum = 0
+                    for(let rowIndex = startRow; rowIndex < endRow; rowIndex++){
+                        for(let colIndex = startColumn; colIndex<endColumn; colIndex++){
+                            sum += testArrOne[rowIndex][colIndex]
+                        }
+                    }
+                    return sum
+                }
+                console.log(testArrOne)
+                // 1
+                const arrSumOne = getSumElement(testArrOne,0,2,0,2)
+                console.log(arrSumOne)
+                // 2
+                const arrSumTwo = getSumElement(testArrOne,0,2,2,4)
+                console.log(arrSumTwo)
+                // 3
+                const arrSumThree = getSumElement(testArrOne,2,4,0,2)
+                console.log(arrSumThree)
+                // 4
+                const arrSumFour = getSumElement(testArrOne,2,4,2,4)
+                console.log(arrSumFour)
+    
+                // функція знаходження суми парних і непарних рядків
+                function getSumEvenRow(testArrOne, rowIndex, step) {
+                    let sum = 0
+                    for(let row = rowIndex; row < testArrOne.length; row+=step){
+                        for(let col = 0; col<testArrOne[row].length; col++){
+                            sum += testArrOne[row][col]
+                        }
+                    }
+                    return sum
+                }
+                // 5) Суму парних рядків
+                const resultSumEvenRow = getSumEvenRow(testArrOne,0,2)
+                console.log(resultSumEvenRow)
+                // 6) Суму непарних рядків
+                const resultSumOddRow = getSumEvenRow(testArrOne,1,2)
+                console.log(resultSumOddRow)
+
+                // 7) У парних рядках – непарні стовпці, у непарних – парні.
+                function getSumElementTable(testArrOne,rowIndex,colIndex, step) {
+                    let sum = 0
+                    for(let row = rowIndex; row < testArrOne.length; row+=step){
+                        for(let col = colIndex; col<testArrOne[row].length; col+=step){
+                            sum += testArrOne[row][col]
+                        }
+                    }
+                    return sum
+                }
+                // Сума парних рядків на межі перетину з непарними стовпцями
+                const resulSumEvenRowsWithOddColumns = getSumElementTable(testArrOne,0,1,2)
+                console.log(resulSumEvenRowsWithOddColumns)
+                // Сума непарних рядків на межі перетину з парними стовпцями
+                const resultSumOddRowsWithEvenColumns = getSumElementTable(testArrOne,1,0,2)
+                console.log(resultSumOddRowsWithEvenColumns)
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+            // Задача. Дано прибуток магазину за К тижнів. Знайти загальний прибуток
+            // Функція генерування випадкових чисел(Прибутку)
+            // function getRandomNumber(minValue,maxValue) {
+            //     return minValue + Math.floor(Math.random()*(maxValue - minValue + 1))
+            // }
+            // // Функція генерування одного тиждня
+            // function generateRandomArray(arrayLength,minValue, maxValue) {
+            //     let arr = []
+            //     for(let i = 0; i<arrayLength; i++){
+            //         const randomNum = getRandomNumber(minValue, maxValue)
+            //         arr.push(randomNum)
+            //     }
+            //     return arr
+            // }
+            // // функція генерування двовимірного масиву
+            // function generateRandomTable(rowsNumber,columnsNumber,minValue,maxValue) {
+            //     let table = []
+            //     for(let i = 0; i<rowsNumber; i++){
+            //         const randomRow = generateRandomArray(columnsNumber,minValue,maxValue)
+            //         table.push(randomRow)
+            //     }
+            //     return table
+            // }
+            // const minValue = 100
+            // const maxValue = 4000
+            // const columnsNumber = 7
+            // const rowsNumber = parseInt(prompt('Введіть кількість тижнів'))
+            // const result = generateRandomTable(rowsNumber,columnsNumber,minValue,maxValue)
+            // console.log(result)
+            // function totalSum(table) {
+            //     let sum = 0
+            //     for(let rowNumber = 0; rowNumber<table.length; rowNumber++){
+            //         for(let columnNumber = 0; columnNumber<table[rowNumber].length; columnNumber++){
+            //             sum+=table[rowNumber][columnNumber]
+            //         }
+            //     }
+            //     return sum
+            // }
+            // const valueTotalSum = totalSum(result)
+            // console.log(valueTotalSum)
+                </script>
+        </div>
+    </main>
+    <footer></footer>
+    <script src="./js/script.js"></script>
+</body>
+<style>
+    @charset "UTF-8";
+	@import url("https://fonts.googleapis.com/css?family=Montserrat:regular,700&display=swap");
+    h2{
+        font-size: 25px;
+        color:#020202;
+        text-align: left;
+        margin-bottom: 25px;
+    }
+    .task{
+        color:rgb(255, 255, 255);
+    }
+    .task:not(:last-child){
+        margin-bottom: 25px;
+    }
+    .tablet{
+        display: grid;
+        grid-template-columns: repeat(3, auto);
+        justify-content: center;
+    }
+    .tablet__item{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border:1px solid #020202;
+        gap:25px;
+        /* padding: 15px; */
+        padding-top: 0;
+        padding-bottom: 0;
+        position: relative;
+    }
+    .tablet__item::before{
+        content:'';
+        position: absolute;
+        width: 100%;
+        height: 1px;
+        background-color: #020202;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    .tablet__title{
+        padding: 10px;
+        /* padding-top: 5px; */
+        text-align: center;
+    }
+    .tablet__value{
+        display: flex;
+        padding: 10px;
+        padding-top: 0;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+</style>
+</html>
