@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Task 3</title>
+</head>
+<body>
+    <header></header>
+    <main class="page">
+        <div class="page__container task">
+            <h2>Задача 4. Для розглянутих методів сортування спробувати вивести етапи сортування шляхом виведення відповідних таблиць за зразком.</h2>
+            <script>
+                 // функція генерування випадкових чисел
+                function getGenerationRandomNumb(minNum, maxNum) {
+                    return minNum + Math.floor(Math.random() * (maxNum - minNum + 1))
+                }
+                // створення масиву з випадковими числами
+                const arrayRandomNumbers = new Array(5).fill().map(numb => getGenerationRandomNumb(0, 50))
+                console.log(arrayRandomNumbers)
+                // [8, 4, 3, 44, 33]
+                function countingExchangesUsingBubbleMethod(arrayNumber) {
+                    let changed
+                    let arrayBubbleMethod = [...arrayNumber]
+                    document.write(`Сортування бульбашкою<br>${JSON.stringify(arrayBubbleMethod)}<br>`)
+                    do{
+                        changed = false
+                        for(let i = 1; i<arrayBubbleMethod.length; i++){
+                            if(arrayBubbleMethod[i-1] > arrayBubbleMethod[i]){
+                                let tmp = arrayBubbleMethod[i-1]
+                                arrayBubbleMethod[i-1] = arrayBubbleMethod[i]
+                                arrayBubbleMethod[i] = tmp
+                                document.write(`${JSON.stringify(arrayBubbleMethod)}<br>`)
+                                changed = true
+                            }
+                        }
+                    }while(changed)
+                    return arrayBubbleMethod
+                }
+
+                const totalNumOfExchangesBubbleSort = countingExchangesUsingBubbleMethod(arrayRandomNumbers)
+                console.log(totalNumOfExchangesBubbleSort)
+                // console.log(arrayRandomNumbers )
+
+                // Метод змішування
+                const swap = (arr,i,j) =>{
+                    const akum = arr[i]
+                    arr[i] = arr[j]
+                    arr[j] = akum
+                }
+                // let arrTest = [2,1,5,6,8,4,6,3,10,11,9]
+                function shakerSort(array) {
+                    let arrayShakerSort = [...array]
+                    let leftIndex = 0
+                    let rightIndex = arrayShakerSort.length - 1
+                    document.write(`Сортування змішуванням<br>${JSON.stringify(arrayShakerSort)}<br>`)
+                    while(leftIndex < rightIndex){
+                        for(let i = leftIndex; i < rightIndex; i++){
+                            if(arrayShakerSort[i] > arrayShakerSort[i+1]){
+                                swap(arrayShakerSort, i, i + 1)
+                                document.write(`${JSON.stringify(arrayShakerSort)}<br>`)
+                            }
+                        }
+                        rightIndex--
+                        for(let k = rightIndex; k > leftIndex; k--){
+                            if(arrayShakerSort[k] < arrayShakerSort[k - 1]){
+                                swap(arrayShakerSort, k, k - 1)
+                                document.write(`${JSON.stringify(arrayShakerSort)}<br>`)
+                            }
+                        }
+                        leftIndex++
+                    }
+                    return arrayShakerSort
+                }
+                const totalNumOfExchangesShakerSort = shakerSort(arrayRandomNumbers)
+                console.log(totalNumOfExchangesShakerSort)
+
+                // Метод включенням
+                // let arrTest = [2,1,5,6,8,4,6,3,10,11,9]
+                function findingChangeInInclusionMethod(array) {
+                    let arrInclusion = [...array]
+                    let currentElement
+                    let i
+                    document.write(`Сортування включенням<br>${JSON.stringify(arrInclusion)}<br>`)
+                    for(let k = 1; k < arrInclusion.length; k++){
+                        currentElement = arrInclusion[k]
+                        i = k - 1
+                        while(i >=0 && arrInclusion[i] > currentElement){
+                            arrInclusion[i+1] = arrInclusion[i]
+                            i = i-1
+                        }
+                        arrInclusion[i+1] = currentElement
+                        document.write(`${JSON.stringify(arrInclusion)}<br>`)
+                    }
+                    return arrInclusion
+                }
+                const totalNumOfExchangesInclusionSort = findingChangeInInclusionMethod(arrayRandomNumbers)
+            </script>
+        </div>
+    </main>
+    <footer></footer>
+    <script src="./js/script.js"></script>
+</body>
+<style>
+    @charset "UTF-8";
+	@import url("https://fonts.googleapis.com/css?family=Montserrat:regular,700&display=swap");
+    h2{
+        font-size: 25px;
+        color:#020202;
+        text-align: left;
+        margin-bottom: 25px;
+    }
+    .task{
+        color:rgb(255, 255, 255);
+    }
+    .task:not(:last-child){
+        margin-bottom: 25px;
+    }
+    .tablet{
+        display: grid;
+        grid-template-columns: repeat(3, auto);
+        justify-content: center;
+    }
+    .tablet__item{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border:1px solid #020202;
+        gap:25px;
+        /* padding: 15px; */
+        padding-top: 0;
+        padding-bottom: 0;
+        position: relative;
+    }
+    .tablet__item::before{
+        content:'';
+        position: absolute;
+        width: 100%;
+        height: 1px;
+        background-color: #020202;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    .tablet__title{
+        padding: 10px;
+        /* padding-top: 5px; */
+        text-align: center;
+    }
+    .tablet__value{
+        display: flex;
+        padding: 10px;
+        padding-top: 0;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+</style>
+</html>
