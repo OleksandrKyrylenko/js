@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Task 2</title>
+</head>
+<body>
+    <header></header>
+    <main class="page">
+        <div class="page__container task">
+            <h2>Задача 2.  Нехай X0 = X1 = 1, Xi = Xi-1 + 2*Xi-2, де i = 2,3,... Визначити Xn. Розв’язати з використанням рекурсивних і нерекурсивних алгоритмів</h2>
+            <script>
+                // Розв'язання за допомогою рекрусивного алгоритму
+                function recursiveFinding(n) {
+                    if(n === 0 || n === 1) return 1
+                    else                        
+                        return recursiveFinding(n-1) + 2*recursiveFinding(n-2)
+                }
+                console.log(recursiveFinding(4))
+                // Розв'язання за допомогою нерекрусивного алгоритму
+                function notRecursiveFinding(n){
+                    let x_n_0 = x_n_1 = 1
+                    if(n === 0 || n === 1) return 1
+                    else{
+                        for(let i = 2; i <= n; i++){
+                            let x_n = x_n_1 + (2 * x_n_0) 
+                            x_n_1 = x_n_0
+                            x_n_0 = x_n
+                        }
+                        return x_n
+                    }
+                }
+                console.log(recursiveFinding(6))
+            </script>
+        </div>
+    </main>
+    <footer></footer>
+    <script src="./js/script.js"></script>
+</body>
+<style>
+    @charset "UTF-8";
+	@import url("https://fonts.googleapis.com/css?family=Montserrat:regular,700&display=swap");
+    h2{
+        font-size: 25px;
+        color:#020202;
+        text-align: left;
+        margin-bottom: 25px;
+    }
+    .task{
+        color:rgb(255, 255, 255);
+    }
+    .task:not(:last-child){
+        margin-bottom: 25px;
+    }
+    .tablet{
+        display: grid;
+        grid-template-columns: repeat(3, auto);
+        justify-content: center;
+    }
+    .tablet__item{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border:1px solid #020202;
+        gap:25px;
+        /* padding: 15px; */
+        padding-top: 0;
+        padding-bottom: 0;
+        position: relative;
+    }
+    .tablet__item::before{
+        content:'';
+        position: absolute;
+        width: 100%;
+        height: 1px;
+        background-color: #020202;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    .tablet__title{
+        padding: 10px;
+        /* padding-top: 5px; */
+        text-align: center;
+    }
+    .tablet__value{
+        display: flex;
+        padding: 10px;
+        padding-top: 0;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+</style>
+</html>
