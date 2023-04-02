@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Task 1</title>
+</head>
+
+<body>
+    <header></header>
+    <main class="page">
+        <div class="page__container task">
+            <h2>Задача 5. Розробити клас «Керівник танців»</h2>
+            <script>
+                class DanceDirector{
+                    constructor(nameBoys, nameGirls, interval){
+                    // ================== Поля ==================
+                        // Масив імен хлопців
+                        this.arrNameBoys = nameBoys
+                        // Масив імен дівчат
+                        this.arrNameGirls = nameGirls
+                        this.interval = interval
+                    }
+                // ================== Методи ==================
+                    // Метод випадкового вибору імені хлопця
+                    getDandomNameBoy(){
+                        let randomIndex = Math.floor(Math.random()*this.arrNameBoys.length)
+                        return this.arrNameBoys[randomIndex]
+                    }
+                    // Метод випадкового вибору імені дівчини
+                    getDandomNameGirl(){
+                        let randomIndex = Math.floor(Math.random()*this.arrNameGirls.length)
+                        return this.arrNameGirls[randomIndex]
+                    }
+                    // Метод виведення пари для танців
+                    getCoupleForDance(){
+                        let boy = this.getDandomNameBoy()
+                        let girl = this.getDandomNameGirl()
+                        return alert(`Парою для танцю є ${boy} та ${girl}`)
+                    }
+                    // Метод run , який ініціює через кожні 5 секунд виведення нової пари для танців
+                    run(){
+                        setInterval(() => {
+                            this.getCoupleForDance()}, this.interval * 1000)
+                    }
+                }
+                const nameBoys = ['Pavlo', 'Oleg', 'Valeriy', 'Ivan']
+                const nameGirls = ['Olga','Viktoria', 'Nastya', 'Masha']
+                let coupleForDance = new DanceDirector (nameBoys, nameGirls, 5)
+                coupleForDance.run()
+            </script>
+        </div>
+    </main>
+    <footer></footer>
+    <script src="./js/script.js"></script>
+</body>
+<style>
+    @charset "UTF-8";
+    @import url("https://fonts.googleapis.com/css?family=Montserrat:regular,700&display=swap");
+
+    h2 {
+        font-size: 18px;
+        color: #020202;
+        text-align: left;
+        margin-bottom: 25px;
+    }
+
+    .task {
+        color: rgb(255, 255, 255);
+    }
+
+    .task:not(:last-child) {
+        margin-bottom: 25px;
+    }
+
+    .tablet {
+        display: grid;
+        grid-template-columns: repeat(3, auto);
+        justify-content: center;
+    }
+
+    .tablet__item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border: 1px solid #020202;
+        gap: 25px;
+        /* padding: 15px; */
+        padding-top: 0;
+        padding-bottom: 0;
+        position: relative;
+    }
+
+    .tablet__item::before {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 1px;
+        background-color: #020202;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    .tablet__title {
+        padding: 10px;
+        /* padding-top: 5px; */
+        text-align: center;
+    }
+
+    .tablet__value {
+        display: flex;
+        padding: 10px;
+        padding-top: 0;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+</style>
+
+</html>

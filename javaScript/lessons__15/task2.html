@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Task 1</title>
+</head>
+
+<body>
+    <header></header>
+    <main class="page">
+        <div class="page__container task">
+            <h2> Задача 2. Створити об’єкт «Авто». </h2>
+            <script>
+                class Automobile {
+                    //  ============== Поля(властивості)  ==============
+                    constructor(model, tankSize, numLitersAvailable, numOfSeats, numOfPassengers) {
+                        // Марка
+                        this.model = model
+                        // Розмір бака
+                        this.tankSize = tankSize
+                        // Кількість наявних літрів
+                        this.numLitersAvailable = numLitersAvailable
+                        // Кількість місць
+                        this.numOfSeats = numOfSeats
+                        // Кількість пасажирів
+                        this.numOfPassengers = numOfPassengers
+                    }
+                    // ============== Методи (дії)  ==============
+                    // Заправка на вказану кількість літрів
+                    getRefuelingInLiters(litres) {
+                        if (litres + this.numLitersAvailable > this.tankSize)
+                            throw new Error('Ви не можете залити бензину більше ніж розміри бака.')
+                        else {
+                            this.numLitersAvailable += litres
+                        }
+                    }
+                    // Виведення кількості пасажирів
+                    toString(){
+                        return this.numOfPassengers
+                    }
+                    // Додавання пасажирів
+                    getAddingPassengers (passengers) {
+                        if(passengers + this.numOfPassengers > this.numOfSeats)
+                            throw new Error (`Дозволена кількість пасажирів = ${this.numOfSeats}`)
+                            this.numOfPassengers += passengers
+                    }
+                    // Висадка пасажирів
+                    getLandingPassengers (passengers){
+                        if(this.numOfPassengers < passengers)
+                            throw new Error (`Кількість пасажирів(${this.numOfPassengers}) є меншою`)
+                            this.numOfPassengers -= passengers
+                    }
+                }
+                const auto = new Automobile ('Volkswagen',70,24,5,1)
+                auto.getRefuelingInLiters(40)
+                auto.getAddingPassengers(4)
+                auto.getLandingPassengers(2)
+                console.log(`Кількість пасажирів = ${auto.toString()}`)
+                console.log(auto)
+            </script>
+        </div>
+    </main>
+    <footer></footer>
+    <script src="./js/script.js"></script>
+</body>
+<style>
+    @charset "UTF-8";
+    @import url("https://fonts.googleapis.com/css?family=Montserrat:regular,700&display=swap");
+
+    h2 {
+        font-size: 18px;
+        color: #020202;
+        text-align: left;
+        margin-bottom: 25px;
+    }
+
+    .task {
+        color: rgb(255, 255, 255);
+    }
+
+    .task:not(:last-child) {
+        margin-bottom: 25px;
+    }
+
+    .tablet {
+        display: grid;
+        grid-template-columns: repeat(3, auto);
+        justify-content: center;
+    }
+
+    .tablet__item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border: 1px solid #020202;
+        gap: 25px;
+        /* padding: 15px; */
+        padding-top: 0;
+        padding-bottom: 0;
+        position: relative;
+    }
+
+    .tablet__item::before {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 1px;
+        background-color: #020202;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    .tablet__title {
+        padding: 10px;
+        /* padding-top: 5px; */
+        text-align: center;
+    }
+
+    .tablet__value {
+        display: flex;
+        padding: 10px;
+        padding-top: 0;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+</style>
+
+</html>
