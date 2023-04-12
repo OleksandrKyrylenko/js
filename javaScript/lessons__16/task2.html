@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Task 3</title>
+</head>
+
+<body>
+    <header></header>
+    <main class="page">
+        <div class="page__container task">
+            <h2> Задача 3. Об’єкт “Фірма” (використати члени-класи)</h2>
+            <script>
+                // дата заснування (рік, місяць);
+                class DateOfInitiationCompany{
+                    #year
+                    #month
+                    constructor(year,month){
+                        this.Year = year
+                        this.Month = month
+                    }
+                    get Year(){
+                        return this.#year
+                    }
+                    get Month(){
+                        return this.#month
+                    }
+                    set Year(value){
+                        if(value < 0 || !Number.isInteger(value))  throw new Error ('Некоректні дані')
+                        return this.#year = value
+                    }
+                    set Month(value){
+                        if(value < 1 || value > 12)  throw new Error ('Некоректні дані')
+                        return this.#month = value
+                    }
+                    toString() {
+                        return ` Рік заснування "Івент агенство" ${this.Month}.${this.Year}`
+                    }
+                }
+                let dateInitiationCompany = new DateOfInitiationCompany(2017, 6)
+                
+                // послуги (назва послуги, вартість, термін виконання);
+                class ServicesCompany{
+                    #price
+                    #deadline
+                    constructor(name, price, deadline){
+                        this.Name = name
+                        this.Price = price
+                        this.Deadline = deadline
+                    }
+                    get Price (){
+                        return this.#price
+                    }
+                    get Deadline (){
+                        return this.#deadline
+                    }
+                    set Price(value){
+                        if(value <= 0) throw new Error ('Некоректні дані')
+                        return this.#price = value
+                    }
+                    set Deadline(value){
+                        if(value <= 0) throw new Error ('Некоректні дані')
+                        return this.#deadline = value
+                    }
+                    toString(){
+                        return `Послуга : ${this.Name}. Вартість : ${this.Price}. Термін виконання : ${this.Deadline}`
+                    }
+                }
+                let services = [
+                    new ServicesCompany('Корпортативи',20000,15),
+                    new ServicesCompany('Весілля',70000,28),
+                    new ServicesCompany('Тімбілдінги',40000,20),
+                    new ServicesCompany('Святкові відкриття',15000,10)
+                ]
+
+                // адреси філіалів (країна, місто, вулиця, номер будинку);
+                class Branches{
+                    #country
+                    #city
+                    #street
+                    #houseNumber
+                    constructor(country,city,street,houseNumber){
+                        this.Country = country
+                        this.City = city
+                        this.Street = street
+                        this.HouseNumber = houseNumber
+                    }
+                    get Country (){
+                        return this.#country
+                    }
+                    get City (){
+                        return this.#city
+                    }
+                    get Street (){
+                        return this.#street
+                    }
+                    get HouseNumber (){
+                        return this.#houseNumber
+                    }
+                    set Country(value){
+                        if(value.length === 0) throw('Некоректні дані')
+                        return this.#country = value
+                    }
+                    set City(value){
+                        if(value.length === 0) throw('Некоректні дані')
+                        return this.#city = value
+                    }
+                    set Street(value){
+                        if(value.length === 0) throw('Некоректні дані')
+                        return this.#street = value
+                    }
+                    set HouseNumber(value){
+                        if(value.length === 0 || value <= 0) throw('Некоректні дані')
+                        return this.#houseNumber = value
+                    }
+                    toString(){
+                        return `${this.Country}. Місто ${this.City} вулиця ${this.Street} ${this.HouseNumber}`
+                    }
+                }
+                let branches = [
+                    new Branches('Україна','Київ', 'Ломоносова', 67),
+                    new Branches('Україна','Київ', 'Регенераторна', '7a'),
+                    new Branches('Україна','Дніпро', 'Миру', 8),
+                    new Branches('Україна','Житомир', 'Київська', 15)
+                ]
+
+                class Company{
+                    #name
+                    constructor(name, dateInitiationCompany, services, branches){
+                        this.Name = name
+                        this.DateCompany = dateInitiationCompany
+                        this.Services = services
+                        this.Branches = branches
+                    }
+                    get Name () {
+                        return this.#name
+                    }
+                    set Name (value) {
+                        if(value.length === 0) throw new Error ('Некоректні дані')
+                        return this.#name = value
+                    }
+                    // визначення кількості років існування фірми
+                    getAgeCompany (){
+                        const currentDate = new Date().getFullYear() 
+                        return currentDate - this.DateCompany.Year
+                    }
+                    // виведення всіх філіалів фірми у вказаному місті
+                    breedingBranches(city){
+                        let arrayBranches = []
+                        for (const branch of this.Branches) {
+                            city === branch.City ? arrayBranches.push(branch) : null
+                        }
+                        return arrayBranches.length > 0 ? arrayBranches : 'У вибраному місті, фірма філіалів немає'
+                    }
+                    // виведення на екран послуг, що можуть бути виконані за вказану суму грошей та вказаний термін часу
+                    serviceThatCanPerformed(price,deadline){
+                        let arrayService = []
+                        for (const service of this.Services) {
+                            if(price <= service.Price && deadline <= service.Deadline) 
+                            arrayService.push(service)
+                        }
+                        return arrayService.length > 0 ? arrayService : 'Згідно цим вимогам, жодні із послуг не можуть бути надані'
+                    }
+                }
+
+                let userCompany = new Company ("Івент агенство", dateInitiationCompany, services, branches)
+
+                console.log(`Фірма існує протягом : ${userCompany.getAgeCompany()}р`)
+                console.log(`Філіали у вибраному місті : ${userCompany.breedingBranches('Київ')}`)
+                console.log(`Послуги які можуть бути виконані - ${userCompany.serviceThatCanPerformed(215000, 28)}`)
+
+
+
+            </script>
+        </div>
+    </main>
+    <footer></footer>
+    <script src="./js/script.js"></script>
+</body>
+<style>
+    @charset "UTF-8";
+    @import url("https://fonts.googleapis.com/css?family=Montserrat:regular,700&display=swap");
+
+    h2 {
+        font-size: 18px;
+        color: #020202;
+        text-align: left;
+        margin-bottom: 25px;
+    }
+
+    .task {
+        color: rgb(255, 255, 255);
+    }
+
+    .task:not(:last-child) {
+        margin-bottom: 25px;
+    }
+
+    .tablet {
+        display: grid;
+        grid-template-columns: repeat(3, auto);
+        justify-content: center;
+    }
+
+    .tablet__item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border: 1px solid #020202;
+        gap: 25px;
+        /* padding: 15px; */
+        padding-top: 0;
+        padding-bottom: 0;
+        position: relative;
+    }
+
+    .tablet__item::before {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 1px;
+        background-color: #020202;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    .tablet__title {
+        padding: 10px;
+        /* padding-top: 5px; */
+        text-align: center;
+    }
+
+    .tablet__value {
+        display: flex;
+        padding: 10px;
+        padding-top: 0;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+</style>
+
+</html>

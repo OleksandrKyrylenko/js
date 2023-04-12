@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Task 4</title>
+</head>
+
+<body>
+    <header></header>
+    <main class="page">
+        <div class="page__container task">
+            <h2>
+                Задача 4. Створити клас TBankomat, який моделює роботу банкомата. Клас повинен містити поля для зберігання кількості купюр кожного із номіналів від 5 до 200 гривень. Реалізувати методи знаходження максимальної та мінімальної сум, які може видати банкомат, та метод зняття деякої суми.
+            </h2>
+            <script>
+                class TBankomat{
+                    constructor(billList){
+                        this.billList = billList
+                    }
+
+                    // Метод знаходження максимальної суми яку може видати банкомат
+                    maxSumForWithdrawal (){
+                        return this.billList.reduce((prevSum, bill)=> prevSum + bill.denomination * bill.numberOfBills ,0)
+                    } 
+                    // Метод знаходження мінімальної суми яку може видати банкомат
+                    minSumForWithdrawal () {
+                        let arr = []
+                        for(let bill of this.billList){
+                            if(bill.numberOfBills > 0) arr.push(bill.denomination)
+                        }
+                        return Math.min(...arr)
+                    }
+                    // Метод зняття деякої суми
+                    withdrawingCertainAmount (amount) {
+                        const minSum = this.minSumForWithdrawal();
+                        const maxSum = this.maxSumForWithdrawal();
+                        if(amount < minSum) 
+                            throw new Error(`Мінімальна сума для зняття =  ${minSum} грн`)
+                        if(amount % minSum !== 0) 
+                            throw new Error(`Сума для зняття має бути кратна ${minSum} грн`)
+                        if(amount > maxSum)  
+                            throw new Error(`Максимальна сума для зняття =  ${maxSum} грн`)
+
+                        this.billList.sort((bill1,bill2) => bill1.denomination - bill2.denomination)
+                        let i = this.billList.length - 1
+                        let withdrawal = [];
+                        while (i >=0 ) {
+                            let bill = this.billList[i]
+                            const checkAmount = () =>{
+                                if(bill.denomination <= amount && bill.numberOfBills > 0){
+                                    amount -= bill.denomination
+                                    bill.numberOfBills-=1
+                                    checkAmount()
+                                } else return
+                            }
+                            checkAmount()
+                            i--
+                        }
+                        return this.maxSumForWithdrawal()
+                    }
+                    toString(){
+                        return `Максимальна сума для зняття = ${this.maxSumForWithdrawal()} грн
+                                Мінімальна сума для зняття = ${this.minSumForWithdrawal()} грн`
+                    }
+                }
+                let billList = 
+                    [{ denomination : 5, numberOfBills   : 20 },
+                    { denomination : 20, numberOfBills  : 40 },
+                    { denomination : 50, numberOfBills  : 50 },
+                    { denomination : 100, numberOfBills : 60 },
+                    { denomination : 200, numberOfBills : 70 },
+                    { denomination : 10, numberOfBills  : 30 }]
+
+                let result = new TBankomat(billList)
+                result.maxSumForWithdrawal()
+                result.minSumForWithdrawal()
+                console.log(result.toString())
+                console.log(result.withdrawingCertainAmount(630))
+            </script>
+        </div>
+    </main>
+    <footer></footer>
+    <script src="./js/script.js"></script>
+</body>
+<style>
+    @charset "UTF-8";
+    @import url("https://fonts.googleapis.com/css?family=Montserrat:regular,700&display=swap");
+
+    h2 {
+        font-size: 18px;
+        color: #020202;
+        text-align: left;
+        margin-bottom: 25px;
+    }
+
+    .task {
+        color: rgb(255, 255, 255);
+    }
+
+    .task:not(:last-child) {
+        margin-bottom: 25px;
+    }
+
+    .tablet {
+        display: grid;
+        grid-template-columns: repeat(3, auto);
+        justify-content: center;
+    }
+
+    .tablet__item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border: 1px solid #020202;
+        gap: 25px;
+        /* padding: 15px; */
+        padding-top: 0;
+        padding-bottom: 0;
+        position: relative;
+    }
+
+    .tablet__item::before {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 1px;
+        background-color: #020202;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    .tablet__title {
+        padding: 10px;
+        /* padding-top: 5px; */
+        text-align: center;
+    }
+
+    .tablet__value {
+        display: flex;
+        padding: 10px;
+        padding-top: 0;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+</style>
+
+</html>

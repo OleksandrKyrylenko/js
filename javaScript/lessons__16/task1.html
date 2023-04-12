@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Task 2</title>
+</head>
+<body>
+    <header></header>
+    <main class="page">
+        <div class="page__container task">
+            <h2>
+                Задача 2. Створити клас TMoney для роботи з грошовими сумами. Сума повинна зберігатися у вигляді доларового еквіваленту. Реалізувати методи додавання/вилучення грошової маси, вказуючи необхідну суму у гривнях, та визначення курсу долара, при якому сума у гривнях збільшиться на 100. Курс долара зберігати в окремому полі. 
+            </h2>
+            <script>
+                class TMoney {
+                    #balance = 0
+                    #exchangeRate
+                    constructor(initBalance, exchangeRate){
+                        this.Balance = initBalance
+                        this.ExchangeRate = exchangeRate
+                    }
+                    get Balance(){
+                        return this.#balance
+                    }
+                    get ExchangeRate(){
+                        return this.#exchangeRate
+                    }
+                    set Balance(value){
+                        if(value < 0) throw new Error('Помилка')
+                        this.#balance = value
+                    }
+                    set ExchangeRate(value){
+                        if(value < 0) throw new Error('Помилка')
+                        this.#exchangeRate = value
+                    }
+                    // додавання коштів
+                    set AddingFunds (value){
+                        this.balance += value / this.#exchangeRate
+                    } 
+                    // вилучення коштів
+                    set WithdrawalOfFunds (value){
+                        this.balance -= value / this.#exchangeRate
+                    } 
+                    // визначення курсу долара, при якому сума у гривнях збільшиться на 100
+                    get NewExchangeRateIncreaseUAH_By_100 (){
+                        const ONE_HUNDRED_UAH = 100
+                        const newRate = (this.#balance * this.#exchangeRate + ONE_HUNDRED_UAH) / this.#balance
+                        return(`Курс при якому сума у гривнях збільшилась на 100 грн = ${newRate.toFixed(2)}`)
+                    }
+                    toString(){
+                        return `Ваш баланс в доларовому еквіваленті = ${this.#balance.toFixed(2)}$. Поточний курс = ${this.#exchangeRate}грн/$`
+                    }
+                }
+                let tMoney = new TMoney(5000, 38)
+                console.log(tMoney.toString())
+                console.log(tMoney.NewExchangeRateIncreaseUAH_By_100)
+            </script>
+        </div>
+    </main>
+    <footer></footer>
+    <script src="./js/script.js"></script>
+</body>
+<style>
+    @charset "UTF-8";
+	@import url("https://fonts.googleapis.com/css?family=Montserrat:regular,700&display=swap");
+    h2{
+        font-size: 25px;
+        color:#020202;
+        text-align: left;
+        margin-bottom: 25px;
+    }
+    .task{
+        color:rgb(255, 255, 255);
+    }
+    .task:not(:last-child){
+        margin-bottom: 25px;
+    }
+    .tablet{
+        display: grid;
+        grid-template-columns: repeat(3, auto);
+        justify-content: center;
+    }
+    .tablet__item{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border:1px solid #020202;
+        gap:25px;
+        /* padding: 15px; */
+        padding-top: 0;
+        padding-bottom: 0;
+        position: relative;
+    }
+    .tablet__item::before{
+        content:'';
+        position: absolute;
+        width: 100%;
+        height: 1px;
+        background-color: #020202;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    .tablet__title{
+        padding: 10px;
+        /* padding-top: 5px; */
+        text-align: center;
+    }
+    .tablet__value{
+        display: flex;
+        padding: 10px;
+        padding-top: 0;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+</style>
+</html>
