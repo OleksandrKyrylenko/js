@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Task 5</title>
+</head>
+
+<body>
+    <header></header>
+    <main class="page">
+        <div class="page__container task">
+            <h2>Задача 5.
+                Особиста бібліотека. Картотека домашньої бібліотеки: дані книги (автори (піб, рік народження, короткий опис), назва книги, жанр, видавництво (назва, реєстраційний номер, рік засування)). Реалізувати розділи бібліотеки (спеціальна література, хобі, домашнє господарство і т.д.), походження книги і наявність на даний час. Організувати додавання/вилучення книг та  вибір книг за назвою, за ПІБ автора, за видавництвом.
+            </h2>
+            <script>
+                // Тестова бібліотека
+                const libraryList = [
+                    {
+                        firstName : 'Ден',
+                        surName: 'Браун',
+                        age:2000,
+                        description: 'Події переважно розгортаються у Римі протягом однієї доби.',
+                        nameBook:'Ангели і демони',
+                        genre: 'Пригодницький роман',
+                        publishingName: 'Pocket Books',
+                        registrationNum: 'hty455f5g55f5g',
+                        yearOfIntroduction: 1939,
+                        availability: true,
+                        topic: 'Спеціальна література',
+                        originOfTheBook: 'США'
+                    },
+                    {
+                        firstName : 'Джоан',
+                        surName: 'Ролінґ',
+                        age: 1997,
+                        description: 'Фантастичні пригоди трьох школярів в школі магії та чаклунства Хогвардс',
+                        nameBook:'Гаррі Поттер і філософський камінь',
+                        genre: 'Пригодницький роман',
+                        publishingName: 'А-БА-БА-ГА-ЛА-МА-ГА',
+                        registrationNum: 'hty455f5g55f5g',
+                        yearOfIntroduction: 1992,
+                        availability: true,
+                        topic: 'Хобі',
+                        originOfTheBook: 'Англія'
+                    },
+                    {
+                        firstName : 'Джордж',
+                        surName: 'Мартін',
+                        age: 1996,
+                        description: 'Дія циклу розгортається у вигаданому світі. Основні події книги зосереджені на материку Вестерос, який за економікою, культурою і соціальним влаштуванням нагадує Європу часів Високого Середньовіччя, і частково на східному континенті під назвою Ессос, що відрізняється етнічним і географічним різноманіттям',
+                        nameBook:'Гра престолів',
+                        genre: 'Роман',
+                        publishingName: 'Bantam Spectra',
+                        registrationNum: 'hty455f5g55f5g',
+                        yearOfIntroduction: 1964,
+                        availability: true,
+                        topic: 'Спеціальна література',
+                        originOfTheBook: 'США'
+                    },
+                    {
+                        firstName : 'Джейн',
+                        surName: 'Остін',
+                        age: 1813,
+                        description: 'Елізабет Беннет — друга з п\'яти доньок містера Беннета. Містер Беннет не багатий і економічне становище його родини залежить від родового маєтку, який після його смерті повинен перейти до спадкоємця по чоловічій лінії, а, отже, родина опиниться без засобів існування.',
+                        nameBook:'Гордість і упередження',
+                        genre: 'Роман',
+                        publishingName: 'Фоліо',
+                        registrationNum: '978-966-03-8030-1',
+                        yearOfIntroduction: 1990,
+                        availability: true,
+                        topic: 'Спеціальна література',
+                        originOfTheBook: 'Англія'
+                    } 
+                ]
+                // Клас автора
+                class AuthorOfTheBook{
+                    // дані книги (автори (піб, рік народження, короткий опис
+                    constructor({firstName,surName,age,description}){
+                        this.surName = surName
+                        this.firstName = firstName
+                        this.age = age
+                        this.briefDescription = description 
+                    }
+                    get FullName (){
+                        return this.firstName + ' ' + this.surName
+                    }
+                    set FullName(value){
+                        let split = value.split(' ')
+                        this.firstName = split[0]
+                        this.surName = split[1]
+                    }
+                    toString(){
+                        return `Автор: ${this.FullName}. Рік народження: ${this.age}. Опис книги: ${this.briefDescription}`
+                    }
+                }
+
+                // Клас видавництва
+                class BookPublishing{
+                    // видавництво (назва, реєстраційний номер, рік засування)
+                    constructor({publishingName,registrationNum, yearOfIntroduction}){
+                        this.name = publishingName
+                        this.registrationNum = registrationNum
+                        this.yearOfIntroduction = yearOfIntroduction
+                    }
+                    toString(){
+                        return `Видавництво : ${this.name}. Реєстраційний номер : ${this.registrationNum}. Рік заснування : ${this.yearOfIntroduction} рік`
+                    }
+                } 
+
+                // Клас дані книг
+                class BookData{
+                    constructor(initDate){
+                        this.autor = new AuthorOfTheBook(initDate)
+                        this.nameBook = initDate.nameBook
+                        this.genre = initDate.genre
+                        this.publishing = new BookPublishing(initDate)
+                        this.availability = initDate.availability
+                        this.topic = initDate.topic
+                        this.originOfTheBook = initDate.originOfTheBook
+                    }
+                    toString(){
+                        return `Автор книги : ${this.autor}. Назва книги : ${this.nameBook}. Жанр : ${this.genre}. Видавництво : ${this.publishing} `
+                    }
+                }
+
+                // Клас бібліотеки
+                class Library{
+                    constructor(libraryList){
+                        this.libraryList = libraryList
+                        this.userLibrary = this.getCreateLibrary()
+                    }
+                    
+                    getCreateLibrary(){
+                        let arrLibrary = []
+                        for(let i = 0; i<this.libraryList.length; i++){
+                            let book = new BookData(this.libraryList[i])
+                            arrLibrary.push(book)
+                        }
+                        return arrLibrary
+                    }
+                    // розділи бібліотеки
+                    getFilterByTopic(topic){
+                        return this.userLibrary.reduce((acc,book)=>{
+                            if(book.topic === topic && book.availability) {
+                                acc.push(book)
+                            }
+                            return acc
+                        },[])
+                    }
+                    // Походження книги
+                    getOriginOfTheBook(neededBook){
+                        for (const book of this.userLibrary) {
+                            if(book.nameBook === neededBook){
+                                return book.originOfTheBook
+                            }
+                        }
+                    }
+                    // наявність на даний час
+                    currentlyAvailable(neededBook){
+                        const book = this.userLibrary.find(book => book.nameBook === neededBook)
+                        return book ? book.availability : null
+                    }
+                    // додавання книг
+                    addBook(newBook){
+                        this.userLibrary.push(newBook)
+                        return this.userLibrary
+                    }
+                    // вилучення книг
+                    withdrawalOfBooks(neededBook){
+                        const indexBook =  this.userLibrary.findIndex(book => book.nameBook === neededBook)
+                        this.userLibrary.splice(indexBook,1) 
+                        return this.userLibrary
+                    }
+                    // вибір книг за назвою
+                    getSelectionOfBookByTitle(nameBook){
+                        const selectionNameBook = this.userLibrary.filter(book => book.nameBook === nameBook)
+                        if(selectionNameBook.length > 0) return selectionNameBook
+                        else alert('Книгу не знайдено')
+                    }
+                    // вибір книг за ПІБ автора
+                    getSelectionByAuthorFullName(fullName){
+                        return this.userLibrary.reduce((acc,book)=>{
+                            if(book.autor.FullName === fullName) acc.push(book)
+                            return acc
+                        },[])
+                    }
+                    // вибір книг за видавництвом
+                    getSelectionOfBooksByPublisher(publishing){
+                        return this.userLibrary.reduce((acc,book)=>{
+                            if(book.publishing.name === publishing) acc.push(book)
+                            return acc
+                        },[])
+                    }
+                    toString(){
+                        return this.userLibrary
+                    }
+                }
+                let library = new Library(libraryList)
+                // console.log(library.getCreateLibrary())
+                // console.log(library.getFilterByTopic('Хобі'))
+                // console.log(library.getOriginOfTheBook('Гордість і упередження'))
+                // console.log(library.currentlyAvailable('Гордість і упередження'))
+                // console.log(library.withdrawalOfBooks('Гра престолів'))
+                // console.log(library.getSelectionOfBookByTitle('Гаррі Поттер і філософський камінь'))
+                // console.log(library.getSelectionByAuthorFullName('Джоан Ролінґ'))
+                // console.log(library.getSelectionOfBooksByPublisher('Фоліо'))
+                // console.log(library.toString());
+            </script>
+        </div>
+    </main>
+    <footer></footer>
+    <script src="./js/script.js"></script>
+</body>
+<style>
+    @charset "UTF-8";
+    @import url("https://fonts.googleapis.com/css?family=Montserrat:regular,700&display=swap");
+
+    h2 {
+        font-size: 18px;
+        color: #020202;
+        text-align: left;
+        margin-bottom: 25px;
+    }
+
+    .task {
+        color: rgb(255, 255, 255);
+    }
+
+    .task:not(:last-child) {
+        margin-bottom: 25px;
+    }
+
+    .tablet {
+        display: grid;
+        grid-template-columns: repeat(3, auto);
+        justify-content: center;
+    }
+
+    .tablet__item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border: 1px solid #020202;
+        gap: 25px;
+        /* padding: 15px; */
+        padding-top: 0;
+        padding-bottom: 0;
+        position: relative;
+    }
+
+    .tablet__item::before {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 1px;
+        background-color: #020202;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    .tablet__title {
+        padding: 10px;
+        /* padding-top: 5px; */
+        text-align: center;
+    }
+
+    .tablet__value {
+        display: flex;
+        padding: 10px;
+        padding-top: 0;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+</style>
+
+</html>

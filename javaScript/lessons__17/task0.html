@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Task 1</title>
+</head>
+<body>
+    <header></header>
+    <main class="page">
+        <div class="page__container task">
+            <h2>
+                Задача 1. Створити клас, що дозволяє виконувати такі операції над масивами: знаходження кількості додатних, кількості від’ємних, кількість входжень деякого числа (статичні методи)
+            </h2>
+            <script>
+                class ResearchArray{
+                    static countPositiveNum = 0
+                    static countNegativeNum = 0
+                    static countRepeat = 0
+                    constructor(initList, num){
+                        this.arrayList = [...initList]
+                        this.someNumber = num
+                    }
+                    totalPositiveNumber (){
+                        for (const num of this.arrayList) {
+                            num > 0 ? ResearchArray.countPositiveNum++ : null
+                        } 
+                    }
+                    totalNegativeNumber (){
+                        for (const num of this.arrayList) {
+                            num < 0 ? ResearchArray.countNegativeNum++ : null
+                        } 
+                    }
+                    totalRepeatNumber(someNumber){
+                        for (const num of this.arrayList) {
+                            num === someNumber ? ResearchArray.countRepeat++ : null
+                        }
+                    }
+                    static getStatistics(){
+                        return `Total Positive = ${ResearchArray.countPositiveNum}. Total Negative = ${ResearchArray.countNegativeNum}.
+                        Total Repeat = ${ResearchArray.countRepeat}`
+                    }
+                }
+
+                let myArray = new ResearchArray([22, -14, 22, 5, -4, 8, -3, 5])
+                myArray.totalPositiveNumber ()
+                myArray.totalNegativeNumber ()
+                myArray.totalRepeatNumber (8)
+                console.log(ResearchArray.getStatistics())
+
+
+
+
+
+
+
+
+
+
+
+                // // Задача.  Описати клієнта банку
+                // // ----- Властивості ------
+                // // ПІБ
+                // class Person {
+                //     constructor({surname, name, age}){
+                //     //       * прізвище
+                //     this.surname = surname
+                //     //       * ім’я
+                //     this.name = name
+                //     //       * вік
+                //     this.age = age
+                //     }
+                //     get FullName(){
+                //         return this.name + ' ' + this.surname
+                //     }
+                //     set FullName(value){
+                //         let split = value.split(' ')
+                //         this.name = split[0]
+                //         this.surname = split[1]
+                //     }
+                //     toString(){
+                //         return `${this.FullName} - ${this.age}`
+                //     }
+                // }
+
+                // // адреса
+                // class Address {
+                //     #zipCode
+                //     #city
+                //     #street
+                //     #houseNumber
+                //     constructor({zipCode,city,street,houseNumber}){
+                //     //       * код
+                //         this.ZipCode = zipCode
+                //     //       * місто
+                //         this.City = city
+                //     //       * вулиця
+                //         this.Street = street
+                //     //       * номер будинку
+                //         this.HouseNumber = houseNumber
+                //     }
+                //     get ZipCode(){
+                //         return this.#zipCode
+                //     }
+                //     get City(){
+                //         return this.#city
+                //     }
+                //     get Street(){
+                //         return this.#street
+                //     }
+                //     get HouseNumber(){
+                //         return this.#houseNumber
+                //     }
+
+                //     set ZipCode(value){
+                //         if(value.length > 5 || !Number.isInteger(value)) 
+                //             throw new Error ('Некоректні дані')
+                //         return this.#zipCode = value
+                //     }
+                //     set City(value){
+                //         if(value.length <= 0 || Number.isInteger(value)) 
+                //             throw new Error ('Некоректні дані')
+                //         return this.#city = value
+                //     }
+                //     set Street(value){
+                //         if(value.length <= 0) 
+                //             throw new Error ('Некоректні дані')
+                //         return this.#street = value
+                //     }
+                //     set HouseNumber(value){
+                //         if(value.length <= 0) 
+                //             throw new Error ('Некоректні дані')
+                //         return this.#houseNumber = value
+                //     }
+                //     toString(){
+                //         return `${this.City}. вул.${this.Street} ${this.HouseNumber}. Код:${this.ZipCode}`
+                //     }
+                // }
+                // class Client{
+                //     #numberScore
+                //     #balance
+                //     constructor(initUser){
+                //         this.title = new Person(initUser)
+                //         this.address = new Address(initUser)
+                //         // номер рахунку
+                //         this.NumberScore = initUser.numberScore
+                //          // кількість грошей
+                //         this.Balance = initUser.balance
+                //     }
+                //     get NumberScore(){
+                //         return this.#numberScore
+                //     }
+                //     get Balance(){
+                //         return this.#balance
+                //     }
+
+                //     set NumberScore(value){
+                //         if(value <= 0) throw new Error('Некоректні дані')
+                //         return this.#numberScore = value
+                //     }
+                //     set Balance(value){
+                //         if(value < 0) throw new Error('Некоректні дані')
+                //         if(value === 0) throw new Error('Кошти відсутні')
+                //         return this.#balance = value
+                //     }
+                //     toString(){
+                //         return `${this.title} - ${this.address} - ${this.NumberScore} - ${this.Balance}`
+                //     }
+                // }
+                // let clientBank = new Client({
+                //     name: 'Ivan',
+                //     surname: 'Sirko',
+                //     age: 21,
+                //     zipCode: 88000,
+                //     city: 'Best sity',
+                //     street: 'Holovna',
+                //     houseNumber: 25,
+                //     numberScore: '21212234546',
+                //     balance: 45000,
+                // })
+                // console.log(clientBank.toString())
+
+
+// ======================================================================================================= 
+                // Задача. Реалізувати конвертер валют. Курси валют та методи перетвоення повинні бути статичними
+                // class Converter {
+                //     static dollarRate = 39
+                //     static euroRate = 40
+                    
+                //     static DollarToGrivna (dollarValue){
+                //         return Converter.dollarRate * dollarValue
+                //     }
+                //     static EuroToGrivna (euroValue){
+                //         return Converter.euroRate * euroValue
+                //     }
+                //     static GrivnaToEuro (grivnaValue){
+                    //     return grivnaValue / Converter.euroRate
+                    // }
+                    // static GrivnaToDollar (grivnaValue){
+                    //     return grivnaValue / Converter.dollarRate
+                //     }
+                // }
+                // console.log(`${Converter.DollarToGrivna(500)}`)
+                // console.log(`${Converter.EuroToGrivna(500)}`)
+                // console.log(`${Converter.GrivnaToEuro(20000)}`)
+                // console.log(`${Converter.GrivnaToDollar(20000)}`)
+                // Converter.dollarRate = 35
+                // console.log(`${Converter.GrivnaToDollar(20000)}`)
+
+
+// =======================================================================================================
+                //   Задача. Розробити "Рекламний агент". Випадковим чином у зададному діапазоні задається інтервал,
+                //   і через згенеровану кількість секунд виводиться деяка реклама. Після цього знову генерується випадковий інтервал.
+                //   У процесі роботи для усіх раніше створених об"єктів - рекламних агентів мінімальне/максимальне значення інтевалу можуть змінюватись.
+                //Мінмальне і максимальне значення інтервалу - статичні
+
+                // class Reklama{
+                //     static minInterval
+                //     static maxInterval
+                //     constructor(message, minInterval, maxInterval){
+                //         this.message = message
+                //         Reklama.minInterval = minInterval
+                //         Reklama.maxInterval = maxInterval
+                //     }
+                //     getRandomInterval (){
+                //         document.write(`<br> min = ${Reklama.minInterval}.  max = ${Reklama.maxInterval}<br>`)
+                //         return Reklama.minInterval + Math.floor(Math.random() * (Reklama.maxInterval - Reklama.minInterval + 1))
+                //     }
+                //     startReklama(){ 
+                //         return new Promise((resolve) => {
+                //             setTimeout(() => {
+                //                 document.write(this.message);
+                //                 resolve();
+                //             }, this.getRandomInterval() * 1000);
+                //         });
+                //     }
+                //     startReklama(){
+                //         setTimeout(() =>{
+                //             document.write(this.message)
+                //             this.startReklama()
+                //             } ,this.getRandomInterval() * 1000)
+                //         }
+                //     }
+                //     for(let i = 0; i < 10; i++){
+                //         console.log(i);
+                //         let result = new Reklama(`Hello ${i} <br>`, 0, 4)
+                //         result.startReklama()
+                //     }
+                // // (async () => {
+                // //     for (let i = 0; i < 10; i++) {
+                // //         console.log(i);
+                // //         let result = new Reklama(`Hello ${i} <br>`, 0, 4);
+                // //         await result.startReklama();
+                // //     }
+                // // })()
+                // // setInterval(()=>{
+                // //     Reklama.minInterval = 3
+                // //     Reklama.maxInterval = 6
+                // // },4000)
+
+
+// =======================================================================================================
+                //Задача. Статистика методів.Дано клас Масив, який зберігає масив і має методи для знаходження суми, добутку, максимального.
+                // Користувач може створити довільну кількість об’єктів даного класу. Підрахувати загальну кількість викликів
+                // кожного із  методів (незалежно від об’єкта)
+                //Потрібно описати статичні каунтери для кожного метода
+                // class MyArray {
+                //     static countSum = 0
+                //     static countProduct = 0
+                //     static countMax = 0
+                //     static countObjectNumber = 0
+                //     constructor(dataList){
+                //         this.arrayList = [...dataList]
+                //         MyArray.countObjectNumber++
+                //     }
+                //     getTotalSum(){
+                //         MyArray.countSum++
+                //         return this.arrayList.reduce((prevSum,element)=>prevSum + element)
+                //     }
+                //     getTotalProduct(){
+                //         MyArray.countProduct++
+                //         return this.arrayList.reduce((prevProd,element)=>prevProd * element)
+                //     }
+                //     getTotalMaxValue(){
+                //         MyArray.countMax++
+                //         return Math.max(...this.arrayList)
+                //     }
+                //     static getstatistics(){
+                //         return `Object Number = ${MyArray.countObjectNumber}, Sum = ${MyArray.countSum}, 
+                //         Product = ${MyArray.countProduct}, Max = ${MyArray.countMax}`
+                //     }
+                // }
+                // let array1 = new MyArray([25,14,18,25,46])
+                // let array2 = new MyArray([5,144,8,6,4])
+                // document.write(`Sum = ${array1.getTotalSum()}<br>`)
+                // document.write(`Sum = ${array2.getTotalSum()}<br>`)
+                // document.write(`Max = ${array2.getTotalMaxValue()}<br>`)
+                // document.write(`Product = ${array1.getTotalProduct()}<br>`)
+                // document.write(`Product = ${array2.getTotalProduct()}<br>`)
+                // document.write(`Statistics = ${MyArray.getstatistics()}`)
+            </script>
+        </div>
+    </main>
+    <footer></footer>
+    <script src="./js/script.js"></script>
+</body>
+<style>
+    @charset "UTF-8";
+	@import url("https://fonts.googleapis.com/css?family=Montserrat:regular,700&display=swap");
+    h2{
+        font-size: 18px;
+        color:#020202;
+        text-align: left;
+        margin-bottom: 25px;
+    }
+    .task{
+        color:rgb(255, 255, 255);
+    }
+    .task:not(:last-child){
+        margin-bottom: 25px;
+    }
+    .tablet{
+        display: grid;
+        grid-template-columns: repeat(3, auto);
+        justify-content: center;
+    }
+    .tablet__item{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border:1px solid #020202;
+        gap:25px;
+        /* padding: 15px; */
+        padding-top: 0;
+        padding-bottom: 0;
+        position: relative;
+    }
+    .tablet__item::before{
+        content:'';
+        position: absolute;
+        width: 100%;
+        height: 1px;
+        background-color: #020202;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    .tablet__title{
+        padding: 10px;
+        /* padding-top: 5px; */
+        text-align: center;
+    }
+    .tablet__value{
+        display: flex;
+        padding: 10px;
+        padding-top: 0;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+</style>
+</html>

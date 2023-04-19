@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Task 4</title>
+</head>
+
+<body>
+    <header></header>
+    <main class="page">
+        <div class="page__container task">
+            <h2>
+                Задача 4. Склад. База товарів, які зберігаються на складі: назва товару, одиниця виміру, кількість, фірма виробник (назва, реєстраційний номер). Організувати реєстрацію/відвантаження товарів, фільтрація за назвою товару, фільтрація за назвою фірми
+            </h2>
+            <script>
+                // Клас фірми виробника 
+                class ManufacturerCompany{
+                    #name
+                    #registrationNumber
+                    constructor(title, registrationNumber){
+                        // назва
+                        this.title = title
+                        // реєстраційний номер
+                        this.registrationNumber = registrationNumber
+                    }
+                    get title(){
+                        return this.#name
+                    }
+                    get registrationNumber(){
+                        return this.#registrationNumber
+                    }
+
+                    set title(value){
+                        if(value.length === 0)  throw new Error ('Некоректні дані')
+                        return this.#name = value
+                    }
+                    set registrationNumber(value){
+                        if(value.length === 0)  throw new Error ('Некоректні дані')
+                        return this.#registrationNumber = value
+                    }
+                    toString(){
+                        return `Фірма виробник: ${this.title}. Реєстраційний номер: ${this.registrationNumber}`
+                    }
+                }
+                let firm1 = new ManufacturerCompany ('firm1', '254214gr421ee4') 
+                let firm2 = new ManufacturerCompany ('firm2', '544214gr421e41') 
+                let firm3 = new ManufacturerCompany ('firm3', '7y687214gr4211') 
+
+                // Клас товару
+                class Product{
+                    #name
+                    #quantity
+                    constructor(name, unit, quantity, firm){
+                        this.name = name
+                        this.unit = unit
+                        this.quantity = quantity
+                        this.firm = firm
+                    }
+                    get name (){
+                        return this.#name
+                    }
+                    get quantity (){
+                        return this.#quantity
+                    }
+
+                    set name(value){
+                        if(value.length === 0) throw new Error ('Некоректні дані')
+                        return this.#name = value
+                    }
+                    set quantity(value){
+                        if(value < 0) throw new Error ('Некоректні дані')
+                        return this.#quantity = value
+                    }
+                    toString(){
+                        return `Назва товару:${this.name}. Одиниця виміру:${this.unit}. Кількість:${this.quantity}.`
+                    }
+                }
+                let productList = [
+                    new Product('product1','ltr',25, firm1),
+                    new Product('product2','kg',41, firm1),
+                    new Product('product1','ltr',61, firm2),
+                    new Product('product3','kg',50, firm3),
+                    new Product('product2','kg',14, firm2),
+                    new Product('product1','kg',32, firm3)
+                ]
+                // Клас складу
+                class Storage{
+                    constructor(product){
+                        this.products = product
+                    }
+                    // Метод реєстрації товарів
+                    registrationProduct(newProduct){
+                        this.products.push(newProduct)
+                    }
+                    // Метод відвантаження товарів
+                    shipmentProduct(nameProd, nameManufacturer, amountProduct){
+                        for (const product of this.products) {
+                            if(nameProd === product.name && nameManufacturer === product.firm.title){
+                                if(product.quantity < amountProduct) throw new Error( 'Потрібної кількість товару немає')
+                                product.quantity -= amountProduct
+                            } 
+                        }
+                    }
+                    // Метод фільтрації за назвою товару
+                    getFilterProductName(){
+                        return this.products.map(product => product.name)
+                    }
+                    // Метод фільтрації за назвою фірми
+                    getFilterFirmName(){
+                        return this.products.reduce((acc,product)=>{
+                            if(product.firm.title) acc.push(product.firm.title)
+                            return acc
+                        },[])
+                    }
+                    toString() {
+                        return `${this.products}`
+                    }
+                }
+                let storageProduct = new Storage(productList)
+            </script>
+        </div>
+    </main>
+    <footer></footer>
+    <script src="./js/script.js"></script>
+</body>
+<style>
+    @charset "UTF-8";
+    @import url("https://fonts.googleapis.com/css?family=Montserrat:regular,700&display=swap");
+
+    h2 {
+        font-size: 18px;
+        color: #020202;
+        text-align: left;
+        margin-bottom: 25px;
+    }
+
+    .task {
+        color: rgb(255, 255, 255);
+    }
+
+    .task:not(:last-child) {
+        margin-bottom: 25px;
+    }
+
+    .tablet {
+        display: grid;
+        grid-template-columns: repeat(3, auto);
+        justify-content: center;
+    }
+
+    .tablet__item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border: 1px solid #020202;
+        gap: 25px;
+        /* padding: 15px; */
+        padding-top: 0;
+        padding-bottom: 0;
+        position: relative;
+    }
+
+    .tablet__item::before {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 1px;
+        background-color: #020202;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    .tablet__title {
+        padding: 10px;
+        /* padding-top: 5px; */
+        text-align: center;
+    }
+
+    .tablet__value {
+        display: flex;
+        padding: 10px;
+        padding-top: 0;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+</style>
+
+</html>

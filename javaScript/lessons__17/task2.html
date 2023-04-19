@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Task 3</title>
+</head>
+
+<body>
+    <header></header>
+    <main class="page">
+        <div class="page__container task">
+            <h2> Задача 3. Створити клас Нагадувач. Кожні вказані кількості секунд (використати setInterval) програма нагадує про якусь подію (це просто текст) і також виводиться порядковий номер скільки раз вже нагадування було. Зробити так, щоб неможна було зробити одночасно декілька об’єктів-нагадувачів. Методи зупинки таймера, метод зміни повідомлення без зупинки таймера.</h2>
+            <script>
+                class Reminder {
+                    static reminderRef
+                    static interval
+                    static countReminder = 0
+                    constructor(messageEvent, intervalWithdrawal, stopInterval){
+                        if(Reminder.reminderRef) return Reminder.reminderRef
+
+                        this.messageEvent = messageEvent
+                        this.intervalWithdrawal = intervalWithdrawal
+                        this.stopInterval = stopInterval
+                        
+
+                        Reminder.reminderRef = this
+                    }
+                    startReminder(){
+                        Reminder.interval = setInterval(()=>{
+                            Reminder.countReminder++
+                            document.write(`${this.messageEvent} ${Reminder.countReminder}<br>`)
+                        },this.intervalWithdrawal * 1000)
+                    }
+                    stopReminder(){
+                        setTimeout(()=>{
+                            clearInterval(Reminder.interval)
+                        },this.stopInterval * 1000)
+                    }
+                    messageChange(newMessage, interval){
+                        setTimeout(()=>{
+                            this.messageEvent = newMessage
+                        },interval * 1000)
+                    }
+                }
+                let reminder = new Reminder ('Нагадування', 1, 30)
+                reminder.startReminder()
+                reminder.stopReminder()
+                reminder.messageChange('Нове повідомлення',5)
+            </script>
+        </div>
+    </main>
+    <footer></footer>
+    <script src="./js/script.js"></script>
+</body>
+<style>
+    @charset "UTF-8";
+    @import url("https://fonts.googleapis.com/css?family=Montserrat:regular,700&display=swap");
+
+    h2 {
+        font-size: 18px;
+        color: #020202;
+        text-align: left;
+        margin-bottom: 25px;
+    }
+
+    .task {
+        color: rgb(255, 255, 255);
+    }
+
+    .task:not(:last-child) {
+        margin-bottom: 25px;
+    }
+
+    .tablet {
+        display: grid;
+        grid-template-columns: repeat(3, auto);
+        justify-content: center;
+    }
+
+    .tablet__item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border: 1px solid #020202;
+        gap: 25px;
+        /* padding: 15px; */
+        padding-top: 0;
+        padding-bottom: 0;
+        position: relative;
+    }
+
+    .tablet__item::before {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 1px;
+        background-color: #020202;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    .tablet__title {
+        padding: 10px;
+        /* padding-top: 5px; */
+        text-align: center;
+    }
+
+    .tablet__value {
+        display: flex;
+        padding: 10px;
+        padding-top: 0;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+</style>
+
+</html>
