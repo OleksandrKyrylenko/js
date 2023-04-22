@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Task 3</title>
+</head>
+<body>
+    <script>
+        function myFunc(){
+            const userYear = parseInt(document.getElementById('age').value)
+            const CURRENT_YEAR = 2023
+            const userAge = CURRENT_YEAR - userYear
+            document.getElementById('valueAge').innerHTML = userAge
+        }
+        window.onload = function (){
+            document.getElementById('age').onchange = myFunc
+        }
+    </script>
+    <header></header>
+    <main class="page">
+        <div class="page__container task">
+            <h2> Задача 3. Користувач задає рік народження. Визначити кількість років користувача. </h2>
+            <div class="task__line">
+                <label for="age">Введіть свій рік народження</label>
+                <input id="age" type="number" value="" class="input">
+            </div>
+            <div>Вам: <span id="valueAge"></span></div>
+        </div>
+    </main>
+    <footer></footer>
+    <script src="./js/script.js"></script>
+</body>
+<style>
+    @charset "UTF-8";
+    @import url("https://fonts.googleapis.com/css?family=Montserrat:regular,700&display=swap");
+
+    h2 {
+        font-size: 18px;
+        color: #020202;
+        text-align: left;
+        margin-bottom: 25px;
+    }
+
+    .task {
+        color: rgb(255, 255, 255);
+    }
+
+    .task:not(:last-child) {
+        margin-bottom: 25px;
+    }
+
+    .tablet {
+        display: grid;
+        grid-template-columns: repeat(3, auto);
+        justify-content: center;
+    }
+
+    .tablet__item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border: 1px solid #020202;
+        gap: 25px;
+        /* padding: 15px; */
+        padding-top: 0;
+        padding-bottom: 0;
+        position: relative;
+    }
+
+    .tablet__item::before {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 1px;
+        background-color: #020202;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    .tablet__title {
+        padding: 10px;
+        /* padding-top: 5px; */
+        text-align: center;
+    }
+
+    .tablet__value {
+        display: flex;
+        padding: 10px;
+        padding-top: 0;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+</style>
+
+</html>
