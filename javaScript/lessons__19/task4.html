@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Task 5</title>
+</head>
+
+<body>
+    <script>
+        // Задача 5. Байрактар. З верхньої частини екрану у випадковій позиції по горизонталі з’являються танки, які їдуть вниз. При кліку на танк він вибухає і зникає з екрану. 
+        class Bayraktar {
+            constructor(imgSrc,imgWidth, explosion) {
+                this.imgSrc = imgSrc
+                this.imgWidth = imgWidth
+                this.count = 0
+                this.explosion = explosion
+            }
+            getRandomPosition(minValue, maxValue) {
+                return minValue + Math.floor(Math.random() * (maxValue - minValue+ 1))
+            }
+            createTanks() {
+                const tankImg = document.createElement('img')
+                tankImg.className = 'tank'
+                tankImg.src = this.imgSrc
+                const positionTop = this.getRandomPosition(-20, -10)
+                const positionLeft = this.getRandomPosition(10, 90)
+                tankImg.style.cssText = `
+                    width: ${this.imgWidth}px;
+                    height: ${this.imgWidth}px;
+                    position: absolute;
+                    top: ${positionTop}%;
+                    left: ${positionLeft}%;
+                `
+                return tankImg
+            }
+
+            optionClick(tank,containerId,counter){
+                this.count++
+                tank.src = this.explosion
+                setTimeout(()=>{
+                    tank.remove()
+                },100)
+                this.render(containerId)
+            }
+
+            render(containerId) {
+                const targetContainer = document.getElementById(containerId)
+                const tank = this.createTanks()
+                tank.onmousedown = this.optionClick.bind(this,tank,containerId)
+                setInterval(()=>{
+                    tank.style.top = parseInt(tank.style.top) + 1 + '%'
+                    tank.style.transition = `top 0.7s linear`
+                    if(tank.style.top === '120%'){
+                        tank.style.top = this.getRandomPosition(-50, -10) + '%'
+                        tank.style.transition = this.getRandomPosition(1, 90) + '%'
+                        tank.style.transition = 'top 0s linear'
+                    }
+                },30)
+                targetContainer.append(tank)
+                return targetContainer
+            }
+        }
+        window.onload = function(){
+            for (let i = 0; i < 5; i++) {
+                const tank = new Bayraktar('./img/tank.png',60,'./img/restricted.gif')
+                tank.render('container')                
+            }
+        }
+        
+    </script>
+    <header></header>
+    <main class="page">
+        <div id="container"></div>
+    </main>
+    <footer></footer>
+    <script src="./js/script.js"></script>
+</body>
+<style>
+    @charset "UTF-8";
+    @import url("https://fonts.googleapis.com/css?family=Montserrat:regular,700&display=swap");
+
+    h2 {
+        font-size: 18px;
+        color: #020202;
+        text-align: left;
+        margin-bottom: 25px;
+    }
+
+    .task {
+        color: rgb(255, 255, 255);
+    }
+
+    .task:not(:last-child) {
+        margin-bottom: 25px;
+    }
+
+    .tablet {
+        display: grid;
+        grid-template-columns: repeat(3, auto);
+        justify-content: center;
+    }
+
+    .tablet__item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border: 1px solid #020202;
+        gap: 25px;
+        padding-top: 0;
+        padding-bottom: 0;
+        position: relative;
+    }
+
+    .tablet__item::before {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 1px;
+        background-color: #020202;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    .tablet__title {
+        padding: 10px;
+        /* padding-top: 5px; */
+        text-align: center;
+    }
+
+    .tablet__value {
+        display: flex;
+        padding: 10px;
+        padding-top: 0;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+
+    td {
+        width: 50px;
+        height: 50px;
+        background-color: rgb(121, 206, 125);
+        text-align: center;
+    }
+
+    body {
+        background-color: rgba(12, 5, 5, 0.655);
+        overflow: hidden;
+    }
+</style>
+
+</html>

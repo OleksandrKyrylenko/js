@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Task 3</title>
+</head>
+<body>
+    <script>
+        // Задача 3. Відобразити падаючий сніг. Сніжинка з’являється у верхній частині екрану і з випадковою швидкістю рухається вниз. Як тільки сніжинка досягає нижньої частини екрану вона знову повинна з’явитись у верхній частині екрану.
+        class FallingSnow{
+            constructor(minSpeed, maxSpeed, numSnow){
+                this.minSpeed = minSpeed
+                this.maxSpeed = maxSpeed
+                this.numSnow = numSnow
+            }
+            getRandomValue(minValue, maxValue){
+                return minValue + Math.floor(Math.random() * (maxValue - minValue + 1))
+            }
+            makingSnowflake(){
+                const snowflake = document.createElement('div')
+                snowflake.className = 'snowflake'
+                const randomSize = this.getRandomValue(3,8)
+                const randomSpeed = this.getRandomValue(this.minSpeed, this.maxSpeed)
+                snowflake.style.cssText = `
+                    left: ${this.getRandomValue(0, 100)}%;
+                    top: ${this.getRandomValue(-15, -2)}%;
+                    width: ${randomSize}px;
+                    height: ${randomSize}px;
+                    animation: falling-snow ${randomSpeed}s linear infinite ${randomSpeed}s;
+                `
+                return snowflake 
+                // console.log(snowflake);
+            }
+            render(containerId) {
+                const targetContainer = document.getElementById(containerId)
+                let countSnow = this.numSnow
+                const generate = () => {
+                    const snowflake = this.makingSnowflake()
+                    targetContainer.append(snowflake)
+                    countSnow--
+                    if (countSnow > 0) {
+                        setTimeout(generate, 100)
+                    }
+                }
+                generate()
+                return targetContainer
+            }
+        }
+        window.onload = function(){
+            const r = new FallingSnow(1, 4, 100)
+            r.render('container1')
+        }
+    </script>
+    <header></header>
+    <main class="page">
+        <div class="page__container task">
+            <div id="container1">
+                <!-- <div class="snowflake"></div> -->
+            </div>
+    </main>
+    <footer></footer>
+    <script src="./js/script.js"></script>
+</body>
+<style>
+    @charset "UTF-8";
+    @import url("https://fonts.googleapis.com/css?family=Montserrat:regular,700&display=swap");
+
+    h2 {
+        font-size: 18px;
+        color: #020202;
+        text-align: left;
+        margin-bottom: 25px;
+    }
+
+    .task {
+        color: rgb(255, 255, 255);
+    }
+
+    .task:not(:last-child) {
+        margin-bottom: 25px;
+    }
+
+    .tablet {
+        display: grid;
+        grid-template-columns: repeat(3, auto);
+        justify-content: center;
+    }
+
+    .tablet__item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border: 1px solid #020202;
+        gap: 25px;
+        /* padding: 15px; */
+        padding-top: 0;
+        padding-bottom: 0;
+        position: relative;
+    }
+
+    .tablet__item::before {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 1px;
+        background-color: #020202;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    .tablet__title {
+        padding: 10px;
+        /* padding-top: 5px; */
+        text-align: center;
+    }
+
+    .tablet__value {
+        display: flex;
+        padding: 10px;
+        padding-top: 0;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+    .green{
+        background-color: green;
+    }
+    .red{
+        background-color: red;
+    }
+    body{
+        height: 100vh;
+        /* width: 100%; */
+        position: relative;
+        overflow: hidden;
+        background: url('./img/image.jpg') no-repeat center/cover;
+    }
+    body::before{
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(2, 2, 2, 0.2);
+    }
+</style>
+
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Task 4</title>
+</head>
+<body>
+    <script>
+        // Задача 4. Сяючі зорі. Вказана кількість зірочок повинна з’являтися у випадковій частині екрану. Кожна зірка з певним кроком і інтервалом збільшується від мінімального до максимального розміру. Як тільки досягнути максимального розміру зірочка повинна з’являтися у іншій випадковій позиції.
+
+        class Stars {
+            constructor( minSize, maxSize) {
+                this.minSize = minSize
+                this.maxSize = maxSize
+            }
+            getRandomPosition() {
+                return Math.floor(Math.random() * 100)
+            }
+
+            getRandomStep() {
+                return Math.random() * (1 - 0.2) + 0.2
+            }
+
+            getRandomInterval() {
+                return 400 + Math.floor(Math.random() * (1000 - 400 + 1))
+            }
+
+            createStar() {
+                const star = document.createElement('div')
+                star.className = 'star'
+                const positionTop = this.getRandomPosition()
+                const positionLeft = this.getRandomPosition()
+                star.style.cssText = `
+                    position: absolute;
+                    width: ${this.minSize}px;
+                    height: ${this.minSize}px;
+                    top:${positionTop}%;
+                    left:${positionLeft}%;
+                    
+                `    
+                star.classList.add('star-animation');
+                return star
+            }
+
+            render(containerId) {
+                const interval = this.getRandomInterval()
+                const step = this.getRandomStep()
+                const star = this.createStar()
+                let widthStar = this.minSize
+                let heightStar = this.minSize
+                const move = setInterval(() => {
+                    widthStar += step
+                    heightStar += step
+                    star.style.width = `${widthStar}px`
+                    star.style.height = `${heightStar}px`
+
+                    if (heightStar >= this.maxSize) {
+                        clearInterval(move)
+                        star.remove()
+                        this.render(containerId)
+                    }
+                }, interval)
+                document.getElementById(containerId).append(star)
+            }
+        }
+        const NUM_STARS = 700
+        window.onload = function () {
+            for (let i = 0; i < NUM_STARS; i++) {
+                const stars = new Stars(2, 8)
+                stars.render('container')        
+            }
+        }
+    </script>
+    <header></header>
+    <main class="page">
+        <div class="page__container task">
+            <div id="container"></div>
+        </div>
+    </main>
+    <footer></footer>
+    
+</body>
+<style>
+    @charset "UTF-8";
+    @import url("https://fonts.googleapis.com/css?family=Montserrat:regular,700&display=swap");
+
+    h2 {
+        font-size: 18px;
+        color: #020202;
+        text-align: left;
+        margin-bottom: 25px;
+    }
+
+    .task {
+        color: rgb(255, 255, 255);
+    }
+
+    .task:not(:last-child) {
+        margin-bottom: 25px;
+    }
+
+    .tablet {
+        display: grid;
+        grid-template-columns: repeat(3, auto);
+        justify-content: center;
+    }
+
+    .tablet__item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border: 1px solid #020202;
+        gap: 25px;
+        /* padding: 15px; */
+        padding-top: 0;
+        padding-bottom: 0;
+        position: relative;
+    }
+
+    .tablet__item::before {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 1px;
+        background-color: #020202;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    .tablet__title {
+        padding: 10px;
+        /* padding-top: 5px; */
+        text-align: center;
+    }
+
+    .tablet__value {
+        display: flex;
+        padding: 10px;
+        padding-top: 0;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+    body{
+        background-color: #181818;
+        overflow: hidden;
+    }
+</style>
+
+</html>

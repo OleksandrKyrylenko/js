@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Task 1</title>
+</head>
+<body>
+    <!-- <script>
+        // Задача. Дано масив з даними про сайти (графічне зображення, назва, посилання). Розробити клас LinkCard, що дозволяє генерувати картку за зразком.
+    class LinkCard{
+        constructor({imgSrc,titleCard, linkCard}){
+            this.imgSrc = imgSrc
+            this.titleCard = titleCard
+            this.linkCard = linkCard
+        }
+        render(container__cards){
+            const cardsContainer = document.createElement('div')
+            cardsContainer.className = 'cards__container'
+
+            const imageContainer = document.createElement('div')
+            imageContainer.className = 'image__container'
+            cardsContainer.append(imageContainer)
+
+            const image = document.createElement('img')
+            image.src = this.imgSrc
+            imageContainer.append(image)
+
+            const titleContainer = document.createElement('div')
+            titleContainer.className = 'title__container'
+            cardsContainer.append(titleContainer)
+
+            const link = document.createElement('a')
+            link.href = this.linkCard
+            link.innerText = this.titleCard 
+            titleContainer.append(link)
+
+            const targetContainer = document.querySelector('.task__cards')
+            targetContainer.append(cardsContainer)
+        }
+    }
+        
+    const cardList = [
+        {
+            imgSrc: './img/ukr_net.png',
+            titleCard: 'UkrNet',
+            linkCard: 'https://www.ukr.net/'
+        },
+        {
+            imgSrc: './img/globe.png',
+            titleCard: 'Globa',
+            linkCard: 'https://en.wikipedia.org/wiki/Globe'
+        },
+        {
+            imgSrc: './img/rocket.png',
+            titleCard: 'Rocket',
+            linkCard: 'https://uk.wikipedia.org/wiki/Rocket'
+        }
+    ]
+    
+    window.onload = function(){
+        for (const el of cardList) {
+            new LinkCard(el).render('.task__cards')
+        }
+    }
+    </script> -->
+    <script>
+         // Задача. Відображаємо картки товарів, які користувач може вибирати. Вибраний товар має зелену рамку
+        class LaptopProduct{
+            constructor({label, imageSrc, title, link, price}){
+                this.label = label
+                this.imageSrc = imageSrc
+                this.title = title
+                this.link = link
+                this.price = price
+            }
+            render(productContainer){
+                // Створюємо загальний контейнер(силкою) для однієї картки
+                const itemInner = document.createElement('a')
+                itemInner.className = 'item__inner'
+                itemInner.href = this.link
+                itemInner.target = '_blank'
+                // itemsColumn.append(itemInner)
+
+                // Створюємо елемент-обгортку який містить основний вміст продукту
+                const itemContent = document.createElement('article')
+                itemContent.classList.add('item__content', 'content-item')
+                itemInner.append(itemContent)
+
+                // Створюємо основний вміст продукту
+                // Label
+                const label = document.createElement('div')
+                label.className = 'content-item__label'
+                label.innerText = this.label
+                itemContent.append(label)
+                // Image
+                const imageContainer = document.createElement('div')
+                imageContainer.className = 'content-item__image'
+                itemContent.append(imageContainer)
+
+                const img = document.createElement('img')
+                img.src = this.imageSrc
+                imageContainer.append(img)
+                // Title
+                const title = document.createElement('div')
+                title.className = 'content-item__title'
+                title.innerText = this.title
+                itemContent.append(title)
+                // Price
+                const price = document.createElement('div')
+                price.className = 'content-item__price'
+                price.innerText = this.price
+                itemContent.append(price)
+
+                const targetContainer = document.querySelector(productContainer)
+                targetContainer.append(itemInner)
+            }
+        }
+        const laptopProductList = [
+            {
+                label: 'Топ продаж',
+                imageSrc: './img/01.png',
+                title: 'Ноутбук MSI GF63 Thin 11UC-290XUA Black',
+                link: 'https://rozetka.com.ua/ua/msi-11uc_290xua/p336572938/',
+                price: '29 999₴'
+            },
+            {
+                label: 'Новинка',
+                imageSrc: './img/02.png',
+                title: 'Ноутбук ASUS TUF Gaming F15 FX506HM-HN017',
+                link: 'https://rozetka.com.ua/ua/msi-11uc_290xua/p336572938/',
+                price: '30 500₴'
+            },
+            {
+                label: 'Акція',
+                imageSrc: './img/03.png',
+                title: 'Ноутбук Acer Aspire 5 A515-57G-37UE',
+                link: 'https://rozetka.com.ua/ua/msi-11uc_290xua/p336572938/',
+                price: '19 999₴'
+            },
+            {
+                label: 'Топ продаж',
+                imageSrc: './img/02.png',
+                title: 'Ноутбук MSI GF63 Thin 11UC-290XUA Black',
+                link: 'https://rozetka.com.ua/ua/msi-11uc_290xua/p336572938/',
+                price: '49 999₴'
+            }
+        ]
+
+        window.onload = function () {
+            for (const linkData of laptopProductList) {
+                new LaptopProduct(linkData).render('.items__column')
+            }
+        }
+    </script>
+    <header></header>
+    <main class="page">
+        <div class="page__container task">
+            <h2> Задача 1. Відображаємо картки товарів, які користувач може вибирати. Вибраний товар має зелену рамку </h2>
+            <div class="items__column item"></div>
+            <!-- <div class="task__cards"></div> -->
+        </div>
+    </main>
+    <footer></footer>
+</body>
+<style>
+    @charset "UTF-8";
+	@import url("https://fonts.googleapis.com/css?family=Montserrat:regular,700&display=swap");
+    h2{
+        font-size: 18px;
+        color:#020202;
+        text-align: left;
+        margin-bottom: 25px;
+    }
+    .task{
+        color:rgb(255, 255, 255);
+    }
+    .task:not(:last-child){
+        margin-bottom: 25px;
+    }
+    .tablet{
+        display: grid;
+        grid-template-columns: repeat(3, auto);
+        justify-content: center;
+    }
+    .tablet__item{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border:1px solid #020202;
+        gap:25px;
+        /* padding: 15px; */
+        padding-top: 0;
+        padding-bottom: 0;
+        position: relative;
+    }
+    .tablet__item::before{
+        content:'';
+        position: absolute;
+        width: 100%;
+        height: 1px;
+        background-color: #020202;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    .tablet__title{
+        padding: 10px;
+        /* padding-top: 5px; */
+        text-align: center;
+    }
+    .tablet__value{
+        display: flex;
+        padding: 10px;
+        padding-top: 0;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+</style>
+</html>
