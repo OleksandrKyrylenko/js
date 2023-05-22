@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Task 4</title>
+</head>
+<body>
+    <script>
+        // Задача 4. Дано 3 таблиці розмірності 3*3 з випадковими числами. Якщо відбувається
+        // клік на якійсь із клітинок, то до відповідної таблиці додається червона рамка
+        // (спробуйте додати можливість відображення кількості кліків біля назви таблиці з
+        // використанням відповідно доданого для цього атрибута).
+
+        // Функція створення елементів
+        class ElemensCreator{
+            static createElements({tag, attrs, props, events}){
+                const el = document.createElement(tag)
+                if(attrs){
+                    for (const attrKey in attrs) {
+                        el.setAttribute(attrKey, attrs[attrKey])
+                    }
+                }
+                if(props){
+                    for (const propKey in props) {
+                        el[propKey] = props[propKey]
+                    }
+                }
+                if(events){
+                    for (const eventKey in events) {
+                        el.addEventListener(eventKey, events[eventKey])
+                    }
+                }
+                return el
+            }
+        }
+        class Tables{
+            constructor(row,column,numTable){
+                this.row = row
+                this.column = column
+                this.numTable = numTable
+                this.numClick = 0
+            }
+            getRandomNum(minNum, maxNum){ 
+                return minNum + Math.floor(Math.random()*(maxNum - minNum + 1))
+            }
+            onClickTable(event){
+                if(event.target.tagName === 'TD'){
+                    const table = event.target.closest('.table')
+                    this.numClick++
+                    table.style.border = '1px solid red'
+                    const count = document.querySelector('.num__click').innerText = this.numClick
+                }
+            }
+            createTable(){
+                const div = ElemensCreator.createElements({
+                    tag:'div',
+                    attrs:{
+                        class:'item__column'
+                    }
+                })
+                const h2 = ElemensCreator.createElements({
+                    tag:'h2',
+                    attrs:{
+                        class:'table__title'
+                    },
+                    props:{
+                        innerText: `Table ${this.i + 1}`
+                    }
+                })
+                const table = ElemensCreator.createElements({
+                    tag:'table',
+                    attrs:{
+                        class:'table'
+                    },
+                    events:{
+                        click:this.onClickTable.bind(this)
+                    }
+                })
+                for(let row = 0; row < this.row; row++){
+                    const tr = document.createElement('tr')
+                    for(let column = 0; column < this.column; column++){
+                        const td = ElemensCreator.createElements({
+                            tag:'td',
+                            props:{
+                                innerText:this.getRandomNum(1, 20)
+                            }
+                        })
+                        tr.append(td)
+                    }
+                    table.append(tr)
+                }
+                div.append(h2)
+                div.append(table)
+                return div
+            }
+            render(targetSelector){
+                const container = document.querySelector(targetSelector)
+                for (this.i = 0; this.i < this.numTable; this.i++) {
+                    container.append(this.createTable())
+                }
+                const countClick = ElemensCreator.createElements({
+                    tag:'div',
+                    attrs:{
+                        class:'count__click'
+                    },
+                    props:{
+                        innerText:'Кількість кліків = '
+                    }
+                })
+                const span = ElemensCreator.createElements({
+                    tag:'span',
+                    attrs:{
+                        class:'num__click'
+                    },
+                    props:{
+                        innerText:0
+                    }
+                })
+                countClick.append(span)
+                container.append(countClick)
+            }
+        }
+        window.onload = function(){
+            const tables = new Tables(3,3,3)
+            tables.render('.container')
+        }
+    </script>
+    <header></header>
+    <main class="page">
+        <div class="page__container">
+            <div class="container"></div>
+        </div>
+    </main>
+    <footer></footer>
+    
+</body>
+<style>
+    @charset "UTF-8";
+    @import url("https://fonts.googleapis.com/css?family=Montserrat:regular,700&display=swap");
+
+    h2 {
+        font-size: 18px;
+        color: #020202;
+        text-align: left;
+        margin-bottom: 25px;
+    }
+
+    .task {
+        color: rgb(255, 255, 255);
+    }
+
+    .task:not(:last-child) {
+        margin-bottom: 25px;
+    }
+
+    .tablet {
+        display: grid;
+        grid-template-columns: repeat(3, auto);
+        justify-content: center;
+    }
+
+    .tablet__item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border: 1px solid #020202;
+        gap: 25px;
+        /* padding: 15px; */
+        padding-top: 0;
+        padding-bottom: 0;
+        position: relative;
+    }
+
+    .tablet__item::before {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 1px;
+        background-color: #020202;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    .tablet__title {
+        padding: 10px;
+        /* padding-top: 5px; */
+        text-align: center;
+    }
+
+    .tablet__value {
+        display: flex;
+        padding: 10px;
+        padding-top: 0;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+    /* body{
+        background-color: #181818;
+        overflow: hidden;
+    } */
+    td {
+        width: 50px; 
+        height: 50px;
+        background-color: rgb(121, 206, 125);
+        text-align: center;
+    }
+    .container{
+        display: flex;
+        gap:25px;
+    }
+</style>
+
+</html>

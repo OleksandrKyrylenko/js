@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Task 5</title>
+</head>
+
+<body>
+    <script>
+        // Задача 5. На формі вводять 7 числових значень (вік, зріст, вага, заробітна плата,
+        // стаж, номер відділу, порядковий номер). Додати подію обробки події click на форму
+        // і якщо клік на input, то автоматично замінювати значення його на 0.
+
+        window.onload = function(){
+            const form = document.getElementById('form')
+            form.addEventListener('click', (event) => {
+                if (event.target.tagName === 'INPUT') {
+                    event.target.value = 0
+                }
+            })
+            const inputs = form.getElementsByTagName('input')
+            for (let i = 0; i < inputs.length; i++) {
+                inputs[i].addEventListener('blur', (event) => {
+                    const input = event.target
+                    if (input.value === '' || input.value === '0') 
+                        input.value = input.placeholder
+                })
+            }
+        }
+    </script>
+    <header></header>
+    <main class="page">
+        <div class="task__container">
+            <form id="form" action="#">
+                <div class="form__line">
+                    <label for="age">Вік</label>
+                    <input id="age" type="number" value="" placeholder="Ваш вік">
+                </div>
+                <div class="form__line">
+                    <label for="height">Зріст</label>
+                    <input id="height" type="number" value="" placeholder="Ваш зріст">
+                </div>
+                <div class="form__line">
+                    <label for="weight">Вага</label>
+                    <input id="weight" type="number" value="" placeholder="Ваша вага">
+                </div>
+                <div class="form__line">
+                    <label for="salary">Заробітна плата</label>
+                    <input id="salary" type="number" value="" placeholder="Ваша заробітна плата">
+                </div>
+                <div class="form__line">
+                    <label for="experience">Стаж</label>
+                    <input id="experience" type="number" value="" placeholder="Ваш стаж">
+                </div>
+                <div class="form__line">
+                    <label for="numDep">Номер відділу</label>
+                    <input id="numDep" type="number" value="" placeholder="Номер відділу">
+                </div>
+                <div class="form__line">
+                    <label for="numSeq">Порядковий номер</label>
+                    <input id="numSeq" type="number" value="" placeholder="Ваш порядковий номер">
+                </div>
+            </form>
+        </div>
+    </main>
+    <footer></footer>
+    <script src="./js/script.js"></script>
+</body>
+<style>
+    @charset "UTF-8";
+    @import url("https://fonts.googleapis.com/css?family=Montserrat:regular,700&display=swap");
+
+    h2 {
+        font-size: 18px;
+        color: #020202;
+        text-align: left;
+        margin-bottom: 25px;
+    }
+
+    .task {
+        color: rgb(255, 255, 255);
+    }
+
+    .task:not(:last-child) {
+        margin-bottom: 25px;
+    }
+
+    .tablet {
+        display: grid;
+        grid-template-columns: repeat(3, auto);
+        justify-content: center;
+    }
+
+    .tablet__item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border: 1px solid #020202;
+        gap: 25px;
+        padding-top: 0;
+        padding-bottom: 0;
+        position: relative;
+    }
+
+    .tablet__item::before {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 1px;
+        background-color: #020202;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    .tablet__title {
+        padding: 10px;
+        /* padding-top: 5px; */
+        text-align: center;
+    }
+
+    .tablet__value {
+        display: flex;
+        padding: 10px;
+        padding-top: 0;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+
+    td {
+        width: 50px;
+        height: 50px;
+        background-color: rgb(121, 206, 125);
+        text-align: center;
+    }
+
+    body {
+        background-color: rgba(12, 5, 5, 0.655);
+        overflow: hidden;
+        color: #fff;
+    }
+    #form{
+        display: flex;
+        flex-direction: column;
+        gap:20px;
+        margin-top: 50px;
+        border:1px solid red;
+        padding: 20px;
+        max-width: 400px;
+    }
+    .form__line{
+        /* max-width: 300px; */
+        display: flex;
+        justify-content: space-between;
+    }
+    input{
+        padding: 5px 10px;
+    }
+</style>
+
+</html>
