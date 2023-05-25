@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Task 4</title>
+</head>
+<body>
+    <header></header>
+    <main class="page">
+        <div class="page__container">
+            <!-- <div class="container"></div> -->
+            <!-- <div class="data" contenteditable="true">11</div>
+            <div class="data" contenteditable="true">2</div>
+            <div class="data" contenteditable="true">33</div>
+            <div class="data" contenteditable="true">44</div>
+            <div id="cnt"></div> -->
+            <div class="container">
+                <!-- <form action="#">
+                    <label>
+                        Ставка
+                        <input type="text" name="Stavka" value="" class="input"><br>
+                    </label>
+                    <button id="btn">Розрахувати</button><br>
+                    <label>
+                        На руки
+                        <input type="text" name="NaRuki" value="" class="input"><br>
+                    </label>
+                </form> --> -->
+            </div>
+        </div>
+    </main>
+    <footer></footer>
+</body>
+<script>
+    // Задача. Тир. Дано масив з 5 елеметів, у якому випадково розміщено 1. Дати користувачу за 3 спроби знайти цю одиницю.
+    // Для аналізу результатів використати виключні ситуації.
+    class NoAttemps extends Error{
+        constructor(){
+            super('Спроби закінчились')
+            this.name = 'NoAttemps'
+        }
+    }
+
+    class Game{
+        constructor(cellsNumber = 5, attempsNumber = 3){
+            this.arr = this.getGameField(cellsNumber)
+            this.attempsNumber = attempsNumber
+        }
+        getGameField(cellsNumber){
+            const arr = new Array(cellsNumber).fill(0)
+            const randomIndex = Math.floor(Math.random() * cellsNumber)
+            arr[randomIndex] = 1
+            return arr
+        }
+        play(){
+            while(this.attempsNumber--){
+                const userPosition = parseInt(prompt('index = '))
+                if(this.arr[userPosition]) return
+            }
+            throw new NoAttemps()
+        }
+    }
+    function validation() {
+        const game = new Game()
+
+        try{
+            game.play()
+            alert('Win')
+        }
+        catch{
+            alert('Loose')
+        }
+    }
+    validation()
+    // function calculateSalary() {
+    //     let stavka = document.forms[0].elements[0].value
+    //     console.log(stavka);
+    //     try{
+    //         // Перевірка чи є числом
+    //         if(isNaN(stavka)) throw new Error('Ставка має бути числом')
+    //         console.log(stavka);
+    //         // Перевірка чи число є > 0 
+    //         stavka = parseInt(stavka)
+    //         console.log(stavka);
+    //         if(stavka < 0) throw new Error('Ставка має бути більше за 0')
+    //         // Перевірка чи число не більше за 90000
+    //         if(stavka > 90000) throw new Error('Ставка не можу бути більше за 90000')
+    //         let salary = stavka * 0.8
+    //         console.log(salary);
+    //         console.log(stavka);
+    //         document.forms[0].elements[2].value = salary
+    //     }
+    //     catch(err){
+    //         alert(err.message)
+    //     }
+    // }
+    // btn.onclick = calculateSalary
+    // let obj ={
+    //     prop1:22,
+    //     myFunc1: function(){
+    //         console.log(5555);
+    //     }
+    // }
+    // obj.prop1 = 12
+    // obj.myFunc1()
+
+    // obj.__proto__ = {
+    //     prop2:32,
+    //     myFunc2: function(){
+    //         console.log(444);
+    //     }
+    // }
+    // obj.prop2
+    // obj.myFunc2()
+    // obj.prop2 = 88
+    // console.log(obj.prop2);
+
+    // let objParent ={
+    //     prop1:22,
+    //     myFunc1: function(){
+    //         console.log(5555);
+    //     }
+    // }
+    // let objChild ={
+    //     prop1:33,
+    //     myFunc2: function(){
+    //         console.log(5555);
+    //     }
+    // }
+    // Object.setPrototypeOf(objChild,objParent)
+    // console.log(objParent);
+    // console.log(objChild);
+    // objChild.myFunc1()
+    // objChild.prop1 = 55
+    // objParent.prop3=88
+    // console.log(objChild);
+
+
+    // let objParent ={
+    //     prop2:22,
+    //     myFunc1: function(){
+    //         console.log(5555);
+    //     }
+    // }
+    // // let objChild ={
+    // //     prop1:33,
+    // //     myFunc2: function(){
+    // //         console.log(5555);
+    // //     }
+    // // }
+    // let objChild = Object.create(objParent,{    
+    //         prop1:{
+    //             value:33,
+    //             enumarable:true
+    //         },
+    //         myFunc2:{
+    //             value:function(){
+    //                 console.log(5555)
+    //             },
+    //             enumarable:true
+    //         }
+    //     })
+    // // console.log(objParent);
+    // // console.log(objChild);
+    // // console.log(objChild.prop1);
+    // console.log(Object.getPrototypeOf(objChild));
+    // console.log(objParent.isPrototypeOf(objChild));
+    // console.log(objChild.hasOwnProperty('prop1'));
+    // console.log( objChild.hasOwnProperty('prop2'));
+    // // objChild.hasOwnProperty(prop1)
+    // // objChild.hasOwnProperty(prop2)
+
+
+    // // Задача 0. Створити клас Range (діапазон)
+    //   // Властивості
+    //   // -  minValue
+    //   // -  maxValue
+    //   // Методи
+    //   // - inRange(value) – метод визначення того, чи є вказане значення у заданому діапазоні
+    //   // - toString
+    // class Range{
+    //     constructor(minValue, maxValue){
+    //         this.minValue = minValue
+    //         this.maxValue = maxValue
+    //     }
+    //     inRange(value){
+    //         return value >= this.minValue && value <= this.maxValue
+    //     }
+    //     toString(){
+    //         return `Range ${this.minValue} - ${this.maxValue}`
+    //     }
+    // }
+    // //-------------------------------------------------
+    //   // На основі класу Range створити клас PensionerChecker
+    //   // Властивості
+    //   // - minValue – мінімальний вік пенсіонера
+    //   // - maxValue – максимальний вік
+    //   // Методи
+    //   // - isPensioner(age) – метод визначення того, чи є пенсіонером
+    //   // - render(containerID) – метод виведення розмітки
+    //   // ToString
+    // class PensionerChecker extends Range{
+    //     constructor(penshionAge = 65){
+    //         super(penshionAge, Infinity)
+    //         this.penshionAge = penshionAge
+    //     }
+    //     isPensioner(age){
+    //         return this.inRange(age)
+    //     }
+    //     toString(){
+    //         return `PensionerChecker >= ${this.minValue}`
+    //     }
+    //     ageChange(){
+    //         const age = parseInt(this.input.value)
+    //         if(this.isPensioner(age)) alert('Pensioner')
+    //         else alert('Not a pensioner')
+    //     }
+    //     render(targetSelector){
+    //         const div = document.createElement('div')
+    //         this.input = document.createElement('input')
+    //         div.append(this.input)
+    //         const btn = document.createElement('button')
+    //         btn.innerText = 'Чи пенсіонер'
+    //         btn.onclick = this.ageChange.bind(this)
+    //         div.append(btn)
+
+    //         document.querySelector(targetSelector).append(div)
+    //     }
+    // }
+    // const pensioner = new PensionerChecker()
+    // pensioner.render('.container')
+
+
+    //   //  Задача 1. Створити клас Dice, який представляє гральний кубик (одне поле faceCount - кліькістьграней) і дозволяє генерувати випадкове число від 1 до кількості граней.
+    // class Dice{
+    //     constructor(faceCount){
+    //         this.faceCount = faceCount
+    //     }
+    //     getScore(){
+    //         return 1 + Math.floor(Math.random() * this.faceCount)
+    //     }
+    // }
+
+    // //Потім на основі цього класу створити клас , який дозволяє вказати не тільки кількість граней, а й кількість спроб - attemptCount (при цьому як випадкове число повертається середнє значення).
+    // class SuperDice extends Dice{
+    //     constructor(faceCount,attemptCount){
+    //         super(faceCount)
+    //         this.attemptCount = attemptCount
+    //     }
+    //     getScore(){
+    //         let sum = 0
+    //         for (let i = 0; i < this.attemptCount; i++) {
+    //             let score = super.getScore()
+    //             sum += score
+    //         }
+    //         return sum / this.attemptCount
+    //     }
+    // }
+    // let r = new SuperDice(6,3)
+    // alert(r.getScore())
+
+    //         DataList
+    // --- властивості ---
+    // масив з числами
+    // --- методи ---
+    // знаходження найбільшого числа
+    // знаходження найменшого числа
+    // знаходження середнього числа
+    // виведення чесел у формі нумерованого списку  при цьому ті, що більші за середнє значення  відмічаються червоним кольором
+    // введення даних з використанням елементів(селектор, відповідні властивості елемента вводу задаються)
+    // class DataList{
+    //     constructor(numberList){
+    //         this.numberList = numberList
+    //     }
+    //     getMax(){
+    //         return Math.max(...this.numberList)
+    //     }
+    //     getMin(){
+    //         return Math.min(...this.numberList)
+    //     }
+    //     getSum(){
+    //         return this.numberList.reduce((prevSum,el)=> prevSum + el)
+    //     }
+    //     getAvarage(){
+    //         return this.getSum() / this.numberList.length
+    //     }
+    //     createElementLi(num,avarage){
+    //         const li = document.createElement('li')
+    //         li.innerText = num
+    //         if(num > avarage) li.style.color = 'red'
+    //         return li
+    //     }
+    //     render(targetSelector){
+    //         const ol = document.createElement('ol')
+    //         const avarage = this.getAvarage()
+    //         console.log(avarage);
+
+    //         this.numberList.forEach(num => {
+    //             ol.append(this.createElementLi(num,avarage))
+    //         })
+    //         document.querySelector(targetSelector).append(ol)
+    //     }
+    //     readList(elSelector,elValueProp){
+    //         const elements = document.querySelectorAll(elSelector)
+    //         this.numberList = []
+    //         for (const el of elements) {
+    //             this.numberList.push(parseInt(el[elValueProp]) ?? 0)
+    //         }
+    //     }
+    // }
+    // //       PriceList
+    //   // --- методи ---
+    //   // знаходження найбільшої ціни
+    //   // знаходження найменшої ціни
+    //   // знаходження середньої ціни
+    //   // введення з використанням елементів div
+    //   // знаходежння загальної вартості товарів
+    // class PriceList extends DataList{
+    //     constructor(priceList){
+    //         super(priceList)
+    //     }
+    //     getMaxPrice(){
+    //         this.getMax()
+    //     }
+    //     getMinPrice(){
+    //         this.getMin()
+    //     }
+    //     getAvaragePrice(){
+    //         this.getAvarage()
+    //     }
+    //     readPrice(divSelector){
+    //         this.readList(divSelector,'innerText')
+    //     }
+    //     getTotalPrice(){
+    //         this.getSum()
+    //     }
+    // }
+    // // let r = new DataList([2,4,25,11,10,19,32,65,13])
+    // // r.render('.container')
+    // let r1 = new DataList()
+    // r1.readList('.data','innerText')
+    // r1.render('#cnt')
+
+
+    // try{
+    //     const val = parseInt(ed.value) / dollarRate
+    //     alert(val)
+    // }
+    // catch(err){
+    //     if(err instanceof ReferenceError) console.log('Елемента вводу не знайдено');
+    //     else if(err instanceof TypeError) console.log('Елемента з таким номером немає');
+    //     else console.log('Якась інша помилка');
+    // }
+    // finally{
+    //     alert('Hello')
+    // }
+</script>
+<style>
+    @charset "UTF-8";
+    @import url("https://fonts.googleapis.com/css?family=Montserrat:regular,700&display=swap");
+
+    h2 {
+        font-size: 18px;
+        color: #020202;
+        text-align: left;
+        margin-bottom: 25px;
+    }
+
+    .task {
+        color: rgb(255, 255, 255);
+    }
+
+    .task:not(:last-child) {
+        margin-bottom: 25px;
+    }
+
+    .tablet {
+        display: grid;
+        grid-template-columns: repeat(3, auto);
+        justify-content: center;
+    }
+
+    .tablet__item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border: 1px solid #020202;
+        gap: 25px;
+        /* padding: 15px; */
+        padding-top: 0;
+        padding-bottom: 0;
+        position: relative;
+    }
+
+    .tablet__item::before {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 1px;
+        background-color: #020202;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    .tablet__title {
+        padding: 10px;
+        /* padding-top: 5px; */
+        text-align: center;
+    }
+
+    .tablet__value {
+        display: flex;
+        padding: 10px;
+        padding-top: 0;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+    /* body{
+        background-color: #181818;
+        overflow: hidden;
+    } */
+    td {
+        width: 50px; 
+        height: 50px;
+        background-color: rgb(121, 206, 125);
+        text-align: center;
+    }
+    .container{
+        display: flex;
+        gap:25px;
+    }
+</style>
+
+</html>

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Task 3</title>
+</head>
+<script>
+    // Задача. Користувач задає місяць навчання учня (перевіряти чи є числом, чи від 1 до 12, чи не канікули) та оцінку (перевіряти чи є числом, чи від 1 до 100). Вивести чи зможе він виправити оцінку (якщо оцінка погана і це не останній місяць у семестрі) . Обробку усіх помилок зробити з використанням відповідних класів.
+
+class isNumber extends Error {
+    constructor() {
+        super()
+        this.message = 'Введено не число'
+        this.name = 'isNumber'
+    }
+}
+class inRange_1_12 extends Error {
+    constructor() {
+        super()
+        this.message = 'Введіть місяць від 1 до 12'
+        this.name = 'inRange_1_12'
+    }
+}
+class IsVacation extends Error {
+    constructor() {
+        super()
+        this.message = 'Канікули'
+        this.name = 'IsVacation'
+    }
+}
+
+class Number1_100 extends Error {
+    constructor() {
+        super()
+        this.message = 'Введіть оцінку від 1 до 100'
+        this.name = 'Number1_100'
+    }
+}
+
+function validate() {
+    try {
+        let month = document.getElementById('month').value
+        let score = document.getElementById('score').value
+
+        // month
+        // Перевірка чи це число
+        if (isNaN(month)) throw new isNumber()
+        // Перевірка правильного місяця
+        if (month < 1 || month > 12) throw new inRange_1_12()
+        // Перевірка чи не канікули 
+        if (month > 5 && month < 8) throw new IsVacation()
+        // score
+        // Перевірка чи це число
+        if (isNaN(score)) throw new isNumber()
+        // Перевірка чи від 1 до 100
+        if (score < 1 || score > 100) throw new Number1_100()
+    }
+    catch (err) {
+        if (err instanceof isNumber){
+            document.getElementById('month').value = 1
+            alert(err.message)
+        }
+        else if (err instanceof inRange_1_12){
+            document.getElementById('month').value = 1
+            alert(err.message)
+        }
+        else if (err instanceof IsVacation){
+            document.getElementById('month').value = 5
+            alert(err.message)
+        }
+        else if (err instanceof isNumber){
+            document.getElementById('score').value = 1
+            alert(err.message)
+        }    
+        else if (err instanceof Number1_100){
+            document.getElementById('score').value = 1
+            alert(err.message)
+        }   
+        else
+            console.log(err.message);
+        validate()
+    }
+}
+window.onload = function(){
+    document.getElementById('button').addEventListener('click', () => {
+    validate()
+    let month = parseInt(document.getElementById('month').value)
+    let score = parseInt(document.getElementById('score').value)
+    let result = document.getElementById('result')
+    if (month !== 5 && month !== 12 && score < 60)
+        result.innerText = 'Учень зможе виправити оцінку'
+    else
+        result.innerText = 'Учень не зможе виправити оцінку'
+    })
+}
+</script>
+<body>
+    <header></header>
+    <main class="page">
+        <div class="page__container task">
+            <div class="container">
+                <form id="form" action="#">
+                    <div class="form__line">
+                        <label for="month">Місяць навчання</label>
+                        <input id="month" type="text" name="month of Study" value="">
+                    </div>
+                    <div class="form__line">
+                        <label for="score">Оцінка</label>
+                        <input id="score" type="text" name="Score" value="">
+                    </div>
+                    <button id="button" type="button">Перевірити</button>
+                </form>
+                <div id="result"></div>
+            </div>
+        </div>
+    </main> 
+    <footer></footer>
+    <script src="./js/script.js"></script>
+</body>
+<style>
+    @charset "UTF-8";
+    @import url("https://fonts.googleapis.com/css?family=Montserrat:regular,700&display=swap");
+
+    h2 {
+        font-size: 18px;
+        color: #020202;
+        text-align: left;
+        margin-bottom: 25px;
+    }
+
+    .task {
+        color: rgb(255, 255, 255);
+    }
+
+    .task:not(:last-child) {
+        margin-bottom: 25px;
+    }
+
+    .container{
+        display: flex;
+        flex-direction: column;
+    }
+    button{
+        padding: 10px;
+        margin-bottom: 5px;
+    }
+    td {
+        width: 20px;
+        height: 20px;
+        background-color: gray;
+    }
+    .container{
+        display: flex;
+        /* flex-direction: row; */
+        gap:40px;
+    }
+    .container__list{
+        display: flex;
+        flex-direction: row;
+        gap:40px;
+    }
+    .item__list{
+        padding: 30px;
+        border:2px solid rgb(139, 3, 8);
+    }
+    .button__click{
+        width: 200px;
+    }
+    .form__line{
+        display: flex;
+        flex-direction: column;
+        max-width: 350px;
+        gap: 10px;
+    }
+    input{
+        padding: 10px 15px;
+    }
+    #form > *{
+
+        margin-bottom: 20px;
+    }
+    button{
+        border-radius: 5px;
+        background-color: #02b3ff;
+        color: #fff;
+    }
+</style>
+
+</html>

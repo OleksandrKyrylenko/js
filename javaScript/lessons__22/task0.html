@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Task 1</title>
+</head>
+<script>
+    // Валідація
+    class isNotNumberError extends Error{
+        constructor(){
+            super()
+            this.message = 'Значення має бути числом'
+            this.name = 'isNotNumberError'
+        }
+    }
+    class isNumberMoreThanZero extends Error{
+        constructor(){
+            super()
+            this.message = 'Сума має бути більше за 0'
+            this.name = 'isNumberMoreThanZero'
+        }
+    }
+    class isEnoughFunds extends Error{
+        constructor(){
+            super()
+            this.message = 'Недостатньо коштів для зняття'
+            this.name = 'isEnoughFunds'
+        }
+    }
+    class isSufficientCreditLimit extends Error{
+        constructor(){
+            super()
+            this.message = 'У вас недостатній кредитний ліміт'
+            this.name = 'isSufficientCreditLimit'
+        }
+    }
+    // Задача. Створити клас Client
+    class Client{
+        #amountMoney
+          // Властивості
+        constructor(id,name,amountMoney){
+              // ID
+            this.userId = id
+             // ПІБ
+            this.userName = name
+            // Кількість грошей на рахунку
+            this.AmountMoney = amountMoney
+        }
+        get AmountMoney(){
+            return this.#amountMoney
+        }
+        set AmountMoney(value){
+            if(!this.validityState(value)) return
+            this.#amountMoney = value
+        }
+        // Методи
+        // Додавання грошей
+        addMoney(value){
+            if(!this.validityState(value)) return
+            this.AmountMoney += value
+            console.log('Успіх')
+            console.log(this.AmountMoney)
+        }
+        // Зняття грошей
+        withdrawalOfMoney(value){
+            try{
+                if(value > this.AmountMoney) throw new isEnoughFunds()
+                if(!this.validityState(value)) return
+                this.AmountMoney -= value
+                console.log('Успіх');
+            }
+            catch(err){
+                if(err instanceof isEnoughFunds) console.log(err.message)
+            }
+        }
+        validityState(value){
+            try{
+                // перевірка чи значення є числом
+                if(isNaN(value)) throw new isNotNumberError()
+                // перевірка чи число є > 0
+                if(value <= 0) throw new isNumberMoreThanZero()
+                return value
+                // this.#amountMoney = value
+            }
+            catch(err){
+                if(err instanceof isNotNumberError) console.log(err.message)
+                else if (err instanceof isNumberMoreThanZero) console.log(err.message)
+            }
+        }
+        // ToString
+        toString(){
+            return `${this.userName}. Залишок коштів на рахунку:${this.AmountMoney} грн`
+        }
+    }
+
+    // На основі цього класу створити клас GoldenClient
+    class GoldenClient extends Client{
+           // Властивості
+           // Відсоток за використання кредитних коштів
+        static interestCreditFunds = 20
+        constructor(idGoldClient, nameGoldClient, amountMoneyGoldClient, creditLimit){
+            // ID
+            // ПІБ
+            // Кількість грошей на рахунку
+            super(idGoldClient, nameGoldClient, amountMoneyGoldClient)
+            // Ліміт кредитних коштів
+            this.creditLimit = creditLimit
+        }
+        // Методи
+        // Додавання грошей
+        addMoneyGold(value){
+            this.addMoney(value)
+        }
+        // Зняття грошей
+        withdrawalOfMoneyGold(value){
+            this.withdrawalOfMoney(value)
+        }
+        // // Визначення пені за використання кредитних коштів
+        calculatePenny(value,amountDaysUseCreditMoney){
+            const currentDate = new Date().getFullYear()
+            const daysInCurrentYear = new Date(currentDate, 11, 31).getDate()
+            try{
+                if(value > this.creditLimit) throw new isSufficientCreditLimit()
+                if(!this.validityState(value)) return
+                let penalti = (((value * (GoldenClient.interestCreditFunds / 100)) / daysInCurrentYear) * amountDaysUseCreditMoney).toFixed(2)
+                return penalti
+            }
+            catch(err){
+                if(err instanceof isSufficientCreditLimit) console.log(err.message);
+            }
+        }
+        // ToString
+        toString(){
+            return super.toString()
+        }
+    }
+    
+    // Створити клас Bank, у якому зберігається масив клієнтів. Виконати такі операції
+    // Вивести усіх простих клієнтів;
+    // Вивести усіх клієнтів GoldenClient;
+    // Знати сумарну кількість грошей на рахунку;
+    class Bank{
+        static maxSumForGoldCard = 30000
+        constructor(clientsList){
+            this.clientsList = clientsList
+            this.client = this.createClients()
+            this.el = this.totalAmount()
+        }
+        createClients(){
+            const clientBank = document.createElement('div')
+            clientBank.className = 'client'
+            const clientGoldCardBank = document.createElement('div')
+            clientGoldCardBank.className = 'client-gold'
+            for (const client of this.clientsList) {
+                if(client.amountMoney < Bank.maxSumForGoldCard){
+                    let requiredClient  = new Client(client.id,client.name,client.amountMoney)
+                    const p = document.createElement('p')
+                    p.append(requiredClient.toString())
+                    clientBank.append(p)
+                }
+                else{
+                    let requiredClient  = new GoldenClient(client.id,client.name,client.amountMoney,client.creditLimit)
+                    const p = document.createElement('p')
+                    p.append(requiredClient.toString())
+                    clientGoldCardBank.append(p)
+                }
+            }
+            return {clientBank, clientGoldCardBank}
+        }
+        // Знати сумарну кількість грошей на рахунку;
+        totalAmount(){
+            const div = document.createElement('div')
+            div.className = 'total-amount'
+            div.innerText = 'Сумарна кількість грошей = '
+            const span = document.createElement('span')
+            let sum = 0
+            for (const client of this.clientsList) {
+                sum += client.amountMoney
+            }
+            span.innerText = `${sum} грн`
+            div.append(span)
+            return div
+        }
+        render(targetSelector){
+            const container = document.createElement('div')
+            container.className = 'client__items'
+            const div1 = document.createElement('div')
+            const title1 = document.createElement('h2')
+            title1.innerText = 'Client not Golden'
+            div1.append(title1)
+            div1.append(this.client.clientBank)
+            console.log(this.client.clientBank);
+            container.append(div1)
+            const div2 = document.createElement('div')
+            const title2 = document.createElement('h2')
+            title2.innerText = 'Golden Client'
+            div2.append(title2)
+            div2.append(this.client.clientGoldCardBank)
+            console.log(this.client.clientBank);
+
+            container.append(div2)
+            container.append(this.el)
+
+            document.getElementById(targetSelector).append(container)
+        }
+    }
+
+    const clientsBankList = [
+        {
+            id: new Date().getTime(),
+            name:'Іванов Володимир',
+            amountMoney: 10000
+        },
+        {
+            id: new Date().getTime(),
+            name:'Мельничук Олексій',
+            amountMoney: 20000
+        },
+        {
+            id: new Date().getTime(),
+            name:'Наконечний Владислав',
+            amountMoney: 30000,
+            creditLimit: 10000
+        },
+        {
+            id: new Date().getTime(),
+            name:'Гончаренко Євгеній',
+            amountMoney: 50000,
+            creditLimit: 30000
+        },
+        {
+            id: new Date().getTime(),
+            name:'Савченко Іван',
+            amountMoney: 40000,
+            creditLimit:25000
+        },
+        {
+            id: new Date().getTime(),
+            name:'Петров Володимир',
+            amountMoney: 60000,
+            creditLimit: 30000
+        },
+        {
+            id: new Date().getTime(),
+            name:'Лукашенко Сергій',
+            amountMoney: 20000
+        },
+        {
+            id: new Date().getTime(),
+            name:'Оксюта Микола',
+            amountMoney: 10000
+        },
+    ]
+    window.onload = function(){
+        let bank = new Bank(clientsBankList)
+        bank.render('cnt')
+    }
+</script>
+<body>
+    <header></header>
+    <main class="page">
+        <div class="page__container task">
+            <div id="cnt"></div>
+        </div>
+    </main>
+    <footer></footer>
+</body>
+<style>
+    @charset "UTF-8";
+	@import url("https://fonts.googleapis.com/css?family=Montserrat:regular,700&display=swap");
+    h2{
+        font-size: 18px;
+        color:#020202;
+        text-align: left;
+        margin-bottom: 25px;
+    }
+    .task{
+        color:rgb(255, 255, 255);
+    }
+    .task:not(:last-child){
+        margin-bottom: 25px;
+    }
+    .tablet{
+        display: grid;
+        grid-template-columns: repeat(3, auto);
+        justify-content: center;
+    }
+    .tablet__item{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border:1px solid #020202;
+        gap:25px;
+        /* padding: 15px; */
+        padding-top: 0;
+        padding-bottom: 0;
+        position: relative;
+    }
+    td {
+        width: 20px;
+        height: 20px;
+        background-color: gray;
+    }
+    div{
+        cursor: pointer;
+        display: inline-flex;
+        flex-direction: column;
+    }
+    h2{
+        margin-bottom: 10px;
+    }
+    .client__items{
+        display: flex;
+        flex-direction: column;
+        gap:40px;
+    }
+    .client{
+        border:4px solid rgb(4, 0, 255);
+        padding: 15px;
+    }
+    .client-gold{
+        border:4px solid rgb(242, 255, 0);
+        padding: 15px;
+    }
+    .client,
+    .client-gold{
+        display: flex;
+        flex-direction: column;
+        gap:10px;
+    }
+    .total-amount{
+        display: flex;
+        flex-direction: row;
+        gap:5px;
+    }
+</style>
+</html>
