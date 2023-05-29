@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Task 2</title>
+</head>
+<script>
+    // Задача 2 . Дано дата виробництва йогурта (вводимо рік, місяць, день) та кількість днів придатності. Визначити чи є він придатним на даний момент.
+    class isNumberError extends Error{
+        constructor(){
+            super()
+            this.message = 'Введіть число'
+            this.name = 'isNumberError'
+        }
+    }
+    class isYearError extends Error{
+        constructor(){
+            super()
+            this.message = 'Некоректний рік'
+            this.name = 'isYearError'
+        }
+    }
+    class isMonthError extends Error{
+        constructor(){
+            super()
+            this.message = 'Некоректний місяць'
+            this.name = 'isMonthError'
+        }
+    }
+    class isDayError extends Error{
+        constructor(){
+            super()
+            this.message = 'Некоректний день'
+            this.name = 'isDayError'
+        }
+    }
+    function validationYear(year, date) {
+        try{
+            if(isNaN(year)) throw new isNumberError()
+            if(year > date.getFullYears() || year < 0) throw new isMonthError()
+        }
+        catch(err){
+            if(err instanceof isNumberError) 
+                alert(err.message)
+            else if(err instanceof isYearError)
+                alert(err.message)
+            return false
+        }
+        return true
+    }
+    function validationMonth(month) {
+        try{
+            if(isNaN(month)) throw new isNumberError()
+            if(month > 12 || month < 0) throw new isMonthError()
+        }
+        catch(err){
+            if(err instanceof isNumberError) 
+                alert(err.message)
+            else if(err instanceof isMonthError)
+                alert(err.message)
+            return false
+        }
+        return true
+    }
+    function validationDay(day) {
+        try{
+            if(isNaN(day)) throw new isNumberError()
+            if(day > 31 || day < 0) throw new isDayError()
+        }
+        catch(err){
+            if(err instanceof isNumberError) 
+                alert(err.message)
+            else if(err instanceof isDayError)
+                alert(err.message)
+            return false
+        }
+        return true
+    }
+    function isSuitabilityProduct(year,month,day,date){
+        const termSuitabilityProduct = 20
+        const dateProduct = new Date(year, month - 1, day)
+        const currentDate = date.getTime()
+        const currentProductTerm = dateProduct.getTime() + termSuitabilityProduct * 24 * 60 * 60 * 1000
+
+        if (currentDate < currentProductTerm) return 'Продукт є придатним для споживання' 
+        else return 'Продукт не є придатним для споживання'
+    }
+    const date = new Date()
+    const yearProduct = parseInt(prompt('Year production'))
+    const monthProduct = parseInt(prompt('Month production'))
+    const dayProduct = parseInt(prompt('Day production'))
+    const validateY = validationYear(yearProduct,date)
+    const validationM = validationMonth(monthProduct)
+    const validationD = validationDay(dayProduct)
+    const suitabilityProduct = isSuitabilityProduct(yearProduct,monthProduct,dayProduct,date)
+    alert(suitabilityProduct)
+</script>
+<body>
+    <header></header>
+    <main class="page">
+        <div class="page__container task">
+            <div class="cnt"></div>  
+    </main>
+    <footer></footer>
+    <script src="./js/script.js"></script>
+</body>
+<style>
+    @charset "UTF-8";
+	@import url("https://fonts.googleapis.com/css?family=Montserrat:regular,700&display=swap");
+    h2{
+        font-size: 25px;
+        color:#020202;
+        text-align: left;
+        margin-bottom: 25px;
+    }
+    .task{
+        color:rgb(255, 255, 255);
+    }
+    .task:not(:last-child){
+        margin-bottom: 25px;
+    }
+    .item{
+        width: 500px;
+        margin-bottom: 10px;
+        /* display: flex;
+        align-items: center; */
+    }
+    .title1{
+        color:#020202;
+        font-size: 18px;
+        display: inline-block;
+        transform: translateX(25px);
+    }
+    .value-container{
+        padding: 5px;
+        width: 400px;
+        display: inline-block;
+        border:2px solid rgb(13, 244, 117);
+    }
+    .value{
+        background-color: #35c5f5;
+        text-align: center;
+    }
+    .containerId{
+        display: flex;
+        flex-direction: column;
+    }
+    input{
+        padding:2px 5px;
+        margin: 10px;
+        width: 150px;
+    }
+    img{
+        max-width: 100%;
+    }
+    .cnt{
+        position: relative;
+    }
+</style>
+</html>

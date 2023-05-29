@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Task 4</title>
+</head>
+<script>
+    // Задача 4. Задаємо користувачу задачу з додавання двох чисел. Визначити скільки секунд було використано для розв’язання задачі.
+    function getRandomNum(minNum, maxNum) {
+        return minNum + Math.floor(Math.random() * (maxNum - minNum + 1))
+    }
+    const numOne = getRandomNum(1,20)
+    const numTwo = getRandomNum(1,20)
+    function solutionTimeExample(numOne,numTwo) {
+        const example = numOne + numTwo
+        let start = new Date()
+        const userResponse = parseInt(prompt(`${numOne} + ${numTwo} = ?`))
+        let end = new Date()
+        const milisecondsCount = end - start
+        return `Правильна відповідь = ${example}. Відповідь користувача = ${userResponse}. Час розв'язку = ${milisecondsCount}ms`
+    }
+    const result = solutionTimeExample(numOne,numTwo)
+    console.log(result)
+</script>
+<body>
+    <header></header>
+    <main class="page">
+        <div class="page__container"></div>
+        </div>
+    </main>
+    <footer></footer>
+</body>
+<style>
+    @charset "UTF-8";
+    @import url("https://fonts.googleapis.com/css?family=Montserrat:regular,700&display=swap");
+
+    h2 {
+        font-size: 18px;
+        color: #020202;
+        text-align: left;
+        margin-bottom: 25px;
+    }
+
+    .task {
+        color: rgb(255, 255, 255);
+    }
+
+    .task:not(:last-child) {
+        margin-bottom: 25px;
+    }
+
+    .tablet {
+        display: grid;
+        grid-template-columns: repeat(3, auto);
+        justify-content: center;
+    }
+
+    .tablet__item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border: 1px solid #020202;
+        gap: 25px;
+        /* padding: 15px; */
+        padding-top: 0;
+        padding-bottom: 0;
+        position: relative;
+    }
+
+    .tablet__item::before {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 1px;
+        background-color: #020202;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    .tablet__title {
+        padding: 10px;
+        /* padding-top: 5px; */
+        text-align: center;
+    }
+
+    .tablet__value {
+        display: flex;
+        padding: 10px;
+        padding-top: 0;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+    /* body{
+        background-color: #181818;
+        overflow: hidden;
+    } */
+    td {
+        width: 50px; 
+        height: 50px;
+        background-color: rgb(121, 206, 125);
+        text-align: center;
+    }
+    .container{
+        display: flex;
+        gap:25px;
+    }
+</style>
+
+</html>

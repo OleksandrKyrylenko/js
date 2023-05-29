@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Task 3</title>
+</head>
+<script>
+    // Задача 3. Сформувати масив з 1000 елементів від 1 до 800. Порівняти час сортування бульбашкою і  вставкою.
+    function getRandomNum(minNum, maxNum) {
+        return minNum + Math.floor(Math.random() * (maxNum - minNum + 1))
+    }
+    const arrayRandomNumbers = new Array(1000).fill().map(num => getRandomNum(1, 800))
+    // Сортування бульбашкою
+    function bubbleSort(arrayNumbers) {
+        let start = new Date()
+        let changed
+        let num = arrayNumbers.length
+        do{
+            changed = false
+            for(let i = 1; i < num; i++){
+                if(arrayNumbers[i-1] > arrayNumbers[i]){
+                    let tmp = arrayNumbers[i-1]
+                    arrayNumbers[i-1] = arrayNumbers[i]
+                    arrayNumbers[i] = tmp
+                    changed = true
+                }
+            }
+        }while(changed)
+        let end = new Date()
+        const milisecondsCount = end - start
+        return milisecondsCount
+    }
+    // Сортування вставкою
+    function insertionSort(arrayNumbers) {
+        let start = new Date().getTime()
+        let num = arrayNumbers.length
+        for(let k = 1; k < num; k++){
+            const currentElement = arrayNumbers[k]
+            let i = k - 1
+            while(i>=0 && arrayNumbers[i] > currentElement){
+                arrayNumbers[i+1] = arrayNumbers[i] 
+                i = i-1
+            }
+            arrayNumbers[i+1] = currentElement
+        }
+        let end = new Date().getTime()
+        console.log(start);
+        console.log(end);
+        const milisecondsCount = end - start
+        return milisecondsCount
+    }
+    function comparisonSortingTime(bubble, insertion){
+        if(bubble > insertion) return `Час сортування вставкою є меншим. Bubble = ${bubble}ms. Insertion = ${insertion}ms`
+        else return `Час сортування бульбашкою є меншим. Bubble = ${bubble}. Insertion = ${insertion}`
+    }
+    const bubbleSortTime = bubbleSort(arrayRandomNumbers)
+    const insertionSortTime = insertionSort(arrayRandomNumbers)
+    console.log(bubbleSortTime)
+    console.log(insertionSortTime)
+    const sortingTime = comparisonSortingTime(bubbleSortTime, insertionSortTime)
+    console.log(sortingTime)
+
+</script>
+<body>
+    <header></header>
+    <main class="page">
+        <div class="page__container task">
+            <div class="container"></div>
+        </div>
+    </main> 
+    <footer></footer>
+    <script src="./js/script.js"></script>
+</body>
+<style>
+    @charset "UTF-8";
+    @import url("https://fonts.googleapis.com/css?family=Montserrat:regular,700&display=swap");
+
+    h2 {
+        font-size: 18px;
+        color: #020202;
+        text-align: left;
+        margin-bottom: 25px;
+    }
+
+    .task {
+        color: rgb(255, 255, 255);
+    }
+
+    .task:not(:last-child) {
+        margin-bottom: 25px;
+    }
+
+    .container{
+        display: flex;
+        flex-direction: column;
+    }
+    button{
+        padding: 10px;
+        margin-bottom: 5px;
+    }
+    td {
+        width: 20px;
+        height: 20px;
+        background-color: gray;
+    }
+    .container{
+        display: flex;
+        /* flex-direction: row; */
+        gap:40px;
+    }
+    .container__list{
+        display: flex;
+        flex-direction: row;
+        gap:40px;
+    }
+    .item__list{
+        padding: 30px;
+        border:2px solid rgb(139, 3, 8);
+    }
+    .button__click{
+        width: 200px;
+    }
+    .form__line{
+        display: flex;
+        flex-direction: column;
+        max-width: 350px;
+        gap: 10px;
+    }
+    input{
+        padding: 10px 15px;
+    }
+    #form > *{
+
+        margin-bottom: 20px;
+    }
+    button{
+        border-radius: 5px;
+        background-color: #02b3ff;
+        color: #fff;
+    }
+</style>
+
+</html>

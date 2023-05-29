@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Task 5</title>
+</head>
+
+<body>
+    <script>
+    // Задача 1. Дано масив рядків. Вивести ті, у яких є цифри (використати метод test та регулярні вирази).
+    const arrStr = ['Hello','AA8421TE','qwsc12','hjjdd','c1d2d2','jghtd']
+    console.log('Задача 1')
+    arrStr.forEach((value)=>{
+        if(/[0-9]/.test(value)) console.log(value)
+    })
+    // =============================================================================
+    // Задача 2. Дано масив рядків. Вивести ті, у яких немає цифр.
+    const arrStr2 = ['Hello','AA8421TE','qwsc12','hjjdd','c1d2d2','jghtd']
+    console.log('Задача 2')
+    arrStr2.forEach((value)=>{
+        if(!/\d/.test(value)) console.log(value)
+    })
+    // =============================================================================
+    // Задача 3. Дано масив рядків. Вивести ті, у яких є голосні літери.
+    const arrStr3 = ['Hello','AA8421TE','qwsc12','hjjdd','c1d2d2','jghtd']
+    console.log('Задача 3')
+    arrStr3.forEach((value)=>{
+        if(/[aeiou]/i.test(value)) console.log(value)
+    })
+    // =============================================================================
+    // Задача 4. Дано масив рядків. Вивести ті, у яких немає голосних літер.
+    const arrStr4 = ['Hello','AA8421TE','qwsc12','hjjdd','c1d2d2','jghtd']
+    console.log('Задача 4')
+    arrStr4.forEach((value)=>{
+        if(!/[aeiou]/i.test(value)) console.log(value)
+    })
+    // =============================================================================
+    // Задача 5. Дано масив рядків. Вивести ті, у яких є або цифра 1 або цифра 3.
+    const arrStr5 = ['Hello','AA8421TE','qwsc12','hjjd3d','c1d2d2','jghtd']
+    console.log('Задача 5')
+    let numbers = /(1|3)/g
+    const stringOfNumbers_1_or_3 = arrStr5.filter(str => str.match(numbers))
+    console.log(stringOfNumbers_1_or_3)
+    // arrStr5.forEach((value)=>{
+    //     if(value.match(numbers)) console.log(value)
+    // })
+    // =============================================================================
+    // Задача 6. Дано рядок тексту, вивести усі числа, які є у тексті.
+    const strText = 'Hgjf;fgg11fgf52vf1gf8'
+    console.log('Задача 6')
+    console.log(strText.match(/\d/g))
+    // =============================================================================
+    // Задача 7. Дано рядок тексту. Знайти усі знаки пунктуації, які були використано.
+    const strText2 = 'Привіт! Як справи? Це, здається, гарний день.'
+    console.log('Задача 7')
+    console.log(strText2.match(/[\p{P}\p{S}]/gu))
+    // =============================================================================
+    // Задача 8. Дано рядок тексту. Вивести усі складові, які розділені розділовими знаками.
+    const strText3 = 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Architecto animi cupiditate atque non iusto dolorum quaerat, dolorem nostrum quisquam unde illum modi, placeat harum. Veniam eaque adipisci rerum vitae quas.'
+    console.log('Задача 8')
+    console.log(strText3.match(/(\w+\s)+\b\w+/g))
+    // =============================================================================
+    // Задача 9. Дано рядок тексту. Перевірити, чи містить він дату у форматі dd.mm.yyyy (dd- день, mm- місяць, yyyy- рік).
+    const strText4 = 'Lorem ipsum, dolor sit amet consectetur 29.05.2023 adipisicing elit.'
+    console.log('Задача 9')
+    let regex = /\d{1,2}.\d{1,2}.\d{4}/g
+    if(regex.test(strText4)) console.log(strText4.match(regex))
+    // =============================================================================
+    // Задача 10. Дано рядок тексту. Підрахувати кількість двоцифрових чисел у рядку.
+    const strText5 = 'Lorem ipsum, dolor 181 sit 11 amet 4 consectetur 29.05.2023 adipisicing elit.'
+    console.log('Задача 10')
+    let condition = /\b\d{2}\b/g
+    let countTwoDigitNumRow = strText5.match(condition).length
+    console.log(strText5.match(condition))
+    console.log(countTwoDigitNumRow)
+    // =============================================================================
+    // Задача 11. Визначити чи може бути рядок тексту номером банківської картки (приклад: «4142-3433-2323-3434»). Знайти усі такі номери.
+    const strText6 = 'Lorem ipsum, dolor «4142-3433-2323-3434» sit «4441-4133-2323-3734» amet 4 consectetur «4441-2323-3734» adipisicing«4441-2323-334» elit.'
+    console.log('Задача 11')
+    let regexValue = /\b\d{4}-\d{4}-\d{4}-\d{4}\b/g
+    if(regexValue.test(strText6)) console.log(strText6.match(regexValue))
+    else console.log('Номерів не знайдено')
+    // =============================================================================
+    // Задача 12. Дано адресу сайту. Визначити, чи є він урядовим (містить домен “gov”)
+    const siteAddress = 'http://www.example.com/'
+    console.log('Задача 12')
+    let conditionValue = /\.gov\b/g
+    if(conditionValue.test(siteAddress)) 
+        console.log('Сайт є урядовим')
+    else 
+        console.log('Сайт не є урядовим')
+    // =============================================================================
+    // Задача 13. Вибрати усі роки після 2021 року з отриманого повідомлення
+    const message = 'Lorem 2025, 2021 ipsum, 29.05.2018 dolor sit 2094 amet 2022 consectetur 29.05.2023 adipisicing elit.'
+    let yearsAreNeeded = /\b20[2-9][^01]\b/g
+    console.log('Задача 13')
+    if (yearsAreNeeded.test(message)) 
+        console.log(message.match(yearsAreNeeded))
+    // =============================================================================
+    // Задача 14. Дано номер телефону. Перевірити, чи є цей телефон телефоном з України (починаєтсья на «+38»)
+    let numberPhone = '+380974152364'
+    console.log('Задача 14')
+    console.log(numberPhone)
+    if(numberPhone.startsWith('+38'))
+        console.log('Номер телефону є українським')
+    else 
+        console.log('Номер телефону не є українським')
+
+    // let regexPhone = /\b380\d{9}\b/
+    // if(regexPhone.test(numberPhone))
+    //     console.log('Номер телефону є українським')
+    // else 
+    //     console.log('Номер телефону не є українським')
+    // =============================================================================
+    // Задача 15. Користувач вводить прізвище та ім’я в одному рядку через пробіл.  Замінити пробіл на дефіс.
+    // let userName = prompt('Введіть ваше прізвище та ім\'я')
+    // console.log('Задача 15')
+    // let result = userName.split(' ').join('-')
+    // console.log(result)
+    // =============================================================================
+    // Задача 16. Користувач вводить дату у форматі «день.місяць.рік». Отримати рядкове представлення дати у форматі «день/місяць/рік»
+    // let userDate = prompt('Введіть дату у форматі день.місяць.рік')
+    // let resultDate = userDate.split('.').join('/')
+    // console.log(resultDate)
+    // =============================================================================
+    // Задача 17. Користувач вводить день (номер дня (0-6) або «sun,mon,tue,wed,thu,fri,sat»). Визначити, чи є це день вихідним
+    let day = prompt('Введіть день тиждня').toLowerCase()
+    day = Number(day) - 1
+    console.log('Задача 17')
+    let regEx = /^(0|6|sun|sat)$/
+    if(regEx.test(day)) 
+        console.log('Вихідний')
+    else 
+        console.log('Не вихідний')
+    </script>
+    <header></header>
+    <main class="page">
+        <div class="task__container"></div>
+    </main>
+    <footer></footer>
+    <script src="./js/script.js"></script>
+</body>
+<style>
+    @charset "UTF-8";
+    @import url("https://fonts.googleapis.com/css?family=Montserrat:regular,700&display=swap");
+
+    h2 {
+        font-size: 18px;
+        color: #020202;
+        text-align: left;
+        margin-bottom: 25px;
+    }
+
+    .task {
+        color: rgb(255, 255, 255);
+    }
+
+    .task:not(:last-child) {
+        margin-bottom: 25px;
+    }
+
+    .tablet {
+        display: grid;
+        grid-template-columns: repeat(3, auto);
+        justify-content: center;
+    }
+
+    .tablet__item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border: 1px solid #020202;
+        gap: 25px;
+        padding-top: 0;
+        padding-bottom: 0;
+        position: relative;
+    }
+
+    .tablet__item::before {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 1px;
+        background-color: #020202;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    .tablet__title {
+        padding: 10px;
+        /* padding-top: 5px; */
+        text-align: center;
+    }
+
+    .tablet__value {
+        display: flex;
+        padding: 10px;
+        padding-top: 0;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+
+    td {
+        width: 50px;
+        height: 50px;
+        background-color: rgb(121, 206, 125);
+        text-align: center;
+    }
+
+    body {
+        background-color: rgba(12, 5, 5, 0.655);
+        overflow: hidden;
+        color: #fff;
+    }
+    #form{
+        display: flex;
+        flex-direction: column;
+        gap:20px;
+        margin-top: 50px;
+        border:1px solid red;
+        padding: 20px;
+        max-width: 400px;
+    }
+    .form__line{
+        /* max-width: 300px; */
+        display: flex;
+        justify-content: space-between;
+    }
+    input{
+        padding: 5px 10px;
+    }
+</style>
+
+</html>
